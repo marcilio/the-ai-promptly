@@ -1,0 +1,18 @@
+[project]
+name = "researcher-agent-dashboard"
+version = "0.1.0"
+description = "A local researcher agent that extracts technical articles, summarizes them with Claude, and generates a daily HTML newsletter timeline."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "requests>=2.31",
+  "beautifulsoup4>=4.12",
+  "python-dateutil>=2.9",
+  "jinja2>=3.1",
+  "PyYAML>=6.0",
+  "anthropic>=0.5.0",
+  "python-dotenv>=1.0",
+]
+
+[project.scripts]
+researcher-dashboard = "researcher_agent.cli:main"

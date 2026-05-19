@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontier Newsletter</title>
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --surface-hover: #1c1f26;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 48px 24px 96px;
+    }
+
+    /* Header */
+    .header { margin-bottom: 40px; }
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .subtitle { color: var(--text-2); font-size: 15px; }
+    .overview {
+      font-size: 15px; line-height: 1.65; color: var(--text);
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0; padding: 14px 18px;
+      margin: 18px 0 0;
+      transition: opacity 0.15s;
+    }
+    .overview.empty { color: var(--text-3); font-style: italic; border-left-color: var(--border-strong); }
+
+    /* Controls panel */
+    .controls {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 24px 24px;
+      margin-bottom: 24px;
+    }
+    .controls-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-3);
+      font-weight: 600;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .controls-eyebrow .pip {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+    .date-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .date-current {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .date-current .date-label { font-size: 20px; font-weight: 600; }
+    .date-current .date-meta { font-size: 13px; color: var(--text-2); }
+    .nav-btn {
+      background: transparent;
+      border: 1px solid var(--border-strong);
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .nav-btn:hover:not(:disabled) { background: var(--surface-hover); border-color: var(--accent-line); color: var(--accent); }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+    .slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      outline: none;
+    }
+    .slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 0 0 4px var(--accent-soft);
+      transition: transform 0.1s;
+    }
+    .slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+    .slider::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      background: var(--accent);
+      border-radius: 50%;
+      cursor: pointer;
+      border: none;
+      box-shadow: 0 0 0 4px var(--accent-soft);
+    }
+
+    .source-line {
+      font-size: 12px;
+      color: var(--text-3);
+      margin-top: 14px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      word-break: break-all;
+    }
+
+    /* Filter pills */
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active {
+      background: var(--accent-soft);
+      border-color: var(--accent-line);
+      color: var(--accent);
+    }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06);
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    /* Article cards */
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+
+    .article {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover {
+      border-color: var(--border-strong);
+      transform: translateY(-1px);
+    }
+
+    .article__score-bar {
+      position: absolute;
+      top: 0; left: 0;
+      height: 2px;
+      background: var(--accent);
+      opacity: 0.6;
+    }
+
+    .article__top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+      gap: 12px;
+    }
+    .category {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+
+    .score {
+      font-size: 12px;
+      color: var(--text-3);
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+
+    .article__meta {
+      font-size: 13px;
+      color: var(--text-2);
+      margin-bottom: 12px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px;
+      color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px;
+      height: 14px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px;
+      color: var(--text-3);
+      font-style: italic;
+      margin-left: 4px;
+    }
+
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .article__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px;
+      color: var(--text-3);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .read-link:hover { text-decoration: underline; }
+
+    .empty {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--text-3);
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <h1>Frontier Newsletter</h1>
+      <p id="overview" class="overview empty">Loading&hellip;</p>
+    </header>
+
+    <section class="controls">
+      <div class="controls-eyebrow">
+        <span class="pip"></span>
+        Timeline &middot; <span id="timelineDays">&mdash;</span> days
+      </div>
+      <div class="date-nav">
+        <button id="prevBtn" class="nav-btn" aria-label="Previous day">&larr;</button>
+        <div class="date-current">
+          <span id="dateLabel" class="date-label">Loading&hellip;</span>
+          <span id="dateMeta" class="date-meta"></span>
+        </div>
+        <button id="nextBtn" class="nav-btn" aria-label="Next day">&rarr;</button>
+      </div>
+      <input id="timeline" class="slider" type="range" min="0" max="0" value="0" />
+      <div id="sourceLine" class="source-line"></div>
+    </section>
+
+    <nav id="filters" class="filters"></nav>
+
+    <main id="content" class="articles"></main>
+  </div>
+
+  <script>
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    const state = {
+      runs: [],
+      currentIndex: 0,
+      articles: [],
+      filter: "all",
+    };
+
+    const timeline = document.getElementById("timeline");
+    const dateLabel = document.getElementById("dateLabel");
+    const dateMeta = document.getElementById("dateMeta");
+    const sourceLine = document.getElementById("sourceLine");
+    const filtersEl = document.getElementById("filters");
+    const content = document.getElementById("content");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const overviewEl = document.getElementById("overview");
+    const timelineDaysEl = document.getElementById("timelineDays");
+
+    function escapeHtml(s) {
+      return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+    }
+
+    function fmtScore(s) {
+      if (s == null) return "";
+      return Number(s).toFixed(2);
+    }
+
+    async function loadIndex() {
+      const response = await fetch("../data/index.json");
+      const payload = await response.json();
+      // Index is newest-first; reverse so slider left = oldest, right = newest
+      state.runs = (payload.runs || []).slice().reverse();
+      if (!state.runs.length) {
+        dateLabel.textContent = "No data yet.";
+        dateMeta.textContent = "Run the agent to populate the timeline.";
+        timeline.disabled = true;
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+        return;
+      }
+      timeline.max = state.runs.length - 1;
+      timeline.value = state.runs.length - 1; // default to most recent
+      timelineDaysEl.textContent = state.runs.length;
+      await selectIndex(state.runs.length - 1);
+    }
+
+    async function selectIndex(i) {
+      state.currentIndex = i;
+      timeline.value = i;
+      const run = state.runs[i];
+      dateLabel.textContent = new Date(run.date + "T00:00:00").toLocaleDateString(undefined, {
+        weekday: "long", year: "numeric", month: "long", day: "numeric"
+      });
+      dateMeta.textContent = `${run.count} article${run.count === 1 ? "" : "s"}`;
+      sourceLine.textContent = `Sources: ${(run.source_urls || []).join(" · ")}`;
+      if (run.overview) {
+        overviewEl.textContent = run.overview;
+        overviewEl.classList.remove("empty");
+      } else {
+        overviewEl.textContent = "No overview generated for this day yet.";
+        overviewEl.classList.add("empty");
+      }
+      prevBtn.disabled = i === 0;
+      nextBtn.disabled = i === state.runs.length - 1;
+      const dailyResponse = await fetch(`../data/daily/${run.date}.json`);
+      state.articles = await dailyResponse.json();
+      renderFilters();
+      renderArticles();
+    }
+
+    function renderFilters() {
+      const counts = { all: state.articles.length };
+      for (const a of state.articles) {
+        const c = (a.category || "other").toLowerCase();
+        counts[c] = (counts[c] || 0) + 1;
+      }
+      filtersEl.innerHTML = CATEGORIES
+        .filter(c => c === "all" || counts[c])
+        .map(c => `
+          <button class="pill ${state.filter === c ? "active" : ""}" data-cat="${c}">
+            ${c === "all" ? "All" : c.charAt(0).toUpperCase() + c.slice(1)}
+            <span class="count">${counts[c] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => {
+          state.filter = btn.dataset.cat;
+          renderFilters();
+          renderArticles();
+        });
+      });
+    }
+
+    function renderArticles() {
+      const filtered = state.filter === "all"
+        ? state.articles
+        : state.articles.filter(a => (a.category || "other").toLowerCase() === state.filter);
+      if (!filtered.length) {
+        content.innerHTML = `<div class="empty">No articles in this category for the selected day.</div>`;
+        return;
+      }
+      content.innerHTML = filtered.map(renderArticle).join("");
+    }
+
+    function hostname(url) {
+      try { return new URL(url).hostname.replace(/^www\./, ""); }
+      catch { return ""; }
+    }
+
+    function renderArticle(article) {
+      const category = (article.category || "other").toLowerCase();
+      const score = Number(article.relevance_score || 0);
+      const scoreWidth = Math.max(2, Math.min(100, score * 100));
+      const tags = Array.isArray(article.tags) ? article.tags : [];
+      const host = hostname(article.url);
+      const hasPublished = !!article.published_at;
+      const displayDate = article.published_at || article.first_seen || "No date";
+      return `
+        <article class="article">
+          <div class="article__score-bar" style="width: ${scoreWidth}%"></div>
+          <div class="article__top">
+            <span class="category cat-${escapeHtml(category)}">${escapeHtml(category)}</span>
+            <span class="score">relevance ${fmtScore(score)}</span>
+          </div>
+          <h2 class="article__title">
+            <a href="${escapeHtml(article.url)}" target="_blank" rel="noopener">${escapeHtml(article.title || "Untitled")}</a>
+          </h2>
+          <div class="article__meta">
+            ${host ? `<a class="host" href="${escapeHtml(article.url)}" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=${encodeURIComponent(host)}&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">${escapeHtml(host)}</a><span class="dot">·</span>` : ""}
+            ${escapeHtml(article.author || "Unknown author")}
+            <span class="dot">·</span>
+            ${escapeHtml(displayDate)}
+            ${!hasPublished && article.first_seen ? `<span class="date-fallback">(discovered)</span>` : ""}
+          </div>
+          <p class="article__summary">${escapeHtml(article.summary || "No summary available.")}</p>
+          <div class="article__footer">
+            <div class="tags">${tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join("")}</div>
+            <a class="read-link" href="${escapeHtml(article.url)}" target="_blank" rel="noopener">Read article &rarr;</a>
+          </div>
+        </article>
+      `;
+    }
+
+    timeline.addEventListener("input", e => selectIndex(Number(e.target.value)));
+    prevBtn.addEventListener("click", () => state.currentIndex > 0 && selectIndex(state.currentIndex - 1));
+    nextBtn.addEventListener("click", () => state.currentIndex < state.runs.length - 1 && selectIndex(state.currentIndex + 1));
+
+    loadIndex();
+  </script>
+</body>
+</html>

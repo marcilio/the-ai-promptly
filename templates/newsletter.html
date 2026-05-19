@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontier Newsletter &middot; {{ date_key }}</title>
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .overview {
+      font-size: 15px; line-height: 1.65; color: var(--text);
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; Back to timeline</a>
+    <div class="eyebrow" style="margin-top: 16px;">Frontier Newsletter</div>
+    <h1>{{ date_key }}</h1>
+    <p class="meta">
+      Generated {{ generated_at }} UTC &nbsp;·&nbsp; {{ run_count }} article{{ "s" if run_count != 1 else "" }}
+    </p>
+
+    {% if overview %}<p class="overview">{{ overview }}</p>{% endif %}
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    {% for article in articles %}
+      {% set cat = (article.category or 'other')|lower %}
+      {% set score = article.relevance_score or 0 %}
+      <article class="article" data-category="{{ cat }}">
+        <div class="article__score-bar" style="width: {{ (score * 100)|round(0)|int }}%"></div>
+        <div class="article__top">
+          <span class="category cat-{{ cat }}">{{ cat }}</span>
+          <span class="score">relevance {{ "%.2f"|format(score) }}</span>
+        </div>
+        <h2 class="article__title">
+          <a href="{{ article.url }}" target="_blank" rel="noopener">{{ article.title }}</a>
+        </h2>
+        {% set host = article.url|hostname %}
+        <div class="article__meta">
+          {% if host %}<a class="host" href="{{ article.url }}" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain={{ host|urlencode }}&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">{{ host }}</a><span class="dot">·</span>{% endif %}
+          {{ article.author or "Unknown author" }}
+          <span class="dot">·</span>
+          {{ article.published_at or article.first_seen or "No date" }}
+          {% if not article.published_at and article.first_seen %}<span class="date-fallback">(discovered)</span>{% endif %}
+        </div>
+        <p class="article__summary">{{ article.summary or "No summary available." }}</p>
+        <div class="article__footer">
+          <div class="tags">
+            {% for tag in (article.tags or []) %}<span class="tag">#{{ tag }}</span>{% endfor %}
+          </div>
+          <a class="read-link" href="{{ article.url }}" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    {% endfor %}
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+  </script>
+</body>
+</html>
