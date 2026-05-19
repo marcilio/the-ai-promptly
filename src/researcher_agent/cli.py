@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 
 from .agent import ClaudeAgent
 from .article import ArticleRecord
-from .config import DEFAULT_KEYWORDS, DEFAULT_MAX_ARTICLES
+from .config import DEFAULT_EXCLUDE_DOMAINS, DEFAULT_KEYWORDS, DEFAULT_MAX_ARTICLES
 from .dashboard import generate_index_page, generate_newsletter_page
 from .fetcher import fetch_html
 from .minhash import compute_signature, is_near_duplicate
@@ -34,6 +34,7 @@ def parse_args():
     parser.add_argument("--dedup-days", type=int, default=60, help="Only dedup against articles included in the last N days; older articles may resurface.")
     parser.add_argument("--min-articles", type=int, default=3, help="Warn if fewer than this many articles end up selected for the day.")
     parser.add_argument("--max-content-chars", type=int, default=12000, help="Truncate article content to this many characters before sending to Claude. 0 disables. Default keeps cost predictable.")
+    parser.add_argument("--exclude-domain", action="append", help="Skip search results from this domain (repeat to add multiple). Defaults to known scraping-blockers like medium.com.")
     parser.add_argument("--dry-run", action="store_true", help="Scan and score articles without writing output files.")
     return parser.parse_args()
 
@@ -56,11 +57,15 @@ def main():
         if not search_terms:
             logger.error("Search file %s contains no keywords.", args.search_file)
             raise SystemExit(1)
+        exclude_domains = args.exclude_domain if args.exclude_domain is not None else DEFAULT_EXCLUDE_DOMAINS
+        if exclude_domains:
+            logger.info("Excluding domains from search: %s", ", ".join(exclude_domains))
         search_results = search_for_terms(
             args.search_file,
             provider=args.search_provider,
             api_key=args.search_api_key,
             max_results=args.search_max_results,
+            exclude_domains=exclude_domains,
         )
 
     if not source_urls and not search_terms:

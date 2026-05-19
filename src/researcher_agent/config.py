@@ -30,3 +30,9 @@ DEFAULT_KEYWORDS = [
     "data science",
 ]
 DEFAULT_MODEL = "claude-haiku-4-5"
+DEFAULT_EXCLUDE_DOMAINS = [
+    "medium.com",
+    "levelup.gitconnected.com",
+    "betterprogramming.pub",
+    "towardsdatascience.com",
+]

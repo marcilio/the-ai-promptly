@@ -53,6 +53,7 @@ def search_for_terms(
     provider: Optional[str] = None,
     api_key: Optional[str] = None,
     max_results: int = 10,
+    exclude_domains: Optional[List[str]] = None,
 ) -> List[Tuple[str, str]]:
     terms = load_search_terms(search_file)
     if not terms:
@@ -70,7 +71,7 @@ def search_for_terms(
     seen = set()
     for term in terms:
         logger.info("Searching for term: %s", term)
-        urls = search_query(term, provider, api_key, max_results)
+        urls = search_query(term, provider, api_key, max_results, exclude_domains or [])
         for url in urls:
             if url not in seen:
                 seen.add(url)
@@ -78,21 +79,28 @@ def search_for_terms(
     return results
 
 
-def search_query(term: str, provider: str, api_key: str, max_results: int) -> List[str]:
+def search_query(term: str, provider: str, api_key: str, max_results: int, exclude_domains: List[str]) -> List[str]:
     if provider == "bing":
-        return bing_search(term, api_key, max_results)
+        return bing_search(term, api_key, max_results, exclude_domains)
     if provider == "serpapi":
-        return serpapi_search(term, api_key, max_results)
+        return serpapi_search(term, api_key, max_results, exclude_domains)
     if provider == "tavily":
-        return tavily_search(term, api_key, max_results)
+        return tavily_search(term, api_key, max_results, exclude_domains)
     raise ValueError(f"Unsupported provider: {provider}")
 
 
-def bing_search(query: str, api_key: str, max_results: int = 10) -> List[str]:
+def _augment_query_with_excludes(query: str, exclude_domains: List[str]) -> str:
+    """Bing / Google support inline `-site:domain` operators."""
+    if not exclude_domains:
+        return query
+    return query + " " + " ".join(f"-site:{d}" for d in exclude_domains)
+
+
+def bing_search(query: str, api_key: str, max_results: int = 10, exclude_domains: Optional[List[str]] = None) -> List[str]:
     endpoint = "https://api.bing.microsoft.com/v7.0/search"
     headers = {"Ocp-Apim-Subscription-Key": api_key}
     params = {
-        "q": query,
+        "q": _augment_query_with_excludes(query, exclude_domains or []),
         "count": max_results,
         "textDecorations": False,
         "textFormat": "Raw",
@@ -104,10 +112,10 @@ def bing_search(query: str, api_key: str, max_results: int = 10) -> List[str]:
     return [item["url"] for item in web_pages if item.get("url")]
 
 
-def serpapi_search(query: str, api_key: str, max_results: int = 10) -> List[str]:
+def serpapi_search(query: str, api_key: str, max_results: int = 10, exclude_domains: Optional[List[str]] = None) -> List[str]:
     endpoint = "https://serpapi.com/search.json"
     params = {
-        "q": query,
+        "q": _augment_query_with_excludes(query, exclude_domains or []),
         "api_key": api_key,
         "engine": "google",
         "num": max_results,
@@ -124,7 +132,7 @@ def serpapi_search(query: str, api_key: str, max_results: int = 10) -> List[str]
     return urls
 
 
-def tavily_search(query: str, api_key: str, max_results: int = 10) -> List[str]:
+def tavily_search(query: str, api_key: str, max_results: int = 10, exclude_domains: Optional[List[str]] = None) -> List[str]:
     endpoint = "https://api.tavily.com/search"
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -136,6 +144,8 @@ def tavily_search(query: str, api_key: str, max_results: int = 10) -> List[str]:
         "search_depth": "basic",
         "include_answer": False,
     }
+    if exclude_domains:
+        json_body["exclude_domains"] = exclude_domains
     response = requests.post(endpoint, headers=headers, json=json_body, timeout=20)
     response.raise_for_status()
     data = response.json()
