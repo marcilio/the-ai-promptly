@@ -9,6 +9,7 @@ from .agent import ClaudeAgent
 from .article import ArticleRecord
 from .config import DEFAULT_EXCLUDE_DOMAINS, DEFAULT_KEYWORDS, DEFAULT_MAX_ARTICLES
 from .dashboard import generate_index_page, generate_newsletter_page
+from .email_delivery import send_newsletter
 from .fetcher import fetch_html
 from .minhash import compute_signature, is_near_duplicate
 from .parser import extract_candidate_urls, extract_article_metadata
@@ -35,6 +36,7 @@ def parse_args():
     parser.add_argument("--min-articles", type=int, default=3, help="Warn if fewer than this many articles end up selected for the day.")
     parser.add_argument("--max-content-chars", type=int, default=12000, help="Truncate article content to this many characters before sending to Claude. 0 disables. Default keeps cost predictable.")
     parser.add_argument("--exclude-domain", action="append", help="Skip search results from this domain (repeat to add multiple). Defaults to known scraping-blockers like medium.com.")
+    parser.add_argument("--email-to", help="If set, email the rendered newsletter to this address via SMTP. Requires SMTP_USER and SMTP_APP_PASSWORD in .env.")
     parser.add_argument("--dry-run", action="store_true", help="Scan and score articles without writing output files.")
     return parser.parse_args()
 
@@ -183,3 +185,9 @@ def main():
     generate_newsletter_page(run_date, selected, index)
     generate_index_page(index)
     logger.info("Newsletter written for %s with %d articles.", run_date, len(selected))
+
+    if args.email_to and selected:
+        try:
+            send_newsletter(run_date, selected, overview, args.email_to)
+        except Exception as exc:
+            logger.error("Failed to send newsletter email to %s: %s", args.email_to, exc)

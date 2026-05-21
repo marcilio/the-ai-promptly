@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontier Newsletter — {{ date_key }}</title>
+</head>
+<body style="margin:0; padding:0; background:#f6f7fa; font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',system-ui,sans-serif; color:#15171c;">
+  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#f6f7fa; padding:24px 12px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="600" style="max-width:600px; width:100%;">
+
+          <tr>
+            <td style="padding:0 4px 20px;">
+              <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#0d9488; font-weight:600; margin-bottom:6px;">Frontier Newsletter</div>
+              <div style="font-size:26px; font-weight:700; letter-spacing:-0.01em; color:#15171c;">{{ date_key }}</div>
+              <div style="font-size:13px; color:#5d626c; margin-top:6px;">{{ run_count }} article{{ "s" if run_count != 1 else "" }}</div>
+            </td>
+          </tr>
+
+          {% if overview %}
+          <tr>
+            <td style="padding:0 4px 24px;">
+              <div style="background:#ffffff; border:1px solid #e4e7ec; border-left:3px solid #0d9488; border-radius:8px; padding:14px 18px; font-size:14px; line-height:1.55; color:#15171c;">
+                {{ overview }}
+              </div>
+            </td>
+          </tr>
+          {% endif %}
+
+          {% for article in articles %}
+          {% set cat = (article.category or 'other')|lower %}
+          {% set host = article.url|hostname %}
+          {% set display_date = article.published_at or article.first_seen or "" %}
+          <tr>
+            <td style="padding:0 4px 14px;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#ffffff; border:1px solid #e4e7ec; border-radius:10px;">
+                <tr>
+                  <td style="padding:18px 20px;">
+                    <div style="font-size:11px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:{% if cat == 'research' %}#0d9488{% elif cat == 'tutorial' %}#b45309{% elif cat == 'blog' %}#4f46e5{% elif cat == 'opinion' %}#be185d{% elif cat == 'news' %}#1d4ed8{% else %}#475569{% endif %}; margin-bottom:8px;">
+                      {{ cat }}
+                    </div>
+                    <div style="font-size:17px; font-weight:600; line-height:1.35; margin-bottom:6px;">
+                      <a href="{{ article.url }}" style="color:#15171c; text-decoration:none;">{{ article.title or "Untitled" }}</a>
+                    </div>
+                    <div style="font-size:12px; color:#5d626c; margin-bottom:10px;">
+                      {% if host %}<a href="{{ article.url }}" style="color:#5d626c; text-decoration:none; font-family:ui-monospace,'SF Mono',Menlo,monospace;">{{ host }}</a> &middot; {% endif %}
+                      {{ article.author or "Unknown author" }}{% if display_date %} &middot; {{ display_date }}{% endif %}
+                    </div>
+                    <div style="font-size:14px; line-height:1.55; color:#3f444e; margin-bottom:12px;">
+                      {{ article.summary or "No summary available." }}
+                    </div>
+                    <div>
+                      <a href="{{ article.url }}" style="color:#0d9488; text-decoration:none; font-size:13px; font-weight:500;">Read article &rarr;</a>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          {% endfor %}
+
+          <tr>
+            <td style="padding:20px 4px 0; font-size:11px; color:#8b8d96; text-align:center;">
+              Sent {{ generated_at }} UTC &middot; Frontier Newsletter
+            </td>
+          </tr>
+
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

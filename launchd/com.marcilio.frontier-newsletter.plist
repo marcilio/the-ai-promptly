@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.marcilio.frontier-newsletter</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/marcilio/projects/researcher-agent-dashboard/.venv/bin/researcher-dashboard</string>
+        <string>--search-file</string>
+        <string>content_search_seeds.txt</string>
+        <string>--search-provider</string>
+        <string>tavily</string>
+        <string>--email-to</string>
+        <string>marcilio.mendonca@gmail.com</string>
+    </array>
+
+    <key>WorkingDirectory</key>
+    <string>/Users/marcilio/projects/researcher-agent-dashboard</string>
+
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>5</integer>
+        <key>Minute</key>
+        <integer>0</integer>
+    </dict>
+
+    <key>StandardOutPath</key>
+    <string>/Users/marcilio/Library/Logs/frontier-newsletter.out.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/marcilio/Library/Logs/frontier-newsletter.err.log</string>
+
+    <key>RunAtLoad</key>
+    <false/>
+</dict>
+</plist>
