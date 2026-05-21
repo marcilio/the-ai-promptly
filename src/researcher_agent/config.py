@@ -35,4 +35,5 @@ DEFAULT_EXCLUDE_DOMAINS = [
     "levelup.gitconnected.com",
     "betterprogramming.pub",
     "towardsdatascience.com",
+    "pub.towardsai.net",
 ]
