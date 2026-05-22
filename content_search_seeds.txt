@@ -1,1 +1,5 @@
-AI agent harness and agentic design patterns
+AI agent harness design
+agentic design patterns 2026
+production AI agent architecture
+LLM tool use and orchestration
+agent evaluation methods

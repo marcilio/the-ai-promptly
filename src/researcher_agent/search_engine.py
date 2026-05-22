@@ -54,6 +54,7 @@ def search_for_terms(
     api_key: Optional[str] = None,
     max_results: int = 10,
     exclude_domains: Optional[List[str]] = None,
+    include_domains: Optional[List[str]] = None,
 ) -> List[Tuple[str, str]]:
     terms = load_search_terms(search_file)
     if not terms:
@@ -67,11 +68,17 @@ def search_for_terms(
             f"Set {BING_SEARCH_API_KEY_ENV}, {SERPAPI_API_KEY_ENV}, or {TAVILY_API_KEY_ENV}."
         )
 
+    if include_domains and provider != "tavily":
+        logger.warning(
+            "include_domains is only honored by Tavily; %s will ignore it. "
+            "Strict mode degrades to no-op on this provider.", provider,
+        )
+
     results: List[Tuple[str, str]] = []
     seen = set()
     for term in terms:
         logger.info("Searching for term: %s", term)
-        urls = search_query(term, provider, api_key, max_results, exclude_domains or [])
+        urls = search_query(term, provider, api_key, max_results, exclude_domains or [], include_domains or [])
         for url in urls:
             if url not in seen:
                 seen.add(url)
@@ -79,13 +86,14 @@ def search_for_terms(
     return results
 
 
-def search_query(term: str, provider: str, api_key: str, max_results: int, exclude_domains: List[str]) -> List[str]:
+def search_query(term: str, provider: str, api_key: str, max_results: int,
+                 exclude_domains: List[str], include_domains: List[str]) -> List[str]:
     if provider == "bing":
         return bing_search(term, api_key, max_results, exclude_domains)
     if provider == "serpapi":
         return serpapi_search(term, api_key, max_results, exclude_domains)
     if provider == "tavily":
-        return tavily_search(term, api_key, max_results, exclude_domains)
+        return tavily_search(term, api_key, max_results, exclude_domains, include_domains)
     raise ValueError(f"Unsupported provider: {provider}")
 
 
@@ -132,7 +140,9 @@ def serpapi_search(query: str, api_key: str, max_results: int = 10, exclude_doma
     return urls
 
 
-def tavily_search(query: str, api_key: str, max_results: int = 10, exclude_domains: Optional[List[str]] = None) -> List[str]:
+def tavily_search(query: str, api_key: str, max_results: int = 10,
+                  exclude_domains: Optional[List[str]] = None,
+                  include_domains: Optional[List[str]] = None) -> List[str]:
     endpoint = "https://api.tavily.com/search"
     headers = {
         "Authorization": f"Bearer {api_key}",
@@ -146,6 +156,8 @@ def tavily_search(query: str, api_key: str, max_results: int = 10, exclude_domai
     }
     if exclude_domains:
         json_body["exclude_domains"] = exclude_domains
+    if include_domains:
+        json_body["include_domains"] = include_domains
     response = requests.post(endpoint, headers=headers, json=json_body, timeout=20)
     response.raise_for_status()
     data = response.json()

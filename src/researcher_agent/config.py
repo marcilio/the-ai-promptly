@@ -37,3 +37,6 @@ DEFAULT_EXCLUDE_DOMAINS = [
     "towardsdatascience.com",
     "pub.towardsai.net",
 ]
+DEFAULT_PREFERRED_DOMAINS_FILE = "preferred_domains.txt"
+DEFAULT_DOMAIN_MODE = "boost"   # one of: "off", "strict", "boost"
+DEFAULT_DOMAIN_BOOST = 1.3       # multiply relevance_score for in-list domains

@@ -42,7 +42,7 @@ class ClaudeAgent:
         api_key = api_key or os.environ.get(ANTHROPIC_API_KEY_ENV)
         if not api_key:
             raise EnvironmentError(f"Missing {ANTHROPIC_API_KEY_ENV} environment variable")
-        self.client = anthropic.Anthropic(api_key=api_key)
+        self.client = anthropic.Anthropic(api_key=api_key, max_retries=8)
         self.model = model or DEFAULT_MODEL
         self.max_content_chars = max_content_chars or 0
 

@@ -1,0 +1,35 @@
+# Frontier Newsletter — preferred sources
+# One domain per line; lines starting with # are comments.
+# Used by --domain-mode strict (Tavily include_domains) or boost (rank multiplier).
+
+# Research labs & official blogs
+anthropic.com
+openai.com
+deepmind.google
+ai.meta.com
+research.google
+
+# Preprint server
+arxiv.org
+
+# Strong individual voices
+martinfowler.com
+simonwillison.net
+eugeneyan.com
+magazine.sebastianraschka.com
+lilianweng.github.io
+
+# Framework / agent-tooling blogs
+blog.langchain.com
+blog.llamaindex.ai
+huggingface.co
+
+# Curated AI commentary
+interconnects.ai
+www.latent.space
+newsletter.pragmaticengineer.com
+
+# Production / infra
+netflixtechblog.com
+github.blog
+anyscale.com

@@ -73,6 +73,31 @@ def normalize_title(title):
     return cleaned
 
 
+def load_domain_list(path):
+    p = Path(path)
+    if not p.exists():
+        return []
+    domains = []
+    for line in p.read_text(encoding="utf-8").splitlines():
+        stripped = line.strip()
+        if stripped and not stripped.startswith("#"):
+            domains.append(stripped.lower())
+    return domains
+
+
+def url_in_domains(url, domains):
+    if not url or not domains:
+        return False
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except ValueError:
+        return False
+    if host.startswith("www."):
+        host = host[4:]
+    domain_set = {d[4:] if d.startswith("www.") else d for d in domains}
+    return any(host == d or host.endswith("." + d) for d in domain_set)
+
+
 def extract_text_nodes(html_text):
     cleaned = re.sub(r"\s+", " ", html_text or "").strip()
     return cleaned

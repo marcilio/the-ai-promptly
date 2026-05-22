@@ -7,7 +7,14 @@ from dotenv import load_dotenv
 
 from .agent import ClaudeAgent
 from .article import ArticleRecord
-from .config import DEFAULT_EXCLUDE_DOMAINS, DEFAULT_KEYWORDS, DEFAULT_MAX_ARTICLES
+from .config import (
+    DEFAULT_DOMAIN_BOOST,
+    DEFAULT_DOMAIN_MODE,
+    DEFAULT_EXCLUDE_DOMAINS,
+    DEFAULT_KEYWORDS,
+    DEFAULT_MAX_ARTICLES,
+    DEFAULT_PREFERRED_DOMAINS_FILE,
+)
 from .dashboard import generate_index_page, generate_newsletter_page
 from .email_delivery import send_newsletter
 from .fetcher import fetch_html
@@ -16,7 +23,7 @@ from .parser import extract_candidate_urls, extract_article_metadata
 from .ranker import filter_new_articles, select_top_articles
 from .search_engine import load_search_terms, search_for_terms
 from .storage import get_history, update_history, update_index, save_daily_run
-from .utils import ensure_directories, normalize_title
+from .utils import ensure_directories, load_domain_list, normalize_title
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(message)s")
@@ -37,6 +44,10 @@ def parse_args():
     parser.add_argument("--max-content-chars", type=int, default=12000, help="Truncate article content to this many characters before sending to Claude. 0 disables. Default keeps cost predictable.")
     parser.add_argument("--exclude-domain", action="append", help="Skip search results from this domain (repeat to add multiple). Defaults to known scraping-blockers like medium.com.")
     parser.add_argument("--email-to", help="If set, email the rendered newsletter to this address via SMTP. Requires SMTP_USER and SMTP_APP_PASSWORD in .env.")
+    parser.add_argument("--preferred-domains", default=DEFAULT_PREFERRED_DOMAINS_FILE, help="Path to a text file with one preferred domain per line (#-comments allowed).")
+    parser.add_argument("--domain-mode", choices=["off", "strict", "boost"], default=DEFAULT_DOMAIN_MODE,
+                        help="How to use the preferred-domains list. strict: restrict Tavily search to these domains only. boost: rank in-list articles higher. off: ignore the list.")
+    parser.add_argument("--domain-boost", type=float, default=DEFAULT_DOMAIN_BOOST, help="Multiplier applied to relevance_score for in-list articles when --domain-mode=boost.")
     parser.add_argument("--dry-run", action="store_true", help="Scan and score articles without writing output files.")
     return parser.parse_args()
 
@@ -54,6 +65,7 @@ def main():
 
     search_terms = []
     search_results = []
+    preferred_domains = []
     if args.search_file:
         search_terms = load_search_terms(args.search_file)
         if not search_terms:
@@ -62,12 +74,20 @@ def main():
         exclude_domains = args.exclude_domain if args.exclude_domain is not None else DEFAULT_EXCLUDE_DOMAINS
         if exclude_domains:
             logger.info("Excluding domains from search: %s", ", ".join(exclude_domains))
+        preferred_domains = load_domain_list(args.preferred_domains) if args.domain_mode != "off" else []
+        include_domains_arg = preferred_domains if args.domain_mode == "strict" else None
+        if preferred_domains:
+            logger.info(
+                "Preferred-domains mode=%s, %d domains loaded from %s",
+                args.domain_mode, len(preferred_domains), args.preferred_domains,
+            )
         search_results = search_for_terms(
             args.search_file,
             provider=args.search_provider,
             api_key=args.search_api_key,
             max_results=args.search_max_results,
             exclude_domains=exclude_domains,
+            include_domains=include_domains_arg,
         )
 
     if not source_urls and not search_terms:
@@ -140,7 +160,11 @@ def main():
         if signature:
             run_signatures.append(signature)
         metadata["source_url"] = candidate_sources.get(candidate)
-        annotation = agent.annotate_article(metadata)
+        try:
+            annotation = agent.annotate_article(metadata)
+        except Exception as exc:
+            logger.warning("Skipping %s — annotation failed: %s", candidate, exc)
+            continue
         article = ArticleRecord(
             url=candidate,
             title=metadata.get("title", candidate),
@@ -158,7 +182,13 @@ def main():
         articles.append(article)
 
     articles = filter_new_articles(articles, seen_urls)
-    selected = select_top_articles(articles, args.max_articles)
+    boost_domains = preferred_domains if args.search_file and args.domain_mode == "boost" else None
+    selected = select_top_articles(
+        articles,
+        args.max_articles,
+        preferred_domains=boost_domains,
+        boost=args.domain_boost,
+    )
     run_date = datetime.utcnow().strftime("%Y-%m-%d")
 
     if len(selected) < args.min_articles:
