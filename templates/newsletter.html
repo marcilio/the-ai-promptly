@@ -37,6 +37,15 @@
     }
     h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
     .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
     .overview {
       font-size: 15px; line-height: 1.65; color: var(--text);
       background: var(--surface); border-left: 3px solid var(--accent);
@@ -155,6 +164,11 @@
     <a class="back-link" href="index.html">&larr; Back to timeline</a>
     <div class="eyebrow" style="margin-top: 16px;">{{ newsletter_name }}</div>
     <h1>{{ date_key }}</h1>
+    {% if newsletter_author_name %}
+    <p class="byline">Brought to you by
+      {% if newsletter_author_url %}<a href="{{ newsletter_author_url }}" target="_blank" rel="noopener">{{ newsletter_author_name }}</a>{% else %}{{ newsletter_author_name }}{% endif %}
+    </p>
+    {% endif %}
     <p class="meta">
       Generated {{ generated_at }} UTC &nbsp;·&nbsp; {{ run_count }} article{{ "s" if run_count != 1 else "" }}
     </p>

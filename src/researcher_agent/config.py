@@ -32,10 +32,22 @@ DEFAULT_KEYWORDS = [
 DEFAULT_MODEL = "claude-haiku-4-5"
 NEWSLETTER_NAME_ENV = "NEWSLETTER_NAME"
 DEFAULT_NEWSLETTER_NAME = "The AI Promptly"
+NEWSLETTER_AUTHOR_NAME_ENV = "NEWSLETTER_AUTHOR_NAME"
+DEFAULT_NEWSLETTER_AUTHOR_NAME = "Marcilio Mendonca"
+NEWSLETTER_AUTHOR_URL_ENV = "NEWSLETTER_AUTHOR_URL"
+DEFAULT_NEWSLETTER_AUTHOR_URL = "https://www.linkedin.com/in/marcilio/"
 
 
 def newsletter_name():
     return os.environ.get(NEWSLETTER_NAME_ENV, DEFAULT_NEWSLETTER_NAME)
+
+
+def newsletter_author_name():
+    return os.environ.get(NEWSLETTER_AUTHOR_NAME_ENV, DEFAULT_NEWSLETTER_AUTHOR_NAME)
+
+
+def newsletter_author_url():
+    return os.environ.get(NEWSLETTER_AUTHOR_URL_ENV, DEFAULT_NEWSLETTER_AUTHOR_URL)
 DEFAULT_EXCLUDE_DOMAINS = [
     "medium.com",
     "levelup.gitconnected.com",

@@ -15,6 +15,11 @@
             <td style="padding:0 4px 20px;">
               <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#0d9488; font-weight:600; margin-bottom:6px;">{{ newsletter_name }}</div>
               <div style="font-size:26px; font-weight:700; letter-spacing:-0.01em; color:#15171c;">{{ date_key }}</div>
+              {% if newsletter_author_name %}
+              <div style="font-size:13px; color:#5d626c; margin-top:6px;">Brought to you by
+                {% if newsletter_author_url %}<a href="{{ newsletter_author_url }}" style="color:#5d626c; text-decoration:underline;">{{ newsletter_author_name }}</a>{% else %}{{ newsletter_author_name }}{% endif %}
+              </div>
+              {% endif %}
               <div style="font-size:13px; color:#5d626c; margin-top:6px;">{{ run_count }} article{{ "s" if run_count != 1 else "" }}</div>
             </td>
           </tr>

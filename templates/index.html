@@ -58,6 +58,19 @@
       margin: 0 0 8px;
     }
     .subtitle { color: var(--text-2); font-size: 15px; }
+    .byline {
+      font-size: 13px;
+      color: var(--text-2);
+      margin: 6px 0 0;
+    }
+    .byline a {
+      color: var(--text-2);
+      text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px;
+      transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
     .overview {
       font-size: 15px; line-height: 1.65; color: var(--text);
       background: var(--surface); border-left: 3px solid var(--accent);
@@ -373,6 +386,11 @@
   <div class="page">
     <header class="header">
       <h1>{{ newsletter_name }}</h1>
+      {% if newsletter_author_name %}
+      <p class="byline">Brought to you by
+        {% if newsletter_author_url %}<a href="{{ newsletter_author_url }}" target="_blank" rel="noopener">{{ newsletter_author_name }}</a>{% else %}{{ newsletter_author_name }}{% endif %}
+      </p>
+      {% endif %}
       <p id="overview" class="overview empty">Loading&hellip;</p>
     </header>
 

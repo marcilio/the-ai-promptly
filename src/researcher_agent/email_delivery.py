@@ -5,7 +5,11 @@ from datetime import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
-from .config import newsletter_name as _newsletter_name
+from .config import (
+    newsletter_author_name as _newsletter_author_name,
+    newsletter_author_url as _newsletter_author_url,
+    newsletter_name as _newsletter_name,
+)
 from .dashboard import render_template
 
 logger = logging.getLogger(__name__)
@@ -47,6 +51,8 @@ def send_newsletter(date_key, articles, overview, recipient, smtp_user=None, smt
         "run_count": len(articles),
         "overview": overview,
         "newsletter_name": brand,
+        "newsletter_author_name": _newsletter_author_name(),
+        "newsletter_author_url": _newsletter_author_url(),
         "generated_at": datetime.utcnow().isoformat(timespec="seconds") + "Z",
     })
     text_body = _build_plain_text(date_key, articles, overview, brand)
