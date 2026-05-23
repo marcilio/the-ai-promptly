@@ -71,6 +71,28 @@
       transition: color 0.15s;
     }
     .byline a:hover { color: var(--accent); }
+
+    .share-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 0; align-items: center; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 6px 12px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+    }
+    .share-btn:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--linkedin:hover { color: var(--accent); }
+    .share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: var(--bg); padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
     .overview {
       font-size: 15px; line-height: 1.65; color: var(--text);
       background: var(--surface); border-left: 3px solid var(--accent);
@@ -409,7 +431,23 @@
       </div>
       <input id="timeline" class="slider" type="range" min="0" max="0" value="0" />
       <div id="sourceLine" class="source-line"></div>
+      {% if newsletter_base_url %}
+      <div class="share-row" id="shareRow" style="display: none;">
+        <a id="shareLinkedIn" class="share-btn share-btn--linkedin"
+           href="#" target="_blank" rel="noopener"
+           title="Share this day's newsletter on LinkedIn">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zM20 19h-3v-5.6c0-1.34-.48-2.25-1.68-2.25-.92 0-1.46.62-1.7 1.22-.09.21-.11.51-.11.81V19h-3V8h3v1.27c.4-.62 1.12-1.5 2.72-1.5 1.98 0 3.47 1.3 3.47 4.08V19z"/></svg>
+          Share on LinkedIn
+        </a>
+        <button type="button" id="shareCopy" class="share-btn share-btn--copy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy link
+        </button>
+        {% if newsletter_author_name %}<span class="share-hint">tag the author when you post</span>{% endif %}
+      </div>
+      {% endif %}
     </section>
+    {% if newsletter_base_url %}<div id="shareToast" class="share-toast">Copied!</div>{% endif %}
 
     <nav id="filters" class="filters"></nav>
 
@@ -417,6 +455,7 @@
   </div>
 
   <script>
+    const NEWSLETTER_BASE_URL = {{ newsletter_base_url|tojson }};
     const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
     const state = {
       runs: [],
@@ -435,6 +474,30 @@
     const nextBtn = document.getElementById("nextBtn");
     const overviewEl = document.getElementById("overview");
     const timelineDaysEl = document.getElementById("timelineDays");
+    const shareRow = document.getElementById("shareRow");
+    const shareLinkedIn = document.getElementById("shareLinkedIn");
+    const shareCopy = document.getElementById("shareCopy");
+    const shareToast = document.getElementById("shareToast");
+
+    function updateShareButtons(dateKey) {
+      if (!shareRow || !NEWSLETTER_BASE_URL) return;
+      const pageUrl = `${NEWSLETTER_BASE_URL}/newsletter-${dateKey}.html`;
+      shareLinkedIn.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`;
+      shareCopy.dataset.url = pageUrl;
+      shareRow.style.display = "flex";
+    }
+
+    if (shareCopy && shareToast) {
+      shareCopy.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(shareCopy.dataset.url);
+          shareToast.classList.add("show");
+          setTimeout(() => shareToast.classList.remove("show"), 1500);
+        } catch (_) {
+          window.prompt("Copy this URL:", shareCopy.dataset.url);
+        }
+      });
+    }
 
     function escapeHtml(s) {
       return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
@@ -482,6 +545,7 @@
       }
       prevBtn.disabled = i === 0;
       nextBtn.disabled = i === state.runs.length - 1;
+      updateShareButtons(run.date);
       const dailyResponse = await fetch(`../data/daily/${run.date}.json`);
       state.articles = await dailyResponse.json();
       renderFilters();

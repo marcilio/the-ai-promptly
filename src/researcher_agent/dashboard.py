@@ -9,6 +9,7 @@ from .config import (
     TEMPLATES_DIR,
     newsletter_author_name,
     newsletter_author_url,
+    newsletter_base_url,
     newsletter_name,
 )
 
@@ -40,9 +41,23 @@ def write_output(filename, content):
     return output_path
 
 
+def _build_og_description(overview, author_name, max_chars=200):
+    """Open Graph description: first chunk of the overview + author credit."""
+    base = (overview or "").strip().replace("\n", " ")
+    if len(base) > max_chars:
+        base = base[: max_chars - 1].rstrip() + "…"
+    if author_name:
+        # Strip credentials/affiliation for a shorter byline in the OG card
+        short = author_name.split(",")[0].strip()
+        return f"{base} — Curated by {short}".strip(" —")
+    return base
+
+
 def generate_newsletter_page(date_key, articles, index):
     run = next((r for r in index.get("runs", []) if r.get("date") == date_key), None)
     overview = (run or {}).get("overview")
+    base_url = newsletter_base_url()
+    page_url = f"{base_url}/newsletter-{date_key}.html" if base_url else ""
     content = render_template(
         "newsletter.html",
         {
@@ -54,6 +69,9 @@ def generate_newsletter_page(date_key, articles, index):
             "newsletter_name": newsletter_name(),
             "newsletter_author_name": newsletter_author_name(),
             "newsletter_author_url": newsletter_author_url(),
+            "newsletter_base_url": base_url,
+            "page_url": page_url,
+            "og_description": _build_og_description(overview, newsletter_author_name()),
             "generated_at": datetime.utcnow().isoformat() + "Z",
         },
     )
@@ -69,6 +87,7 @@ def generate_index_page(index):
             "newsletter_name": newsletter_name(),
             "newsletter_author_name": newsletter_author_name(),
             "newsletter_author_url": newsletter_author_url(),
+            "newsletter_base_url": newsletter_base_url(),
         },
     )
     return write_output("index.html", content)

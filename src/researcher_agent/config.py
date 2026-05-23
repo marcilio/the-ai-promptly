@@ -31,11 +31,12 @@ DEFAULT_KEYWORDS = [
 ]
 DEFAULT_MODEL = "claude-haiku-4-5"
 NEWSLETTER_NAME_ENV = "NEWSLETTER_NAME"
-DEFAULT_NEWSLETTER_NAME = "The AI Promptly"
+DEFAULT_NEWSLETTER_NAME = "Daily Agentic"
 NEWSLETTER_AUTHOR_NAME_ENV = "NEWSLETTER_AUTHOR_NAME"
-DEFAULT_NEWSLETTER_AUTHOR_NAME = "Marcilio Mendonca"
+DEFAULT_NEWSLETTER_AUTHOR_NAME = "Marcilio Mendonca, PhD, Staff AI FDE at Google"
 NEWSLETTER_AUTHOR_URL_ENV = "NEWSLETTER_AUTHOR_URL"
 DEFAULT_NEWSLETTER_AUTHOR_URL = "https://www.linkedin.com/in/marcilio/"
+NEWSLETTER_BASE_URL_ENV = "NEWSLETTER_BASE_URL"
 
 
 def newsletter_name():
@@ -48,6 +49,15 @@ def newsletter_author_name():
 
 def newsletter_author_url():
     return os.environ.get(NEWSLETTER_AUTHOR_URL_ENV, DEFAULT_NEWSLETTER_AUTHOR_URL)
+
+
+def newsletter_base_url():
+    """Public root URL of the deployed dashboard, e.g. https://daily-agentic.vercel.app.
+    Empty when running locally; share buttons are hidden in that case because LinkedIn
+    can't crawl localhost.
+    """
+    url = os.environ.get(NEWSLETTER_BASE_URL_ENV, "").strip()
+    return url.rstrip("/") if url else ""
 DEFAULT_EXCLUDE_DOMAINS = [
     "medium.com",
     "levelup.gitconnected.com",
