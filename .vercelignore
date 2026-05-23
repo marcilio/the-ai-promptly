@@ -1,0 +1,34 @@
+# Belt-and-suspenders. We deploy ./dist explicitly via `vercel deploy ./dist`,
+# but if `vercel deploy` is ever run without a dir, this prevents leaking source,
+# secrets, or runtime data.
+
+# Secrets — never deploy
+.env
+.env.*
+
+# Python / venvs / build cache
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Source — not needed for static deploy
+src/
+templates/
+scripts/
+launchd/
+README.md
+pyproject.toml
+
+# Runtime artifacts — the dashboard fetches data/*.json from dist/ instead
+data/
+output/
+preferred_domains.txt
+content_search_seeds.txt
+
+# Local tooling / state
+.git/
+.gitignore
+.claude/
+.DS_Store
