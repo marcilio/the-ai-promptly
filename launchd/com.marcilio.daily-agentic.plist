@@ -3,22 +3,19 @@
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.marcilio.frontier-newsletter</string>
+    <string>com.marcilio.daily-agentic</string>
 
+    <!-- Invoke the wrapper: agent run → build dist → git push (Vercel deploys) -->
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/marcilio/projects/researcher-agent-dashboard/.venv/bin/researcher-dashboard</string>
-        <string>--search-file</string>
-        <string>content_search_seeds.txt</string>
-        <string>--search-provider</string>
-        <string>tavily</string>
-        <string>--email-to</string>
-        <string>marcilio.mendonca@gmail.com</string>
+        <string>/bin/bash</string>
+        <string>/Users/marcilio/projects/researcher-agent-dashboard/scripts/daily.sh</string>
     </array>
 
     <key>WorkingDirectory</key>
     <string>/Users/marcilio/projects/researcher-agent-dashboard</string>
 
+    <!-- Run daily at 05:00 local time -->
     <key>StartCalendarInterval</key>
     <dict>
         <key>Hour</key>
@@ -27,12 +24,13 @@
         <integer>0</integer>
     </dict>
 
+    <!-- Logs: tail -f either of these to watch the daily cycle -->
     <key>StandardOutPath</key>
-    <string>/Users/marcilio/Library/Logs/frontier-newsletter.out.log</string>
-
+    <string>/Users/marcilio/Library/Logs/daily-agentic.out.log</string>
     <key>StandardErrorPath</key>
-    <string>/Users/marcilio/Library/Logs/frontier-newsletter.err.log</string>
+    <string>/Users/marcilio/Library/Logs/daily-agentic.err.log</string>
 
+    <!-- Don't fire immediately on load; wait for the next 05:00 -->
     <key>RunAtLoad</key>
     <false/>
 </dict>
