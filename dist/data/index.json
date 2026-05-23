@@ -2,7 +2,7 @@
   "runs": [
     {
       "date": "2026-05-23",
-      "generated_at": "2026-05-23T06:29:32.049890Z",
+      "generated_at": "2026-05-23T12:05:08.706086Z",
       "source_urls": [
         "search:AI agent harness design",
         "search:agentic design patterns 2026",
@@ -12,7 +12,7 @@
       ],
       "count": 10,
       "filename": "newsletter-2026-05-23.html",
-      "overview": "These articles explore the emerging infrastructure and practices needed to build reliable AI agents at scale, with particular focus on training multi-step tool orchestration, rethinking code conventions for agentic workflows, and establishing architectural patterns for long-running agent systems. A key finding is that compression optimization can paradoxically increase costs by forcing models to spend more reasoning effort decoding dense formats."
+      "overview": "Recent research emphasizes that semantic tool descriptions and effective configuration mechanisms are critical for scaling AI agents to handle complex tasks. Key advances include contextual bandit approaches for tool selection, emerging standards for agent configuration, and specialized evaluation frameworks for measuring agent performance across diverse domains."
     },
     {
       "date": "2026-05-22",
