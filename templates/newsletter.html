@@ -114,6 +114,27 @@
       font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
     }
     .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
     .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
     .tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .tag {
@@ -163,6 +184,12 @@
           {% if not article.published_at and article.first_seen %}<span class="date-fallback">(discovered)</span>{% endif %}
         </div>
         <p class="article__summary">{{ article.summary or "No summary available." }}</p>
+        {% if article.takeaways %}
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul>{% for t in article.takeaways %}<li>{{ t }}</li>{% endfor %}</ul>
+        </div>
+        {% endif %}
         <div class="article__footer">
           <div class="tags">
             {% for tag in (article.tags or []) %}<span class="tag">#{{ tag }}</span>{% endfor %}

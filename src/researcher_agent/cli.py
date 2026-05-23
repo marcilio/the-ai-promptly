@@ -1,6 +1,7 @@
 import argparse
 import json
 import logging
+import time
 from datetime import datetime, timedelta
 
 from dotenv import load_dotenv
@@ -41,13 +42,16 @@ def parse_args():
     parser.add_argument("--max-articles", type=int, default=DEFAULT_MAX_ARTICLES, help="Maximum number of articles to include in the newsletter.")
     parser.add_argument("--dedup-days", type=int, default=60, help="Only dedup against articles included in the last N days; older articles may resurface.")
     parser.add_argument("--min-articles", type=int, default=3, help="Warn if fewer than this many articles end up selected for the day.")
-    parser.add_argument("--max-content-chars", type=int, default=12000, help="Truncate article content to this many characters before sending to Claude. 0 disables. Default keeps cost predictable.")
+    parser.add_argument("--max-content-chars", type=int, default=6000, help="Truncate article content to this many characters before sending to Claude. 0 disables. Default keeps cost predictable; first ~6k chars almost always contain the thesis.")
+    parser.add_argument("--max-per-domain", type=int, default=2, help="Cap the number of selected articles per source domain. Forces diversity. Set to 0 to disable.")
     parser.add_argument("--exclude-domain", action="append", help="Skip search results from this domain (repeat to add multiple). Defaults to known scraping-blockers like medium.com.")
     parser.add_argument("--email-to", help="If set, email the rendered newsletter to this address via SMTP. Requires SMTP_USER and SMTP_APP_PASSWORD in .env.")
     parser.add_argument("--preferred-domains", default=DEFAULT_PREFERRED_DOMAINS_FILE, help="Path to a text file with one preferred domain per line (#-comments allowed).")
     parser.add_argument("--domain-mode", choices=["off", "strict", "boost"], default=DEFAULT_DOMAIN_MODE,
                         help="How to use the preferred-domains list. strict: restrict Tavily search to these domains only. boost: rank in-list articles higher. off: ignore the list.")
     parser.add_argument("--domain-boost", type=float, default=DEFAULT_DOMAIN_BOOST, help="Multiplier applied to relevance_score for in-list articles when --domain-mode=boost.")
+    parser.add_argument("--request-delay-seconds", type=float, default=4.0, help="Sleep this many seconds between Claude annotation calls to stay under rate limits. 0 disables.")
+    parser.add_argument("--failure-backoff-seconds", type=float, default=30.0, help="When 3+ Claude calls fail in a row, sleep this long before continuing. Lets transient overload clear.")
     parser.add_argument("--dry-run", action="store_true", help="Scan and score articles without writing output files.")
     return parser.parse_args()
 
@@ -123,6 +127,8 @@ def main():
     agent = ClaudeAgent(max_content_chars=args.max_content_chars)
     articles = []
     candidate_sources = {}
+    consecutive_failures = 0
+    SEQ_FAIL_THRESHOLD = 3
 
     for source_url in sorted(source_urls):
         logger.info("Fetching source: %s", source_url)
@@ -162,8 +168,17 @@ def main():
         metadata["source_url"] = candidate_sources.get(candidate)
         try:
             annotation = agent.annotate_article(metadata)
+            consecutive_failures = 0
         except Exception as exc:
+            consecutive_failures += 1
             logger.warning("Skipping %s — annotation failed: %s", candidate, exc)
+            if consecutive_failures >= SEQ_FAIL_THRESHOLD and args.failure_backoff_seconds > 0:
+                extra = max(args.failure_backoff_seconds - args.request_delay_seconds, 0)
+                if extra > 0:
+                    logger.warning("%d consecutive failures — sleeping %.0fs before continuing", consecutive_failures, extra)
+                    time.sleep(extra)
+            if args.request_delay_seconds > 0:
+                time.sleep(args.request_delay_seconds)
             continue
         article = ArticleRecord(
             url=candidate,
@@ -175,11 +190,14 @@ def main():
             category=annotation.get("category", "other"),
             relevance_score=float(annotation.get("relevance_score", 0.0)),
             tags=annotation.get("tags", []),
+            takeaways=annotation.get("takeaways") or [],
             first_seen=datetime.utcnow().strftime("%Y-%m-%d"),
             source_url=metadata.get("source_url"),
             minhash=signature,
         )
         articles.append(article)
+        if args.request_delay_seconds > 0:
+            time.sleep(args.request_delay_seconds)
 
     articles = filter_new_articles(articles, seen_urls)
     boost_domains = preferred_domains if args.search_file and args.domain_mode == "boost" else None
@@ -188,6 +206,7 @@ def main():
         args.max_articles,
         preferred_domains=boost_domains,
         boost=args.domain_boost,
+        max_per_domain=args.max_per_domain,
     )
     run_date = datetime.utcnow().strftime("%Y-%m-%d")
 
@@ -205,7 +224,12 @@ def main():
 
     source_inputs = sorted(source_urls) + [f"search:{term}" for term in search_terms]
 
-    overview = agent.summarize_day(selected) if selected else None
+    overview = None
+    if selected:
+        try:
+            overview = agent.summarize_day(selected)
+        except Exception as exc:
+            logger.warning("Daily overview generation failed (%s) — saving without one.", exc)
     if overview:
         logger.info("Daily overview: %s", overview)
 

@@ -98,6 +98,16 @@ def url_in_domains(url, domains):
     return any(host == d or host.endswith("." + d) for d in domain_set)
 
 
+def url_hostname(url):
+    if not url:
+        return ""
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except ValueError:
+        return ""
+    return host[4:] if host.startswith("www.") else host
+
+
 def extract_text_nodes(html_text):
     cleaned = re.sub(r"\s+", " ", html_text or "").strip()
     return cleaned

@@ -18,6 +18,7 @@ class ArticleRecord:
     last_included: Optional[str] = None
     source_url: Optional[str] = None
     minhash: Optional[List[int]] = None
+    takeaways: List[str] = field(default_factory=list)
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -30,6 +31,7 @@ class ArticleRecord:
             "category": self.category,
             "relevance_score": self.relevance_score,
             "tags": self.tags,
+            "takeaways": self.takeaways,
             "first_seen": self.first_seen,
             "last_included": self.last_included,
             "source_url": self.source_url,
@@ -48,6 +50,7 @@ class ArticleRecord:
             category=data.get("category", "other"),
             relevance_score=data.get("relevance_score", 0.0),
             tags=data.get("tags", []),
+            takeaways=data.get("takeaways") or [],
             first_seen=data.get("first_seen"),
             last_included=data.get("last_included"),
             source_url=data.get("source_url"),

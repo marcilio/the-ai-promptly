@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from .article import ArticleRecord
-from .utils import url_in_domains
+from .utils import url_hostname, url_in_domains
 
 
 def _effective_score(article: ArticleRecord, preferred_domains: Optional[List[str]], boost: float) -> float:
@@ -16,6 +16,7 @@ def select_top_articles(
     max_articles: int,
     preferred_domains: Optional[List[str]] = None,
     boost: float = 1.0,
+    max_per_domain: Optional[int] = None,
 ):
     filtered = [article for article in articles if article.relevance_score > 0.0]
     sorted_articles = sorted(
@@ -27,7 +28,26 @@ def select_top_articles(
         ),
         reverse=True,
     )
-    return sorted_articles[:max_articles]
+
+    if not max_per_domain or max_per_domain <= 0:
+        return sorted_articles[:max_articles]
+
+    selected: List[ArticleRecord] = []
+    overflow: List[ArticleRecord] = []
+    counts = {}
+    for article in sorted_articles:
+        host = url_hostname(article.url)
+        if counts.get(host, 0) < max_per_domain:
+            selected.append(article)
+            counts[host] = counts.get(host, 0) + 1
+            if len(selected) >= max_articles:
+                return selected
+        else:
+            overflow.append(article)
+    # Diversity exhausted before hitting max_articles → top up from overflow
+    if len(selected) < max_articles:
+        selected.extend(overflow[: max_articles - len(selected)])
+    return selected
 
 
 def filter_new_articles(articles: List[ArticleRecord], history_urls):

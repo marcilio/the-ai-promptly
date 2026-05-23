@@ -303,6 +303,38 @@
 
     .article__summary { color: var(--text-2); margin: 0 0 14px; }
 
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative;
+      padding-left: 16px;
+      margin: 4px 0;
+      font-size: 13.5px;
+      line-height: 1.5;
+      color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     .article__footer {
       display: flex;
       justify-content: space-between;
@@ -503,6 +535,12 @@
             ${!hasPublished && article.first_seen ? `<span class="date-fallback">(discovered)</span>` : ""}
           </div>
           <p class="article__summary">${escapeHtml(article.summary || "No summary available.")}</p>
+          ${Array.isArray(article.takeaways) && article.takeaways.length ? `
+            <div class="takeaways">
+              <div class="takeaways__label">Key takeaways</div>
+              <ul>${article.takeaways.map(t => `<li>${escapeHtml(t)}</li>`).join("")}</ul>
+            </div>
+          ` : ""}
           <div class="article__footer">
             <div class="tags">${tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join("")}</div>
             <a class="read-link" href="${escapeHtml(article.url)}" target="_blank" rel="noopener">Read article &rarr;</a>

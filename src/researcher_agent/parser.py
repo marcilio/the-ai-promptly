@@ -96,13 +96,43 @@ def _get_summary(soup):
     return None
 
 
+_AUTHOR_MAX_CHARS = 500
+_AUTHOR_META_SELECTORS = [
+    {"name": "author"},
+    {"property": "article:author"},
+    {"name": "citation_author"},
+    {"name": "dc.creator"},
+    {"name": "DC.Creator"},
+    {"name": "byl"},
+]
+
+
 def _get_author(soup):
-    author_tag = soup.find("meta", attrs={"name": "author"}) or soup.find("meta", property="article:author")
-    if author_tag:
-        return author_tag.get("content", "").strip()
-    author_spans = soup.select("[class*=author], [id*=author]")
-    if author_spans:
-        return author_spans[0].get_text(strip=True)
+    for selector in _AUTHOR_META_SELECTORS:
+        tags = soup.find_all("meta", attrs=selector)
+        if tags:
+            joined = ", ".join(t.get("content", "").strip() for t in tags if t.get("content"))
+            if joined:
+                return joined[:_AUTHOR_MAX_CHARS] if len(joined) <= _AUTHOR_MAX_CHARS else None
+
+    # Narrowed selectors: prefer schema-org / common explicit author markup, not just
+    # any element with "author" in its class name (which on arxiv html pages can wrap
+    # the entire paper body).
+    for selector in [
+        "[itemprop=author]",
+        "[rel=author]",
+        ".author-name",
+        ".byline-author",
+        ".byline",
+        ".post-author",
+        ".article-author",
+        ".authors",
+    ]:
+        match = soup.select_one(selector)
+        if match:
+            text = match.get_text(" ", strip=True)
+            if text and len(text) <= _AUTHOR_MAX_CHARS:
+                return text
     return None
 
 

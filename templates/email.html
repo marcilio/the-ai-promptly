@@ -51,6 +51,18 @@
                     <div style="font-size:14px; line-height:1.55; color:#3f444e; margin-bottom:12px;">
                       {{ article.summary or "No summary available." }}
                     </div>
+                    {% if article.takeaways %}
+                    <div style="background:#f6f7fa; border-left:2px solid #0d9488; border-radius:0 6px 6px 0; padding:10px 14px; margin-bottom:12px;">
+                      <div style="font-size:10px; letter-spacing:0.14em; text-transform:uppercase; color:#0d9488; font-weight:600; margin-bottom:6px;">Key takeaways</div>
+                      <ul style="list-style:none; padding:0; margin:0;">
+                        {% for t in article.takeaways %}
+                        <li style="position:relative; padding-left:14px; margin:4px 0; font-size:13px; line-height:1.5; color:#15171c;">
+                          <span style="position:absolute; left:0; color:#0d9488; font-weight:600;">→</span>{{ t }}
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    {% endif %}
                     <div>
                       <a href="{{ article.url }}" style="color:#0d9488; text-decoration:none; font-size:13px; font-weight:500;">Read article &rarr;</a>
                     </div>
