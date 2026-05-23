@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Agentic &middot; 2026-05-23</title>
+  
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
+
+    .share-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; align-items: center; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 6px 12px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+    }
+    .share-btn:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--linkedin:hover { color: #5eead4; }
+    .share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #0a0a0f; padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
+    .overview {
+      font-size: 15px; line-height: 1.65; color: var(--text);
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; Back to timeline</a>
+    <div class="eyebrow" style="margin-top: 16px;">Daily Agentic</div>
+    <h1>2026-05-23</h1>
+    
+    <p class="byline">Brought to you by
+      <a href="https://www.linkedin.com/in/marcilio/" target="_blank" rel="noopener">Marcilio Mendonca, PhD, Staff AI FDE at Google</a>
+    </p>
+    
+    <p class="meta">
+      Generated 2026-05-23T05:43:27.919220Z UTC &nbsp;·&nbsp; 10 articles
+    </p>
+
+    <p class="overview">Agentic AI systems require comprehensive security frameworks and production-ready architectural patterns. Key themes span attack surface characterization, context management, observability, and evaluation methodologies—with context engineering and defense-in-depth mechanisms emerging as critical foundations for reliable, secure deployment.</p>
+
+    
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2603.11088v1" target="_blank" rel="noopener">The Attack and Defense Landscape of Agentic AI: A Comprehensive Survey</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2603.11088v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Kim, Juhee, Liu, Xiaoyuan, Wang, Zhun, Qiu, Shi, Li, Bo, Guo, Wenbo, Song, Dawn
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This comprehensive systematization of knowledge (SoK) paper surveys the security landscape of agentic AI systems—autonomous agents combining LLMs with traditional software components. The authors present the first systematic framework characterizing agent design across seven dimensions (input trust, access sensitivity, workflow, action, memory, tool, user interface) and analyze how increased flexibility amplifies security risks. They identify six attack vectors across three threat models (external, user-level, internal) and seven security risks spanning the CIA triad plus contextual security. The paper systematizes defense mechanisms across five categories: runtime protection (input/output guardrails, information flow control, monitoring, human-in-the-loop), secure-by-design (privilege separation, formal verification), identity/access management, and component hardening. Case studies of six real-world agents (coding and web) and a detailed analysis of AutoGPT reveal critical gaps: most deployed defenses address downstream consequences rather than upstream attack causes, leaving indirect prompt injection and unsafe data flow largely unmitigated. The work serves as a foundational handbook for building secure agentic systems and identifies open research challenges in this critical emerging domain.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Agentic systems expose fundamentally different attack surfaces than standalone LLMs: multiple heterogeneous interfaces (external data, persistent memory, third-party tools) create larger attack surface requiring defense-in-depth beyond component-level protections.</li><li>Seven design dimensions (input trust, access sensitivity, workflow, action, memory, tool, UI) create continuous flexibility-security tradeoff; expanded flexibility enables more diverse attack vectors and risk amplification across components.</li><li>Defense landscape remains immature: current systems rely heavily on downstream output guardrails and access control but lack upstream defenses like input guardrails and information flow control to prevent injection at source.</li><li>Informal, manually-curated defenses dominate production agents (domain allowlists, regex-based filters, first-token command validation); formal verification and automated detection remain largely unavailable despite research progress.</li><li>Critical open challenges include: composable defense-in-depth without emergent misalignment, adaptive policies balancing security-usability tradeoff, standardized agent identity/access control frameworks, and realistic evaluation bridging research-production gap.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agentic AI security</span><span class="tag">#LLM agents</span><span class="tag">#prompt injection</span><span class="tag">#attack landscape</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2603.11088v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2603.05344v1" target="_blank" rel="noopener">Building AI Coding Agents for the Terminal: Scaffolding, Harness, Context Engineering, and Lessons Learned</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2603.05344v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Bui, Nghi D. Q.
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">OpenDev is an open-source terminal-native AI coding agent that addresses three fundamental challenges in building long-running autonomous software engineering systems: managing finite context windows, enforcing safety without hindering productivity, and sustaining multi-turn reasoning within token budgets. The system employs a compound AI architecture with workload-specialized model routing (separate models for action, thinking, critique, vision, and compaction), dual-agent planning/execution separation, Adaptive Context Compaction (progressively reducing older observations across five stages), event-driven system reminders to counteract instruction fade-out, and an experience-driven memory pipeline that accumulates project-specific knowledge. Safety is enforced through defense-in-depth (prompt guardrails, schema-level tool gating, runtime approval, tool-level validation, and lifecycle hooks). The paper documents architectural patterns, design trade-offs, and transferable lessons from building a production-ready system, positioning OpenDev as the first comprehensive technical report for an interactive, terminal-native coding agent.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Compound AI systems with per-workflow LLM binding enable cost–capability trade-offs: action, thinking, critique, vision, and compaction each route to optimized models via configuration, not code.</li><li>Adaptive Context Compaction with five graduated thresholds (70%–99% utilization) transitions observations through active–faded–archived states, reducing peak consumption ~54% and often eliminating emergency summarization.</li><li>Event-driven system reminders injected at decision points (as role:user messages) overcome attention-decay: instruction compliance improves when reminders appear at maximum recency, not buried in initial system prompts.</li><li>Schema-level safety (removing dangerous tools from planning agents&#39; schemas) is structurally more robust than runtime permission checks; agents cannot reason about actions they never see.</li><li>Tool result optimization and lazy resource loading (MCP tools, skills, subagents) bound context growth: offload large outputs to files, load tool schemas on-demand, defer skill content until invoked.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#context engineering</span><span class="tag">#software engineering</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2603.05344v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf" target="_blank" rel="noopener">A Practical Guide To Building Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=cdn.openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">cdn.openai.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This practical guide from OpenAI outlines foundational principles and architectural patterns for building AI agents. It covers the core design decisions—from defining agent responsibilities and choosing execution models to managing state, handling errors, and integrating external tools—that developers face when moving beyond simple chatbots to production systems. Technical teams building agentic workflows will find concrete guidance on structuring agents for reliability, scalability, and maintainability in real-world deployments.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Define clear agent roles and boundaries to prevent scope creep and improve debuggability in multi-agent systems</li><li>Use explicit tool definitions with strong type signatures to minimize hallucination and ensure predictable behavior</li><li>Implement structured error handling and retry logic, not just simple fallbacks, for robust agent interactions</li><li>Plan for observability and logging from the start; agentic systems are harder to debug than traditional code</li><li>Separate concerns: orchestration, reasoning, tool execution, and memory management into distinct components</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#system design</span><span class="tag">#LLM engineering</span>
+          </div>
+          <a class="read-link" href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://martinfowler.com/articles/gen-ai-patterns" target="_blank" rel="noopener">Emerging Patterns in Building GenAI Products</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://martinfowler.com/articles/gen-ai-patterns" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=martinfowler.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">martinfowler.com</a><span class="dot">·</span>
+          Bharani Subramaniam
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article by Bharani Subramaniam and Martin Fowler documents practical patterns emerging from moving generative AI products from proof-of-concept to production. The authors identify key technical challenges—hallucination, non-determinism, unbounded data access—and catalog recurring solutions including direct prompting, embeddings, RAG (Retrieval Augmented Generation), fine-tuning, guardrails, query rewriting, and reranking. Drawing from Thoughtworks&#39; client engagements, the article synthesizes field experience rather than providing general education, aiming to help teams navigate the distinct architectural and operational problems that GenAI systems introduce compared to traditional transactional or analytical systems.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Evals are critical for validating non-deterministic LLM outputs and establishing sensible operational boundaries</li><li>RAG addresses static training data limitations but requires multiple enhancement patterns like reranking, query rewriting, and hybrid retrieval to work well in practice</li><li>Fine-tuning becomes worthwhile when RAG approaches prove insufficient for domain-specific or context-dependent knowledge requirements</li><li>Guardrails using separate LLM calls mitigate hallucination and injection risks without relying solely on prompt engineering</li><li>GenAI products introduce fundamentally different architectural challenges than traditional systems and shouldn&#39;t be treated as simple extensions</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#generative AI</span><span class="tag">#RAG patterns</span><span class="tag">#LLM production systems</span>
+          </div>
+          <a class="read-link" href="https://martinfowler.com/articles/gen-ai-patterns" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://resources.anthropic.com/hubfs/Building%20Effective%20AI%20Agents-%20Architecture%20Patterns%20and%20Implementation%20Frameworks.pdf" target="_blank" rel="noopener">Building Effective AI Agents Architecture Patterns And Implementation Frameworks</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://resources.anthropic.com/hubfs/Building%20Effective%20AI%20Agents-%20Architecture%20Patterns%20and%20Implementation%20Frameworks.pdf" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=resources.anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">resources.anthropic.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This resource explores architectural patterns and implementation frameworks for building effective AI agents. The document covers foundational design principles for constructing agents that can reliably execute multi-step tasks, integrate with external tools and APIs, and maintain coherent reasoning across interactions. It provides practical guidance on structuring agent systems, managing state and context, and implementing robust error handling and fallback mechanisms. Technical readers should care because agent-oriented architectures are becoming critical infrastructure for production AI applications, and understanding these patterns directly impacts system reliability, maintainability, and performance at scale.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Design agents with clear decision-making loops: perception, reasoning, action, and feedback mechanisms</li><li>Implement tool integration carefully to ensure agents can safely compose and chain external API calls</li><li>Use structured prompting and context management to maintain reasoning coherence over long interaction sequences</li><li>Build fallback and error-handling strategies to handle agent failures gracefully in production</li><li>Architect for observability and testing by instrumenting agent workflows for debugging and validation</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#architecture patterns</span><span class="tag">#production systems</span>
+          </div>
+          <a class="read-link" href="https://resources.anthropic.com/hubfs/Building%20Effective%20AI%20Agents-%20Architecture%20Patterns%20and%20Implementation%20Frameworks.pdf" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Effective Context Engineering For AI Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article explores context engineering as a foundational technique for building effective AI agents in 2026. It examines how to structure, prioritize, and dynamically manage context windows to improve agent reasoning, reduce hallucinations, and enable more complex multi-step tasks. The piece argues that deliberate context design—including selective information retrieval, hierarchical prompt structures, and adaptive context allocation—is critical as agent capabilities expand and system prompts become insufficient for sophisticated agentic workflows.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Structured context hierarchies with explicit relevance signals outperform uniform prompt concatenation for agent task performance.</li><li>Dynamic context pruning based on task requirements reduces token waste and improves latency without sacrificing reasoning quality.</li><li>Agentic workflows require separating system constraints from task-specific context to enable flexible agent behavior.</li><li>Context engineering directly impacts agent reliability; poor context design is a primary cause of agent failures in production.</li><li>Metadata-rich context representations enable agents to reason about information provenance and confidence.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#context optimization</span><span class="tag">#prompt engineering</span>
+          </div>
+          <a class="read-link" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.martinfowler.com/tags/2026.html" target="_blank" rel="noopener">2026</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.martinfowler.com/tags/2026.html" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=martinfowler.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">martinfowler.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article collection surveys agentic design patterns and AI-assisted programming practices expected in 2026. It documents the evolution from traditional code-writing to LLM-driven development paradigms, including vibe coding (prompting LLMs without reviewing generated code), agentic programming (humans reviewing LLM-generated code), and structured prompt-driven development (SPDD). Key figures like Martin Fowler and Kent Beck reflect on how AI fundamentally reshapes programming skills, development workflows, and the nature of source code itself. The collection emphasizes that while LLMs now generate most code, humans remain responsible for oversight, correctness, and strategic decisions—requiring new skills centered on prompt engineering, abstraction, and iterative review rather than manual coding.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Vibe coding enables non-programmers to build software via LLM prompts, but produces poor maintainability and security—suitable only for disposable applications.</li><li>Agentic programming shifts developers from typing code to prompting LLMs and reviewing results, fundamentally changing required programming skills.</li><li>SPDD treats prompts as first-class artifacts in version control, requiring developers to master alignment, abstraction-first thinking, and iterative review.</li><li>LLM-assisted pair programming patterns—onboarding, structured design, shared standards—reduce friction and shift from tool correction to genuine collaboration.</li><li>November 2025 marked an inflection point with Anthropic&#39;s Opus 4.5 and OpenAI&#39;s GPT-5.2, enabling practical AI-assisted team development.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#generative AI</span><span class="tag">#agentic programming</span><span class="tag">#LLM development patterns</span>
+          </div>
+          <a class="read-link" href="https://www.martinfowler.com/tags/2026.html" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.85</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/learn/agents-course/bonus-unit2/what-is-agent-observability-and-evaluation" target="_blank" rel="noopener">AI Agent Observability and Evaluation · Hugging Face</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/learn/agents-course/bonus-unit2/what-is-agent-observability-and-evaluation" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This Hugging Face course documentation covers AI agent observability and evaluation—essential practices for deploying production-ready agents. Observability means monitoring external signals (logs, metrics, traces) to understand agent behavior, detect issues, and optimize performance. The guide explains key concepts: traces represent complete agent tasks while spans are individual steps; critical metrics include latency, costs, request errors, user feedback, and accuracy. Tools like Langfuse and Arize provide dashboards for real-time monitoring. The document emphasizes that observability transforms agents from black boxes into transparent, debuggable systems, enabling cost-accuracy trade-off analysis, latency measurement, and harm detection. It advocates combining multiple metrics and automated evaluations (using LLMs or libraries like RAGAS) for comprehensive agent health assessment before production deployment.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Observability makes AI agents transparent by tracking logs, metrics, and traces to understand costs, latency, and accuracy trade-offs.</li><li>Use traces (complete tasks) and spans (individual steps) to identify bottlenecks; e.g., 20-second latency might indicate slow models or sequential calls.</li><li>Monitor multiple metrics: latency, costs per run, request errors, explicit user ratings, implicit signals (repeated queries), and automated evaluation scores.</li><li>Tools like Langfuse and Arize use OpenTelemetry standards; check documentation for framework-specific integrations and custom instrumentations.</li><li>Define success metrics upfront; combine user feedback, error tracking, and automated evals (RAGAS for RAG, LLM Guard for harm) for robust health assessment.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#observability</span><span class="tag">#LLMOps</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/learn/agents-course/bonus-unit2/what-is-agent-observability-and-evaluation" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.85</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://resources.anthropic.com/building-effective-ai-agents" target="_blank" rel="noopener">Building Effective AI Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://resources.anthropic.com/building-effective-ai-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=resources.anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">resources.anthropic.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This resource from Anthropic discusses best practices and architectural patterns for building effective AI agents. The article covers key design principles, implementation strategies, and considerations for creating agents that can reliably perform multi-step tasks, interact with tools, and maintain context over extended interactions. Technical teams building agent systems will benefit from understanding Anthropic&#39;s recommended approaches to prompt engineering, tool integration, planning, and error handling that improve agent reliability and performance in production environments.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Design agents with clear tool definitions, proper error handling, and feedback loops for robust multi-step task execution</li><li>Implement structured prompts that specify agent capabilities, constraints, and decision-making logic to improve consistency</li><li>Use iterative refinement and monitoring to identify failure modes and improve agent behavior over time</li><li>Plan for context management and long-running interactions to maintain coherent agent behavior across multiple steps</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#prompt engineering</span><span class="tag">#production systems</span>
+          </div>
+          <a class="read-link" href="https://resources.anthropic.com/building-effective-ai-agents" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.85</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener">Demystifying Evals For AI Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article demystifies evaluation methodologies for AI agents, addressing the challenge of assessing agent performance beyond simple benchmarks. It explores how to design comprehensive evaluation frameworks that capture agent behavior across diverse scenarios, reliability, and robustness. The piece emphasizes moving beyond single-metric evaluations toward multi-dimensional assessments that account for task complexity, failure modes, and real-world constraints. For technical teams building or deploying AI agents, understanding rigorous evaluation practices is critical for ensuring reliability, safety, and production readiness before deployment.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Multi-dimensional evals capture agent behavior better than single metrics or benchmarks</li><li>Design evaluations to test failure modes, edge cases, and robustness systematically</li><li>Real-world agent assessment requires scenario diversity and complexity stratification</li><li>Comprehensive evals inform deployment decisions and identify reliability gaps</li><li>Agent evaluation frameworks must account for task-specific success criteria and constraints</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#evaluation methods</span><span class="tag">#testing frameworks</span>
+          </div>
+          <a class="read-link" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+
+    // Copy-link button (no-op if button not present)
+    const copyBtn = document.querySelector(".share-btn--copy");
+    const toast = document.getElementById("shareToast");
+    if (copyBtn && toast) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1500);
+        } catch (_) {
+          // Older browsers: fall back to a prompt
+          window.prompt("Copy this URL:", copyBtn.dataset.url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

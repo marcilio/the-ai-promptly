@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Agentic &middot; 2026-05-21</title>
+  
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
+
+    .share-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; align-items: center; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 6px 12px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+    }
+    .share-btn:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--linkedin:hover { color: #5eead4; }
+    .share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #0a0a0f; padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
+    .overview {
+      font-size: 15px; line-height: 1.65; color: var(--text);
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; Back to timeline</a>
+    <div class="eyebrow" style="margin-top: 16px;">Daily Agentic</div>
+    <h1>2026-05-21</h1>
+    
+    <p class="byline">Brought to you by
+      <a href="https://www.linkedin.com/in/marcilio/" target="_blank" rel="noopener">Marcilio Mendonca, PhD, Staff AI FDE at Google</a>
+    </p>
+    
+    <p class="meta">
+      Generated 2026-05-23T05:43:27.929139Z UTC &nbsp;·&nbsp; 4 articles
+    </p>
+
+    <p class="overview">Recent articles reveal a maturing consensus around structured multi-agent architectures for production AI systems. Separating specialized agent roles—planning, generation, and evaluation—with clear handoff mechanisms enables longer reasoning horizons and prevents hallucination, emerging as the critical pattern across frameworks like LangGraph, AutoGen, and MCP.</p>
+
+    
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    
+      
+      
+      <article class="article" data-category="news">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-news">news</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.infoq.com/news/2026/04/anthropic-three-agent-harness-ai" target="_blank" rel="noopener">Anthropic  Designs Three-Agent Harness Supports Long-Running Full-Stack AI Development</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.infoq.com/news/2026/04/anthropic-three-agent-harness-ai" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=infoq.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">infoq.com</a><span class="dot">·</span>
+          byLeela Kumili
+          <span class="dot">·</span>
+          2026-04-04T14:24:00+0000
+          
+        </div>
+        <p class="article__summary">Anthropic has introduced a multi-agent harness architecture designed to support long-running autonomous AI development tasks, particularly for frontend design and full-stack software creation. The system decomposes work into three distinct agent roles: planning, generation, and evaluation. A key innovation is the separation of evaluation from generation—a dedicated evaluator agent with calibrated scoring criteria prevents generators from overrating their outputs, particularly on subjective tasks. The framework addresses critical challenges in extended AI workflows, including context loss and task termination, through structured handoff artifacts and context resets rather than context compaction. For frontend design specifically, the evaluator uses four grading criteria (design quality, originality, craft, and functionality) and interacts with live pages via Playwright MCP to provide detailed critiques guiding iterative refinement. Iterations typically range from 5-15 cycles per run, sometimes taking up to four hours, producing progressively refined designs. The structured approach enables better handling of multi-hour sessions by clearly defining agent responsibilities and dependencies, supporting both sequential and parallel execution. While some evaluation mechanisms require human oversight for initial calibration, the framework facilitates reproducibility and incremental progress. Industry feedback highlights that the key breakthrough is enforcing structure—JSON specs, testing, and commit-by-commit progress—to overcome context window limitations in long-running agents. As models improve, this architecture may evolve, with some tasks handled directly by next-generation models while harnesses tackle increasingly complex work.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#agentic design patterns</span><span class="tag">#autonomous development</span>
+          </div>
+          <a class="read-link" href="https://www.infoq.com/news/2026/04/anthropic-three-agent-harness-ai" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.85</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://aitoolsclub.com/15-agentic-ai-design-patterns-you-should-know-research-backed-and-emerging-frameworks-2026" target="_blank" rel="noopener">15 Agentic AI Design Patterns You Should Know Research Backed And Emerging Frameworks 2026</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://aitoolsclub.com/15-agentic-ai-design-patterns-you-should-know-research-backed-and-emerging-frameworks-2026" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=aitoolsclub.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">aitoolsclub.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-21
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article presents 15 agentic AI design patterns for 2026, covering both established and emerging frameworks for building autonomous AI agents. The patterns appear to focus on practical architectures and design methodologies that developers can use to structure AI systems that can operate with minimal human intervention. These design patterns are research-backed and represent current best practices in the field of agentic AI development. For technical readers, understanding these patterns is crucial as agentic AI systems are becoming increasingly important for automation, autonomous decision-making, and complex problem-solving. The article serves as a comprehensive reference guide for architects and engineers looking to implement sophisticated AI agent systems in production environments. With AI agents becoming more prevalent across industries, knowledge of these design patterns helps developers make informed architectural decisions and avoid common pitfalls when building systems that require autonomous behavior, reasoning, and task execution.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agentic AI</span><span class="tag">#design patterns</span><span class="tag">#AI systems architecture</span>
+          </div>
+          <a class="read-link" href="https://aitoolsclub.com/15-agentic-ai-design-patterns-you-should-know-research-backed-and-emerging-frameworks-2026" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.85</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.amazon.com/MASTERING-AGENTIC-DESIGN-PATTERNS-INTELLIGENT/dp/B0G1CK2LZN" target="_blank" rel="noopener">MASTERING AGENTIC AI DESIGN PATTERNS: THE COMPLETE DEVELOPER’S BLUEPRINT FOR BUILDING, SCALING, AND AUTOMATING INTELLIGENT MULTI-AGENT SYSTEMS WITH LANGGRAPH, AUTOGEN, AND MCP FRAMEWORKS: cordex, finn: 9798273485341: Amazon.com: Books</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.amazon.com/MASTERING-AGENTIC-DESIGN-PATTERNS-INTELLIGENT/dp/B0G1CK2LZN" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=amazon.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">amazon.com</a><span class="dot">·</span>
+          finn cordex(Author)
+          <span class="dot">·</span>
+          2026-05-21
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This is a 2026 developer&#39;s guide to building intelligent multi-agent AI systems, authored by Finn Cordex, a senior AI engineer. The book covers mastering agentic AI design patterns using three key frameworks: LangGraph, AutoGen, and the Model Context Protocol (MCP). It progresses from foundational concepts of autonomous multi-agent architectures through practical design patterns including planner-executor, tool-chaining, reflection, and coordination strategies. The guide emphasizes production-ready implementations, with detailed coverage of LangGraph&#39;s graph-based orchestration for Python workflows, AutoGen&#39;s collaborative agent design with message-passing protocols, and MCP for cross-agent communication and interoperability. Technical readers will find value in the optimization techniques for scalability, error-handling strategies, and end-to-end Python implementations demonstrating real-world agentic pipelines. This resource is designed for engineers, data scientists, and enterprise developers seeking to move beyond experimental AI systems into robust, enterprise-grade intelligent automation solutions for copilots, AI workflow engines, and large-scale decision systems.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agentic AI</span><span class="tag">#multi-agent systems</span><span class="tag">#LangGraph</span>
+          </div>
+          <a class="read-link" href="https://www.amazon.com/MASTERING-AGENTIC-DESIGN-PATTERNS-INTELLIGENT/dp/B0G1CK2LZN" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.85</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.vincirufus.com/en/posts/agentic-engineering-patterns" target="_blank" rel="noopener">Agentic Engineering Patterns</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.vincirufus.com/en/posts/agentic-engineering-patterns" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=vincirufus.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">vincirufus.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-21
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article explores agentic engineering patterns and design approaches for building AI agents. It discusses how to architect systems where autonomous agents can operate effectively, covering practical patterns for agent development, integration with external systems, and management of agent behavior. The content addresses the engineering challenges of implementing reliable, controllable agents in production environments, including considerations for safety, observability, and scalability. This is relevant for developers building AI systems who need to understand structural patterns and best practices for agent-based architectures.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#design patterns</span><span class="tag">#agentic systems</span>
+          </div>
+          <a class="read-link" href="https://www.vincirufus.com/en/posts/agentic-engineering-patterns" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+
+    // Copy-link button (no-op if button not present)
+    const copyBtn = document.querySelector(".share-btn--copy");
+    const toast = document.getElementById("shareToast");
+    if (copyBtn && toast) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1500);
+        } catch (_) {
+          // Older browsers: fall back to a prompt
+          window.prompt("Copy this URL:", copyBtn.dataset.url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

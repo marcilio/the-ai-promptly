@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Agentic &middot; 2026-05-19</title>
+  
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
+
+    .share-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; align-items: center; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 6px 12px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+    }
+    .share-btn:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--linkedin:hover { color: #5eead4; }
+    .share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #0a0a0f; padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
+    .overview {
+      font-size: 15px; line-height: 1.65; color: var(--text);
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; Back to timeline</a>
+    <div class="eyebrow" style="margin-top: 16px;">Daily Agentic</div>
+    <h1>2026-05-19</h1>
+    
+    <p class="byline">Brought to you by
+      <a href="https://www.linkedin.com/in/marcilio/" target="_blank" rel="noopener">Marcilio Mendonca, PhD, Staff AI FDE at Google</a>
+    </p>
+    
+    <p class="meta">
+      Generated 2026-05-23T05:43:27.933558Z UTC &nbsp;·&nbsp; 8 articles
+    </p>
+
+    <p class="overview">Harness engineering—the structured control scaffolding around AI agents—has emerged as a critical discipline for production systems. Emerging patterns include persistent instruction files, tiered memory management, risk-classified tool access, and specialized infrastructure optimizations like prompt caching to reduce token costs by 85%, though practical deployments still require significant human oversight and remain immature for fully autonomous workflows.</p>
+
+    
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    
+      
+      
+      <article class="article" data-category="other">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-other">other</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://github.com/ai-boost/awesome-harness-engineering" target="_blank" rel="noopener">GitHub - ai-boost/awesome-harness-engineering: Awesome list for AI agent harness engineering: tools, patterns, evals, memory, MCP, permissions, observability, and orchestration.</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://github.com/ai-boost/awesome-harness-engineering" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=github.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">github.com</a><span class="dot">·</span>
+          ai-boost
+          <span class="dot">·</span>
+          2026-05-19
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This is a comprehensive GitHub awesome list curating resources, tools, patterns, and references for AI agent harness engineering—the discipline of designing the scaffolding around AI agents including context delivery, tool interfaces, planning systems, memory, permissions, observability, and orchestration. The collection distinguishes harness engineering as a separate concern from model capability, arguing that every harness component exists because the model cannot do it alone, and the best designs are built with the assumption that components will become unnecessary as models improve. It organizes resources across foundational concepts (essays from OpenAI, Anthropic, Google, and others defining the discipline), design primitives and patterns, agent loop implementations, planning and task decomposition, tool design, memory systems, verification frameworks, and production case studies from Microsoft Azure, Meta, and other organizations. The list includes canonical papers like ReAct, practical guides on tool design and permissions, emerging concepts like Model Context Protocol (MCP) integrations, and detailed engineering walkthroughs showing how harness design alone can improve agent performance by 5+ percentage points or reduce production incident response time from 40+ hours to 3 minutes. For technical readers and AI practitioners, this resource bridges the gap between theoretical agent frameworks and production-grade systems, providing a structured taxonomy of harness engineering concerns and concrete reference implementations.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#harness engineering</span><span class="tag">#agentic design patterns</span>
+          </div>
+          <a class="read-link" href="https://github.com/ai-boost/awesome-harness-engineering" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://developer.nvidia.com/blog/building-for-the-rising-complexity-of-agentic-systems-with-extreme-co-design/" target="_blank" rel="noopener">Building for the Rising Complexity of Agentic Systems with Extreme Co-Design | NVIDIA Technical Blog</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://developer.nvidia.com/blog/building-for-the-rising-complexity-of-agentic-systems-with-extreme-co-design/" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=developer.nvidia.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">developer.nvidia.com</a><span class="dot">·</span>
+          ByEduardo Alvarez,Benjamin KliegerandGraham Steele
+          <span class="dot">·</span>
+          2026-05-05T15:52:15+00:00
+          
+        </div>
+        <p class="article__summary">This NVIDIA technical blog post examines the architectural and infrastructure challenges of building large-scale agentic AI systems. The authors analyze how agentic systems—which autonomously call tools, spawn sub-agents, and manage their own context—fundamentally differ from traditional chatbots in their token consumption patterns. A real-world example from Claude Code demonstrates context windows scaling from 15K to 156K tokens across hundreds of inference requests, creating &#39;structurally probabilistic&#39; workloads that break conventional serving economics. The paper highlights that without optimization, agentic systems consume up to 15x more tokens than standard chat. Key solutions include prompt caching (achieving 95-98% hit rates to reduce costs by ~85%), context compaction, hierarchical agent architectures with sub-agents, and specialized hardware like NVIDIA&#39;s Vera Rubin platform featuring NVL72 GPUs, high-bandwidth memory (HBM), and advanced fabrics (NVLink 6, ConnectX-9). The central challenge is navigating the throughput-latency tradeoff: agentic workloads require both massive token processing and low latency for user interactivity, which traditionally are at odds. The paper advocates for &#39;extreme co-design&#39; across specialized chips and software optimizations to enable trillion-parameter MoE models with 400k token contexts at competitive costs, making agentic systems economically viable at scale.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agentic AI</span><span class="tag">#inference optimization</span><span class="tag">#system architecture</span>
+          </div>
+          <a class="read-link" href="https://developer.nvidia.com/blog/building-for-the-rising-complexity-of-agentic-systems-with-extreme-co-design/" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.linkedin.com/posts/that-aum_12-agentic-harness-patterns-that-you-can-activity-7447616150018146305-V8VQ" target="_blank" rel="noopener">12 agentic harness patterns that you can learn from Claude Code leaks 👇
+
+1/ Persistent Instruction File
+
+&amp;gt; CLAUDE.md loads rules every session
+&amp;gt; Build commands, naming conventions, architecture
+&amp;gt;… | Om Nalinde | 43 comments</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.linkedin.com/posts/that-aum_12-agentic-harness-patterns-that-you-can-activity-7447616150018146305-V8VQ" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=linkedin.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">linkedin.com</a><span class="dot">·</span>
+          zenik
+          <span class="dot">·</span>
+          1mo
+          
+        </div>
+        <p class="article__summary">This article outlines 12 practical harness patterns for building reliable agentic AI systems, derived from Claude Code&#39;s architecture. The patterns span three categories: memory management (persistent instruction files, scoped context assembly, tiered memory with garbage collection, and progressive context compaction); workflow orchestration (explore-plan-act loops, context-isolated subagents, and fork-join parallelism); and tools/permissions (progressive tool expansion, command risk classification, single-purpose tools, and deterministic lifecycle hooks). The key insight is that production-ready AI agents require structured control layers rather than relying on model intelligence alone. Persistent CLAUDE.md files eliminate repeated instructions, tiered memory systems prevent context overflow while maintaining token efficiency, and isolated subagents prevent interference between different phases. Command risk classification with auto-execution, confirmation, or blocking provides safety guardrails. These patterns address common agent failure modes like forgetting rules mid-task, context pollution, and unsafe command execution. The emphasis throughout is on deterministic, auditable systems that remain predictable at scale.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#system design patterns</span><span class="tag">#LLM orchestration</span>
+          </div>
+          <a class="read-link" href="https://www.linkedin.com/posts/that-aum_12-agentic-harness-patterns-that-you-can-activity-7447616150018146305-V8VQ" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.anthropic.com/engineering/harness-design-long-running-apps" target="_blank" rel="noopener">Harness Design Long Running Apps</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.anthropic.com/engineering/harness-design-long-running-apps" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-19
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article from Anthropic discusses engineering patterns for building long-running AI applications using an &#39;agentic harness&#39; design approach. The harness pattern provides a structured framework for orchestrating AI agents by managing task execution, handling state transitions, and coordinating multiple API calls over extended periods. Key aspects include defining clear task specifications, implementing robust error handling and retry mechanisms, and maintaining context across multiple agent iterations. The article highlights why this pattern matters for production AI systems: long-running applications require careful management of costs, latency, and reliability that simple single-call approaches cannot provide. By separating the control flow logic from the AI model interaction logic, developers can build more maintainable and scalable agentic systems. The harness acts as a control layer that supervises the agent&#39;s decision-making and ensures tasks are completed reliably despite failures or edge cases. This architectural approach is particularly relevant for developers building autonomous agents, multi-step workflows, or systems where AI makes sequential decisions with real-world consequences. Understanding these patterns helps engineers avoid common pitfalls in agent design and create systems that gracefully handle ambiguity and partial completion scenarios.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#system design</span><span class="tag">#agentic patterns</span>
+          </div>
+          <a class="read-link" href="https://www.anthropic.com/engineering/harness-design-long-running-apps" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 75%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.75</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://atlan.com/know/what-is-harness-engineering/" target="_blank" rel="noopener">What Is Harness Engineering</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://atlan.com/know/what-is-harness-engineering/" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=atlan.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">atlan.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-19
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article explores harness engineering and agentic design patterns in the context of AI systems. Harness engineering refers to the practice of building robust control mechanisms and frameworks around AI agents to ensure they operate safely, effectively, and within desired parameters. The piece discusses how agentic design patterns—architectural approaches for designing autonomous agents—can be combined with proper harness mechanisms to create reliable AI systems. Key concepts likely include oversight mechanisms, constraint enforcement, monitoring systems, and design patterns that allow humans to maintain meaningful control over agent behavior. Understanding harness engineering is important for technical practitioners because as AI agents become more autonomous and complex, the ability to implement proper safeguards, logging, error handling, and user controls becomes critical. These patterns directly impact the reliability, debuggability, and trustworthiness of AI-driven applications. The article appears to serve as an educational resource for developers and architects looking to understand how to properly structure and control AI agent systems in production environments.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#system design</span><span class="tag">#safety mechanisms</span>
+          </div>
+          <a class="read-link" href="https://atlan.com/know/what-is-harness-engineering/" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 75%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.75</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://xmpro.com/your-ai-agent-needs-a-harness-heres-what-that-means-for-industrial-operations/" target="_blank" rel="noopener">Your AI Agent Needs A Harness Heres What That Means For Industrial Operations</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://xmpro.com/your-ai-agent-needs-a-harness-heres-what-that-means-for-industrial-operations/" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=xmpro.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">xmpro.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-19
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article discusses the concept of an &#39;AI agent harness&#39; as a critical framework for deploying AI agents in industrial operations. The harness functions as a control and governance layer that manages how AI agents operate, make decisions, and interact with physical systems. Key aspects include safety constraints, monitoring capabilities, human oversight mechanisms, and integration with existing industrial infrastructure. The piece argues that without proper harnessing mechanisms, AI agents in industrial settings risk uncontrolled behavior, regulatory non-compliance, and operational failures. The harness approach involves implementing guardrails, feedback loops, and agentic design patterns that ensure AI agents remain aligned with business objectives while operating autonomously. This is particularly crucial in manufacturing, utilities, and other critical infrastructure where agent decisions have real-world consequences. The article emphasizes that effective AI agent deployment requires not just intelligent algorithms, but robust architectural frameworks that enable safe, auditable, and controllable autonomous systems in industrial contexts.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#industrial automation</span><span class="tag">#agent governance</span>
+          </div>
+          <a class="read-link" href="https://xmpro.com/your-ai-agent-needs-a-harness-heres-what-that-means-for-industrial-operations/" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 72%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.72</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://platformengineering.org/blog/aura-building-open-agentic-harness-for-production-AI" target="_blank" rel="noopener">Introducing AURA: Building an Open Agentic harness for production AI</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://platformengineering.org/blog/aura-building-open-agentic-harness-for-production-AI" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=platformengineering.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">platformengineering.org</a><span class="dot">·</span>
+          Henry AndrewsEngineering Manager @ Mezmo••
+          <span class="dot">·</span>
+          2026-04-20T07:51:40.067Z
+          
+        </div>
+        <p class="article__summary">This article introduces AURA, an open agentic harness designed for production AI systems. The piece appears to be part of a broader discussion on agentic software development patterns and frameworks for building reliable AI agents in enterprise environments. While the content provided is limited to related article links and navigation elements, the core focus seems to be on establishing architectural patterns and best practices for deploying AI agents at scale. The article is positioned within a larger ecosystem discussing the maturity levels of agentic software development, platform adoption strategies, and domain-specific applications in regulated industries like finance and government. For technical readers and platform engineers, understanding production-ready agentic harnesses is increasingly important as organizations move beyond experimental AI implementations to robust, scalable systems. The reference to multiple related topics—including the 4 levels of agentic development and federated platforms—suggests AURA addresses critical infrastructure concerns around observability, reliability, and operational governance for AI agents in production environments.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#production infrastructure</span><span class="tag">#agentic systems</span>
+          </div>
+          <a class="read-link" href="https://platformengineering.org/blog/aura-building-open-agentic-harness-for-production-AI" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="opinion">
+        <div class="article__score-bar" style="width: 72%"></div>
+        <div class="article__top">
+          <span class="category cat-opinion">opinion</span>
+          <span class="score">relevance 0.72</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://news.ycombinator.com/item?id=46701969" target="_blank" rel="noopener">The Agentic AI Handbook: Production-Ready Patterns | Hacker News</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://news.ycombinator.com/item?id=46701969" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=news.ycombinator.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">news.ycombinator.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-19
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This Hacker News discussion thread examines the practical challenges and limitations of agentic AI tools in software development workflows. Users debate whether AI agent IDEs represent genuine advancement or marketing hype, expressing frustration with tool usability issues in established IDEs like Rider and VS Code. Key concerns include: inconsistent results, poor context understanding, problematic file change application methods resembling broken git merges, and inadequate handling of testing—where LLMs frequently generate redundant or incorrect test cases. The thread acknowledges that AI tools are immature and require significant hand-holding, particularly for domain-specific tasks. Participants note that mastering these tools demands investment and clear communication, comparing the learning curve to traditional tools like Vim or Emacs. While some contributors report variable but occasionally excellent results with Claude for refactoring tasks, others emphasize that current AI capabilities are overhyped and inadequate for autonomous decision-making in software development. The consensus suggests that AI should augment human expertise rather than replace it, with humans responsible for specifications and critical decisions like test coverage strategy.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agentic AI</span><span class="tag">#developer tools</span><span class="tag">#AI limitations</span>
+          </div>
+          <a class="read-link" href="https://news.ycombinator.com/item?id=46701969" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+
+    // Copy-link button (no-op if button not present)
+    const copyBtn = document.querySelector(".share-btn--copy");
+    const toast = document.getElementById("shareToast");
+    if (copyBtn && toast) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1500);
+        } catch (_) {
+          // Older browsers: fall back to a prompt
+          window.prompt("Copy this URL:", copyBtn.dataset.url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

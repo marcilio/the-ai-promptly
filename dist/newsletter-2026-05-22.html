@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Agentic &middot; 2026-05-22</title>
+  
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
+
+    .share-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; align-items: center; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 6px 12px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+    }
+    .share-btn:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--linkedin:hover { color: #5eead4; }
+    .share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #0a0a0f; padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
+    .overview {
+      font-size: 15px; line-height: 1.65; color: var(--text);
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; Back to timeline</a>
+    <div class="eyebrow" style="margin-top: 16px;">Daily Agentic</div>
+    <h1>2026-05-22</h1>
+    
+    <p class="byline">Brought to you by
+      <a href="https://www.linkedin.com/in/marcilio/" target="_blank" rel="noopener">Marcilio Mendonca, PhD, Staff AI FDE at Google</a>
+    </p>
+    
+    <p class="meta">
+      Generated 2026-05-23T05:43:27.924646Z UTC &nbsp;·&nbsp; 10 articles
+    </p>
+
+    <p class="overview">These articles chart the maturation of autonomous AI agent systems across architecture, evaluation, and production deployment. The central theme is establishing principled design patterns and standardized evaluation frameworks for building reliable agentic AI at scale, with particular emphasis on multi-agent orchestration and real-world robustness challenges that current systems struggle to meet.</p>
+
+    
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/blog/dcarpintero/design-patterns-for-building-agentic-workflows" target="_blank" rel="noopener">Design Patterns for Building Agentic Workflows</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/blog/dcarpintero/design-patterns-for-building-agentic-workflows" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2025-07-14T22:09:20.522Z
+          
+        </div>
+        <p class="article__summary">This comprehensive guide explores six foundational design patterns for building agentic AI workflows: Evaluator-Optimizer, Context-Augmentation, Prompt-Chaining, Parallelization, Routing, and Orchestrator-Workers. The article addresses how modern AI systems are evolving from reactive assistants to autonomous agents capable of reasoning, planning, and acting based on observations and reflections. Each pattern tackles specific challenges: Evaluator-Optimizer enables iterative refinement of LLM outputs through self-reflection; Context-Augmentation dynamically expands LLM capabilities by integrating external tools and data sources; Prompt-Chaining decomposes complex tasks into manageable sequential subtasks; Parallelization distributes workload across agents for improved accuracy and speed; Routing directs inputs to specialized handlers; and Orchestrator-Workers coordinates multiple agents. The article provides practical architecture descriptions, use cases, and critical implementation considerations for each pattern, including cost-benefit analysis, error handling strategies, and production scalability concerns. This is essential reading for engineers building production AI systems, offering concrete patterns to address design verification, scalability, cost management, and maintenance challenges that emerge when deploying autonomous AI agents.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#design patterns</span><span class="tag">#LLM workflows</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/blog/dcarpintero/design-patterns-for-building-agentic-workflows" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2503.16416" target="_blank" rel="noopener">Survey on Evaluation of LLM-based Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2503.16416" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Authors:Asaf Yehudai,Lilach Eden,Alan Li,Guy Uziel,Yilun Zhao,Roy Bar-Haim,Arman Cohan,Michal Shmueli-Scheuer
+          <span class="dot">·</span>
+          2026-05-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This comprehensive survey examines evaluation methodologies for LLM-based agents, a rapidly evolving category of autonomous AI systems capable of planning, reasoning, and tool interaction in dynamic environments. The authors analyze agent evaluation across five critical dimensions: (1) fundamental LLM capabilities required for agentic workflows such as planning and tool use, (2) application-specific benchmarks including web and software engineering agents, (3) evaluation approaches for generalist agents, (4) core characteristics of agent benchmarks, and (5) evaluation frameworks and developer tools. The survey identifies significant trends toward more realistic and challenging evaluations with continuously updated benchmarks, reflecting the field&#39;s maturation. However, it also highlights critical research gaps that need urgent attention, particularly in assessing cost-efficiency, safety, robustness, and developing fine-grained, scalable evaluation methodologies. This work is essential for researchers and practitioners building LLM-based agents, as standardized evaluation approaches are crucial for understanding agent capabilities, limitations, and real-world viability. The survey provides a structured taxonomy of evaluation methods and identifies open problems that will shape future agent development and deployment strategies.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM agents</span><span class="tag">#evaluation methods</span><span class="tag">#benchmarking</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2503.16416" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2503.22458" target="_blank" rel="noopener">Evaluating LLM-based Agents for Multi-Turn Conversations: A Survey</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2503.22458" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Authors:Shengyue Guan,Jindong Wang,Jiang Bian,Bin Zhu,Jian-guang Lou,Haoyi Xiong
+          <span class="dot">·</span>
+          2026-05-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This survey provides a comprehensive examination of evaluation methodologies for large language model (LLM)-based agents operating in multi-turn conversational contexts. Drawing from a systematic review of nearly 250 scholarly sources using a PRISMA-inspired framework, the authors develop two complementary taxonomy systems to address critical evaluation challenges. The first taxonomy identifies what to evaluate, encompassing key agent components including task completion, response quality, user experience, memory and context retention, and planning with tool integration. The second taxonomy addresses how to evaluate, categorizing methodologies into annotation-based evaluations, automated metrics, hybrid approaches combining human assessment with quantitative measures, and self-judging methods leveraging LLMs themselves. Beyond traditional natural language processing metrics like BLEU and ROUGE scores, the framework incorporates advanced techniques specifically designed to capture the dynamic, interactive nature of multi-turn dialogues. This work is essential for researchers and practitioners developing conversational AI systems, as it establishes standardized evaluation frameworks and provides guidance for assessing agent performance holistically across multiple dimensions critical to real-world deployment.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM evaluation</span><span class="tag">#conversational agents</span><span class="tag">#multi-turn dialogue</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2503.22458" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2601.03624" target="_blank" rel="noopener">Architecting Agentic Communities using Design Patterns</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2601.03624" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Authors:Zoran Milosevic,Fethi Rabhi
+          <span class="dot">·</span>
+          2026-05-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This research paper presents a systematic approach for architecting production-grade AI agent systems using design patterns grounded in enterprise distributed systems principles. The authors classify agent architectures into three tiers: LLM Agents (task-specific automation), Agentic AI (adaptive goal-seekers), and Agentic Communities (multi-agent organizational frameworks with humans). The key contribution focuses on Agentic Communities—coordination frameworks where AI agents and humans operate within formal roles, protocols, and governance structures. The work draws from distributed systems coordination principles and formal methods to provide a framework that enables specification of collaboration agreements, organizational rules, and ethical constraints through accountability mechanisms. This approach offers both practical architectural guidance for practitioners and formal verification capabilities essential for enterprise deployment. The authors validate their framework through a clinical trial matching case study, demonstrating real-world applicability. The research addresses a critical need in the rapidly evolving LLM/AI landscape: systematic, verifiable approaches to building complex multi-agent systems that maintain operational governance, inter-agent communication protocols, and stakeholder accountability. The inclusion of a comprehensive design patterns catalogue as supplementary material provides actionable reference for practitioners implementing these architectures in dynamic, multi-agent ecosystems.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#multi-agent systems</span><span class="tag">#design patterns</span><span class="tag">#AI governance</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2601.03624" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2601.19752" target="_blank" rel="noopener">Agentic Design Patterns: A System-Theoretic Framework</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2601.19752" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Authors:Minh-Dung Dao,Quy Minh Le,Hoang Thanh Lam,Duc-Trong Le,Quoc-Viet Pham,Barry O&#39;Sullivan,Hoang D. Nguyen
+          <span class="dot">·</span>
+          2026-05-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This research paper introduces a system-theoretic framework for designing robust agentic AI systems built on foundation models. The authors identify critical challenges in current agentic AI—including hallucination, poor reasoning, and ad-hoc design approaches—and propose a principled methodology to address them. The paper deconstructs agentic systems into five core functional subsystems: Reasoning &amp; World Model, Perception &amp; Grounding, Action Execution, Learning &amp; Adaptation, and Inter-Agent Communication. Built on this architecture, the authors present 12 reusable design patterns organized into four categories: Foundational, Cognitive &amp; Decisional, Execution &amp; Interaction, and Adaptive &amp; Learning. These patterns map directly to a comprehensive taxonomy of agentic challenges, providing engineers and researchers with standardized solutions to recurring design problems. The framework&#39;s utility is demonstrated through a case study on ReAct, illustrating how the proposed patterns can address systemic architectural deficiencies. This work is significant for developers building autonomous AI systems, offering a structured language and methodology for designing more modular, understandable, and reliable agents. The system-theoretic foundation distinguishes this work from existing convenience-based taxonomies, making it directly implementable and applicable to real-world agentic AI development.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agentic AI systems</span><span class="tag">#design patterns</span><span class="tag">#foundation models</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2601.19752" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2603.22862" target="_blank" rel="noopener">The Evolution of Tool Use in LLM Agents: From Single-Tool Call to Multi-Tool Orchestration</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2603.22862" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Authors:Haoyuan Xu,Chang Li,Xinyan Ma,Xianhao Ou,Zihan Zhang,Tao He,Xiangyu Liu,Zixiang Wang,Jiafeng Liang,Zheng Chu,Runxuan Liu,Rongchuan Mu,Dandan Tu,Ming Liu,Bing Qin
+          <span class="dot">·</span>
+          2026-05-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This comprehensive review paper examines the evolution of tool use in large language model (LLM) agents, tracking the progression from simple single-tool invocation to complex multi-tool orchestration over extended task trajectories. The authors unify existing task formulations and organize the literature across six critical dimensions: inference-time planning and execution, training and trajectory construction, safety and control mechanisms, efficiency under resource constraints, capability completeness in open environments, and benchmark design methodologies. The paper addresses how modern LLM agents must navigate practical challenges including safety verification, cost optimization, and execution feedback in dynamic environments. Beyond theoretical foundations, the work surveys representative applications across software engineering, enterprise workflows, graphical user interfaces, and mobile systems. For technical readers, this synthesis is valuable as tool use represents a fundamental capability gap between pure language modeling and practical autonomous agent systems. The shift from isolated tool calls to orchestrated multi-step workflows reflects maturing agent technology that must handle real-world complexity, state management, and constraint satisfaction. The paper&#39;s systematic treatment of safety, efficiency, and evaluation metrics provides essential guidance for practitioners building production agent systems. Key challenges outlined include verifiability of agent behavior, scalability of orchestration strategies, and completeness in open-ended environments—critical concerns for deploying LLM agents in high-stakes applications.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM agents</span><span class="tag">#tool use</span><span class="tag">#multi-agent orchestration</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2603.22862" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2604.06185" target="_blank" rel="noopener">Benchmarking LLM Tool-Use in the Wild</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2604.06185" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Authors:Peijie Yu,Wei Liu,Yifan Yang,Jinjian Li,Zelong Zhang,Xiao Feng,Feng Zhang
+          <span class="dot">·</span>
+          2026-05-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This research paper introduces WildToolBench, a new benchmark designed to evaluate Large Language Models&#39; ability to use tools in real-world scenarios. The authors identify three critical challenges in practical LLM tool-use that existing benchmarks fail to capture: compositional tasks requiring efficient orchestration of multiple tool calls, implicit intent distributed across multiple dialogue turns requiring contextual understanding, and instruction transitions that mix task queries with clarifications and casual conversation. By evaluating 57 LLMs on WildToolBench, the research reveals a stark gap in current capabilities—no model achieves better than 15% accuracy on the benchmark. This finding suggests that while LLMs appear to make progress on artificial tool-use benchmarks, they struggle significantly with the messy, flexible nature of real user interactions. The controlled experiments demonstrate that the primary challenge for LLM agentic capabilities isn&#39;t task complexity but rather the inherent unpredictability of natural user behavior. This work is significant for developers and researchers building LLM-based systems, as it reveals fundamental limitations in current models&#39; robustness for production deployments and highlights the need to rethink how LLMs interact with users and tools in practical settings.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM tool-use</span><span class="tag">#benchmarking</span><span class="tag">#agentic AI</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2604.06185" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2604.12162" target="_blank" rel="noopener">AlphaEval: Evaluating Agents in Production</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2604.12162" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Authors:Pengrui Lu,Bingyu Xu,Wenjun Zhang,Shengjia Hua,Xuanjian Gao,Ranxiang Ge,Lyumanshan Ye,Linxuan Wu,Yiran Li,Junfei Fish Yu,Yibo Zhang,Ruixin Li,Manxiang Li,Xiao Han,Xiaocong Zhou,Guangyao Chi,Zisheng Chen,Kaishen Chen,Kun Wang,Qihua Xu,Fengyue Meng,Yuchen Ni,Jiajun Li,Jinxiu Liu,Danfeng Zhang,Jingru Zhao,Pengfei Liu
+          <span class="dot">·</span>
+          2026-05-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">AlphaEval addresses a critical gap in AI agent evaluation by introducing a production-grounded benchmark of 94 real-world tasks sourced from seven companies deploying agents in their core operations across six occupational domains. Unlike existing benchmarks that rely on curated tasks with deterministic metrics, AlphaEval captures production realities: implicit constraints, heterogeneous multi-modal inputs, undeclared domain expertise requirements, long-horizon deliverables, and evolving expert evaluation standards. The research evaluates complete agent products (Claude Code, Codex, etc.) rather than individual models, revealing performance variations invisible to model-level testing. A key contribution is the requirement-to-benchmark construction framework, a systematic methodology that transforms authentic production requirements into executable evaluation tasks efficiently. This framework covers multiple evaluation paradigms including LLM-as-a-Judge, reference-driven metrics, formal verification, rubric-based assessment, and automated UI testing, with domains composing appropriate combinations. The work provides both an immediately valuable benchmark and reproducible methodology that organizations can adopt to construct their own production-grounded benchmarks, standardizing the evaluation pipeline from requirement gathering through assessment.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agent evaluation</span><span class="tag">#AI benchmarks</span><span class="tag">#production systems</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2604.12162" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2604.25724" target="_blank" rel="noopener">Scalable Inference Architectures for Compound AI Systems: A Production Deployment Study</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2604.25724" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Authors:Srikanta Prasad S V,Utkarsh Arora
+          <span class="dot">·</span>
+          2026-05-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This production research paper from Salesforce presents a scalable inference architecture for compound AI systems—applications that compose multiple models, retrievers, and tools to solve complex tasks. The authors describe their modular, platform-agnostic infrastructure that powers autonomous AI agents (Agentforce) and AI-powered code analysis tools (ApexGuru). The system leverages serverless execution, dynamic autoscaling, and MLOps pipelines to serve concurrent, heterogeneous model invocations with low latency and cost efficiency. Reporting significant production results, the architecture achieves over 50% reduction in tail latency (P95), up to 3.9x throughput improvement, and 30-40% cost savings compared to static deployments. A key contribution is the novel analysis of compound-system-specific challenges including multi-model fan-out overhead, cascading cold-start propagation, and heterogeneous scaling dynamics that uniquely emerge in agentic workloads. Through detailed case studies and operational lessons, the paper demonstrates how to scale model invocations in parallel, handle bursty multi-agent workloads, and support rapid model iteration—capabilities critical for operationalizing agentic AI at enterprise scale. This work will interest engineers and researchers building production AI systems, particularly those developing multi-model architectures and AI agents requiring robust infrastructure.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#compound AI systems</span><span class="tag">#inference infrastructure</span><span class="tag">#agentic AI</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2604.25724" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.95</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2604.25850" target="_blank" rel="noopener">Agentic Harness Engineering: Observability-Driven Automatic Evolution of Coding-Agent Harnesses</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2604.25850" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Authors:Jiahang Lin,Shichun Liu,Chengjun Pan,Lizhi Lin,Shihan Dou,Zhiheng Xi,Xuanjing Huang,Hang Yan,Zhenhua Han,Tao Gui,Yu-Gang Jiang
+          <span class="dot">·</span>
+          2026-05-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This research paper introduces Agentic Harness Engineering (AHE), a novel framework for automatically optimizing the harnesses that mediate how AI coding agents interact with tools and execution environments. Rather than relying on manual harness engineering, AHE implements a closed-loop system driven by three observability pillars: component observability (making editable harness components explicit and revertible), experience observability (distilling trajectory data into consumable evidence), and decision observability (pairing edits with predictions verified against outcomes). This approach transforms harness evolution into a falsifiable process, eliminating trial-and-error iteration. The authors demonstrate substantial improvements on Terminal-Bench 2, lifting pass@1 from 69.7% to 77.0% across ten AHE iterations, surpassing both human-designed baselines and self-evolving approaches. Notably, the evolved harness transfers effectively to other benchmarks and model families without re-evolution, indicating the learned engineering patterns generalize rather than overfit to specific tasks. Ablations reveal that gains come from structural harness components (tools, middleware, memory) rather than prompt engineering, suggesting the framework captures fundamental engineering principles. This work is highly relevant to developers building production AI agents, as it addresses the critical but under-explored problem of programmatically optimizing agent infrastructure at scale.</p>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#harness engineering</span><span class="tag">#observability</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2604.25850" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+
+    // Copy-link button (no-op if button not present)
+    const copyBtn = document.querySelector(".share-btn--copy");
+    const toast = document.getElementById("shareToast");
+    if (copyBtn && toast) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1500);
+        } catch (_) {
+          // Older browsers: fall back to a prompt
+          window.prompt("Copy this URL:", copyBtn.dataset.url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

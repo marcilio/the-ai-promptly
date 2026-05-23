@@ -1,0 +1,52 @@
+{
+  "runs": [
+    {
+      "date": "2026-05-23",
+      "generated_at": "2026-05-23T03:25:05.618163Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 10,
+      "filename": "newsletter-2026-05-23.html",
+      "overview": "Agentic AI systems require comprehensive security frameworks and production-ready architectural patterns. Key themes span attack surface characterization, context management, observability, and evaluation methodologies—with context engineering and defense-in-depth mechanisms emerging as critical foundations for reliable, secure deployment."
+    },
+    {
+      "date": "2026-05-22",
+      "generated_at": "2026-05-22T05:14:45.722861Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 10,
+      "filename": "newsletter-2026-05-22.html",
+      "overview": "These articles chart the maturation of autonomous AI agent systems across architecture, evaluation, and production deployment. The central theme is establishing principled design patterns and standardized evaluation frameworks for building reliable agentic AI at scale, with particular emphasis on multi-agent orchestration and real-world robustness challenges that current systems struggle to meet."
+    },
+    {
+      "date": "2026-05-21",
+      "generated_at": "2026-05-21T14:53:20.451459Z",
+      "source_urls": [
+        "search:AI agent harness and agentic design patterns"
+      ],
+      "count": 4,
+      "filename": "newsletter-2026-05-21.html",
+      "overview": "Recent articles reveal a maturing consensus around structured multi-agent architectures for production AI systems. Separating specialized agent roles—planning, generation, and evaluation—with clear handoff mechanisms enables longer reasoning horizons and prevents hallucination, emerging as the critical pattern across frameworks like LangGraph, AutoGen, and MCP."
+    },
+    {
+      "date": "2026-05-19",
+      "generated_at": "2026-05-19T15:15:36.090272Z",
+      "source_urls": [
+        "search:AI agent harness and agentic design patterns"
+      ],
+      "count": 8,
+      "filename": "newsletter-2026-05-19.html",
+      "overview": "Harness engineering—the structured control scaffolding around AI agents—has emerged as a critical discipline for production systems. Emerging patterns include persistent instruction files, tiered memory management, risk-classified tool access, and specialized infrastructure optimizations like prompt caching to reduce token costs by 85%, though practical deployments still require significant human oversight and remain immature for fully autonomous workflows."
+    }
+  ]
+}
