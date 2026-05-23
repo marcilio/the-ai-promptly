@@ -21,9 +21,10 @@ launchd/
 README.md
 pyproject.toml
 
-# Runtime artifacts — the dashboard fetches data/*.json from dist/ instead
-data/
-output/
+# Runtime artifacts — the dashboard fetches data/*.json from dist/ instead.
+# Use leading / to anchor to project root so we don't also ignore dist/data/.
+/data/
+/output/
 preferred_domains.txt
 content_search_seeds.txt
 
