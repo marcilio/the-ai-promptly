@@ -7,11 +7,11 @@
   
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Daily Agentic — 2026-05-23" />
-  <meta property="og:description" content="Agentic AI systems require comprehensive security frameworks and production-ready architectural patterns. Key themes span attack surface characterization, context management, observability, and evalu… — Curated by Marcilio Mendonca" />
+  <meta property="og:description" content="These articles explore the emerging infrastructure and practices needed to build reliable AI agents at scale, with particular focus on training multi-step tool orchestration, rethinking code conventi… — Curated by Marcilio Mendonca" />
   <meta property="og:url" content="https://the-ai-promptly.vercel.app/newsletter-2026-05-23.html" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Daily Agentic — 2026-05-23" />
-  <meta name="twitter:description" content="Agentic AI systems require comprehensive security frameworks and production-ready architectural patterns. Key themes span attack surface characterization, context management, observability, and evalu… — Curated by Marcilio Mendonca" />
+  <meta name="twitter:description" content="These articles explore the emerging infrastructure and practices needed to build reliable AI agents at scale, with particular focus on training multi-step tool orchestration, rethinking code conventi… — Curated by Marcilio Mendonca" />
   
   <style>
     :root {
@@ -200,10 +200,10 @@
     </p>
     
     <p class="meta">
-      Generated 2026-05-23T06:03:51.445253Z UTC &nbsp;·&nbsp; 10 articles
+      Generated 2026-05-23T06:29:32.050139Z UTC &nbsp;·&nbsp; 10 articles
     </p>
 
-    <p class="overview">Agentic AI systems require comprehensive security frameworks and production-ready architectural patterns. Key themes span attack surface characterization, context management, observability, and evaluation methodologies—with context engineering and defense-in-depth mechanisms emerging as critical foundations for reliable, secure deployment.</p>
+    <p class="overview">These articles explore the emerging infrastructure and practices needed to build reliable AI agents at scale, with particular focus on training multi-step tool orchestration, rethinking code conventions for agentic workflows, and establishing architectural patterns for long-running agent systems. A key finding is that compression optimization can paradoxically increase costs by forcing models to spend more reasoning effort decoding dense formats.</p>
 
     
     <div class="share-row">
@@ -229,34 +229,34 @@
       
       
       <article class="article" data-category="research">
-        <div class="article__score-bar" style="width: 95%"></div>
+        <div class="article__score-bar" style="width: 92%"></div>
         <div class="article__top">
           <span class="category cat-research">research</span>
-          <span class="score">relevance 0.95</span>
+          <span class="score">relevance 0.92</span>
         </div>
         <h2 class="article__title">
-          <a href="https://arxiv.org/html/2603.11088v1" target="_blank" rel="noopener">The Attack and Defense Landscape of Agentic AI: A Comprehensive Survey</a>
+          <a href="https://arxiv.org/html/2603.24709v1" target="_blank" rel="noopener">Training LLMs for Multi-Step Tool Orchestration with Constrained Data Synthesis and Graduated Rewards</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://arxiv.org/html/2603.11088v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
-          Kim, Juhee, Liu, Xiaoyuan, Wang, Zhun, Qiu, Shi, Li, Bo, Guo, Wenbo, Song, Dawn
+          <a class="host" href="https://arxiv.org/html/2603.24709v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Jiayang, Cheng, Liu, Xin, Zhang, Zhihan, Wen, Haoyang, Zhang, Zixuan, Yin, Qingyu, Li, Shiyang, Nigam, Priyanka, Yin, Bing, Zhang, Chao, Song, Yangqiu
           <span class="dot">·</span>
           2026-05-23
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This comprehensive systematization of knowledge (SoK) paper surveys the security landscape of agentic AI systems—autonomous agents combining LLMs with traditional software components. The authors present the first systematic framework characterizing agent design across seven dimensions (input trust, access sensitivity, workflow, action, memory, tool, user interface) and analyze how increased flexibility amplifies security risks. They identify six attack vectors across three threat models (external, user-level, internal) and seven security risks spanning the CIA triad plus contextual security. The paper systematizes defense mechanisms across five categories: runtime protection (input/output guardrails, information flow control, monitoring, human-in-the-loop), secure-by-design (privilege separation, formal verification), identity/access management, and component hardening. Case studies of six real-world agents (coding and web) and a detailed analysis of AutoGPT reveal critical gaps: most deployed defenses address downstream consequences rather than upstream attack causes, leaving indirect prompt injection and unsafe data flow largely unmitigated. The work serves as a foundational handbook for building secure agentic systems and identifies open research challenges in this critical emerging domain.</p>
+        <p class="article__summary">This paper addresses the challenge of training large language models to orchestrate multi-step tool use sequences, which frequently fail due to parameter errors in complex API workflows. The authors propose a reinforcement learning framework combining two innovations: a deterministic environment synthesizing valid multi-step execution traces using cached real API responses with controllable complexity, and a graduated reward function decomposing correctness into atomic validity (call-level correctness) and orchestration consistency (proper sequencing respecting dependencies). Evaluated on ComplexFuncBench and BFCL v4, the approach substantially improves turn accuracy and demonstrates transfer of learned orchestration skills across different API ecosystems, addressing a critical limitation in current LLM tool-use capabilities.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Agentic systems expose fundamentally different attack surfaces than standalone LLMs: multiple heterogeneous interfaces (external data, persistent memory, third-party tools) create larger attack surface requiring defense-in-depth beyond component-level protections.</li><li>Seven design dimensions (input trust, access sensitivity, workflow, action, memory, tool, UI) create continuous flexibility-security tradeoff; expanded flexibility enables more diverse attack vectors and risk amplification across components.</li><li>Defense landscape remains immature: current systems rely heavily on downstream output guardrails and access control but lack upstream defenses like input guardrails and information flow control to prevent injection at source.</li><li>Informal, manually-curated defenses dominate production agents (domain allowlists, regex-based filters, first-token command validation); formal verification and automated detection remain largely unavailable despite research progress.</li><li>Critical open challenges include: composable defense-in-depth without emergent misalignment, adaptive policies balancing security-usability tradeoff, standardized agent identity/access control frameworks, and realistic evaluation bridging research-production gap.</li></ul>
+          <ul><li>Graduated rewards decomposing correctness into atomic validity and orchestration consistency substantially outperform sparse binary rewards for tool orchestration training.</li><li>Constrained data synthesis using cached real API responses enables generation of valid multi-step traces with controlled complexity without requiring full environment simulation.</li><li>Learned multi-step orchestration skills transfer effectively across different API ecosystems, suggesting generalizable improvements beyond domain-specific training data.</li><li>Both reward components and environment realism are essential; ablations confirm neither component can be omitted without significant performance degradation.</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#agentic AI security</span><span class="tag">#LLM agents</span><span class="tag">#prompt injection</span><span class="tag">#attack landscape</span>
+            <span class="tag">#LLM tool use</span><span class="tag">#reinforcement learning</span><span class="tag">#multi-step reasoning</span>
           </div>
-          <a class="read-link" href="https://arxiv.org/html/2603.11088v1" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://arxiv.org/html/2603.24709v1" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
@@ -269,300 +269,300 @@
           <span class="score">relevance 0.92</span>
         </div>
         <h2 class="article__title">
-          <a href="https://arxiv.org/html/2603.05344v1" target="_blank" rel="noopener">Building AI Coding Agents for the Terminal: Scaffolding, Harness, Context Engineering, and Lessons Learned</a>
+          <a href="https://arxiv.org/html/2604.07502v1" target="_blank" rel="noopener">Beyond Human-Readable: Rethinking Software Engineering Conventions for the Agentic Development Era</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://arxiv.org/html/2603.05344v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
-          Bui, Nghi D. Q.
+          <a class="host" href="https://arxiv.org/html/2604.07502v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Ustynov, Dmytro
           <span class="dot">·</span>
           2026-05-23
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">OpenDev is an open-source terminal-native AI coding agent that addresses three fundamental challenges in building long-running autonomous software engineering systems: managing finite context windows, enforcing safety without hindering productivity, and sustaining multi-turn reasoning within token budgets. The system employs a compound AI architecture with workload-specialized model routing (separate models for action, thinking, critique, vision, and compaction), dual-agent planning/execution separation, Adaptive Context Compaction (progressively reducing older observations across five stages), event-driven system reminders to counteract instruction fade-out, and an experience-driven memory pipeline that accumulates project-specific knowledge. Safety is enforced through defense-in-depth (prompt guardrails, schema-level tool gating, runtime approval, tool-level validation, and lifecycle hooks). The paper documents architectural patterns, design trade-offs, and transferable lessons from building a production-ready system, positioning OpenDev as the first comprehensive technical report for an interactive, terminal-native coding agent.</p>
+        <p class="article__summary">This arXiv paper challenges the six-decade emphasis on human-readable code conventions, arguing that agentic AI development fundamentally changes who the &#39;primary consumer&#39; of code is. Ustynov proposes semantic density optimization—removing zero-information tokens while preserving high-value ones—as a key design principle. A controlled experiment on log formats reveals a counterintuitive finding: aggressive compression reduced input tokens by 17% but increased session costs by 67%, because the model spent more reasoning effort decoding compressed formats. The paper proposes rehabilitating classical anti-patterns, introducing &#39;program skeletons&#39; for agent navigation, and decoupling semantic intent from human-readable presentation, suggesting that software engineering conventions must fundamentally evolve for agentic workflows.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Compound AI systems with per-workflow LLM binding enable cost–capability trade-offs: action, thinking, critique, vision, and compaction each route to optimized models via configuration, not code.</li><li>Adaptive Context Compaction with five graduated thresholds (70%–99% utilization) transitions observations through active–faded–archived states, reducing peak consumption ~54% and often eliminating emergency summarization.</li><li>Event-driven system reminders injected at decision points (as role:user messages) overcome attention-decay: instruction compliance improves when reminders appear at maximum recency, not buried in initial system prompts.</li><li>Schema-level safety (removing dangerous tools from planning agents&#39; schemas) is structurally more robust than runtime permission checks; agents cannot reason about actions they never see.</li><li>Tool result optimization and lazy resource loading (MCP tools, skills, subagents) bound context growth: offload large outputs to files, load tool schemas on-demand, defer skill content until invoked.</li></ul>
+          <ul><li>Semantic density optimization: remove zero-information tokens while preserving high-value semantic content for LLM agents</li><li>Aggressive compression paradox: token reduction doesn&#39;t always lower costs; interpretive burden shifted to model reasoning increased total expense by 67%</li><li>Classical anti-patterns may be rehabilitated when optimized for agent consumption rather than human readability</li><li>Program skeleton concept enables improved agentic code navigation and understanding of codebase structure</li><li>Software engineering conventions must decouple semantic intent from human-readable representation to optimize for agentic AI development</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#AI agents</span><span class="tag">#context engineering</span><span class="tag">#software engineering</span>
+            <span class="tag">#agentic AI</span><span class="tag">#software engineering conventions</span><span class="tag">#LLM optimization</span>
           </div>
-          <a class="read-link" href="https://arxiv.org/html/2603.05344v1" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://arxiv.org/html/2604.07502v1" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
-      <article class="article" data-category="tutorial">
-        <div class="article__score-bar" style="width: 92%"></div>
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 82%"></div>
         <div class="article__top">
-          <span class="category cat-tutorial">tutorial</span>
-          <span class="score">relevance 0.92</span>
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.82</span>
         </div>
         <h2 class="article__title">
-          <a href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf" target="_blank" rel="noopener">A Practical Guide To Building Agents</a>
+          <a href="https://deepmind.google/blog/evaluating-multimodal-interactive-agents" target="_blank" rel="noopener">Evaluating Multimodal Interactive Agents</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=cdn.openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">cdn.openai.com</a><span class="dot">·</span>
+          <a class="host" href="https://deepmind.google/blog/evaluating-multimodal-interactive-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=deepmind.google&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">deepmind.google</a><span class="dot">·</span>
+          Josh Abramson, Arun Ahuja, Federico Carnevale, Petko Georgiev, Alex Goldin, Jessica Landon, Timothy Lillicrap, Alistair Muldal, Adam Santoro, Tamara von Glehn, Gregory Wayne, Nathaniel Wong, Chen Yan, Blake Richards*, Alden Hung* (*Â External authors
+          <span class="dot">·</span>
+          2022-05-27T00:00:00+00:00
+          
+        </div>
+        <p class="article__summary">This article addresses the critical challenge of evaluating multimodal interactive agents—systems that perceive and act in complex environments using multiple sensory modalities. The authors propose comprehensive evaluation methodologies for assessing agent capabilities across planning, reasoning, and interactive behavior. The work is significant for technical researchers because standardized evaluation frameworks are essential for advancing embodied AI systems, enabling fair comparison of agent architectures, and identifying performance bottlenecks. The research provides structured approaches to benchmark agents on tasks requiring imagination, planning, and adaptive decision-making in interactive settings.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Multimodal agents require specialized evaluation metrics beyond standard supervised learning benchmarks to assess planning and reasoning abilities.</li><li>Standardized evaluation frameworks enable fair comparison across different agent architectures and multimodal input combinations.</li><li>Interactive agent evaluation must account for environment complexity, task diversity, and real-time performance constraints.</li><li>Planning and imagination capabilities in agents should be evaluated separately from execution and control performance.</li><li>Benchmark design should include tasks requiring long-horizon reasoning and adaptive behavior in dynamic environments.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#multimodal agents</span><span class="tag">#agent evaluation</span><span class="tag">#embodied AI</span>
+          </div>
+          <a class="read-link" href="https://deepmind.google/blog/evaluating-multimodal-interactive-agents" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="opinion">
+        <div class="article__score-bar" style="width: 78%"></div>
+        <div class="article__top">
+          <span class="category cat-opinion">opinion</span>
+          <span class="score">relevance 0.78</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap" target="_blank" rel="noopener">Code Is Cheap</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=simonwillison.net&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">simonwillison.net</a><span class="dot">·</span>
           Unknown author
           <span class="dot">·</span>
           2026-05-23
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This practical guide from OpenAI outlines foundational principles and architectural patterns for building AI agents. It covers the core design decisions—from defining agent responsibilities and choosing execution models to managing state, handling errors, and integrating external tools—that developers face when moving beyond simple chatbots to production systems. Technical teams building agentic workflows will find concrete guidance on structuring agents for reliability, scalability, and maintainability in real-world deployments.</p>
+        <p class="article__summary">This piece argues that in modern software development, writing code itself has become a commodity skill—the real value lies in architectural decisions, system design, and understanding problem domains. As AI tools make code generation increasingly trivial, developers and teams must shift focus from pure coding ability to higher-order thinking: identifying the right abstractions, designing scalable systems, and making trade-offs that matter. Technical readers should care because this reframes what it means to be valuable in an AI-augmented future where coding skill alone is insufficient for career growth.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Define clear agent roles and boundaries to prevent scope creep and improve debuggability in multi-agent systems</li><li>Use explicit tool definitions with strong type signatures to minimize hallucination and ensure predictable behavior</li><li>Implement structured error handling and retry logic, not just simple fallbacks, for robust agent interactions</li><li>Plan for observability and logging from the start; agentic systems are harder to debug than traditional code</li><li>Separate concerns: orchestration, reasoning, tool execution, and memory management into distinct components</li></ul>
+          <ul><li>Code generation is commoditized; architectural and design decisions now drive differentiation.</li><li>Understanding problem domains and business context matters more than syntax expertise.</li><li>AI tools enable rapid prototyping, shifting focus to validation and system correctness trade-offs.</li><li>Career value increasingly depends on judgment in design rather than lines of code written.</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#AI agents</span><span class="tag">#system design</span><span class="tag">#LLM engineering</span>
+            <span class="tag">#AI-augmented development</span><span class="tag">#software architecture</span><span class="tag">#skill transition</span>
           </div>
-          <a class="read-link" href="https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://simonwillison.net/guides/agentic-engineering-patterns/code-is-cheap" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
       <article class="article" data-category="blog">
-        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__score-bar" style="width: 78%"></div>
         <div class="article__top">
           <span class="category cat-blog">blog</span>
-          <span class="score">relevance 0.88</span>
+          <span class="score">relevance 0.78</span>
         </div>
         <h2 class="article__title">
-          <a href="https://martinfowler.com/articles/gen-ai-patterns" target="_blank" rel="noopener">Emerging Patterns in Building GenAI Products</a>
+          <a href="https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work" target="_blank" rel="noopener">How Coding Agents Work</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://martinfowler.com/articles/gen-ai-patterns" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=martinfowler.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">martinfowler.com</a><span class="dot">·</span>
-          Bharani Subramaniam
-          <span class="dot">·</span>
-          2026-05-23
-          <span class="date-fallback">(discovered)</span>
-        </div>
-        <p class="article__summary">This article by Bharani Subramaniam and Martin Fowler documents practical patterns emerging from moving generative AI products from proof-of-concept to production. The authors identify key technical challenges—hallucination, non-determinism, unbounded data access—and catalog recurring solutions including direct prompting, embeddings, RAG (Retrieval Augmented Generation), fine-tuning, guardrails, query rewriting, and reranking. Drawing from Thoughtworks&#39; client engagements, the article synthesizes field experience rather than providing general education, aiming to help teams navigate the distinct architectural and operational problems that GenAI systems introduce compared to traditional transactional or analytical systems.</p>
-        
-        <div class="takeaways">
-          <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Evals are critical for validating non-deterministic LLM outputs and establishing sensible operational boundaries</li><li>RAG addresses static training data limitations but requires multiple enhancement patterns like reranking, query rewriting, and hybrid retrieval to work well in practice</li><li>Fine-tuning becomes worthwhile when RAG approaches prove insufficient for domain-specific or context-dependent knowledge requirements</li><li>Guardrails using separate LLM calls mitigate hallucination and injection risks without relying solely on prompt engineering</li><li>GenAI products introduce fundamentally different architectural challenges than traditional systems and shouldn&#39;t be treated as simple extensions</li></ul>
-        </div>
-        
-        <div class="article__footer">
-          <div class="tags">
-            <span class="tag">#generative AI</span><span class="tag">#RAG patterns</span><span class="tag">#LLM production systems</span>
-          </div>
-          <a class="read-link" href="https://martinfowler.com/articles/gen-ai-patterns" target="_blank" rel="noopener">Read article &rarr;</a>
-        </div>
-      </article>
-    
-      
-      
-      <article class="article" data-category="tutorial">
-        <div class="article__score-bar" style="width: 88%"></div>
-        <div class="article__top">
-          <span class="category cat-tutorial">tutorial</span>
-          <span class="score">relevance 0.88</span>
-        </div>
-        <h2 class="article__title">
-          <a href="https://resources.anthropic.com/hubfs/Building%20Effective%20AI%20Agents-%20Architecture%20Patterns%20and%20Implementation%20Frameworks.pdf" target="_blank" rel="noopener">Building Effective AI Agents Architecture Patterns And Implementation Frameworks</a>
-        </h2>
-        
-        <div class="article__meta">
-          <a class="host" href="https://resources.anthropic.com/hubfs/Building%20Effective%20AI%20Agents-%20Architecture%20Patterns%20and%20Implementation%20Frameworks.pdf" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=resources.anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">resources.anthropic.com</a><span class="dot">·</span>
+          <a class="host" href="https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=simonwillison.net&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">simonwillison.net</a><span class="dot">·</span>
           Unknown author
           <span class="dot">·</span>
           2026-05-23
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This resource explores architectural patterns and implementation frameworks for building effective AI agents. The document covers foundational design principles for constructing agents that can reliably execute multi-step tasks, integrate with external tools and APIs, and maintain coherent reasoning across interactions. It provides practical guidance on structuring agent systems, managing state and context, and implementing robust error handling and fallback mechanisms. Technical readers should care because agent-oriented architectures are becoming critical infrastructure for production AI applications, and understanding these patterns directly impacts system reliability, maintainability, and performance at scale.</p>
+        <p class="article__summary">This article explores the architectural design and operational mechanisms of coding agents—AI systems capable of autonomously writing, debugging, and testing code. The author explains how these agents integrate language models with tools for code execution, version control, and error feedback loops, enabling them to tackle complex programming tasks with minimal human intervention. Understanding coding agent architecture is critical for developers building AI-assisted development systems and for researchers advancing autonomous software engineering capabilities.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Design agents with clear decision-making loops: perception, reasoning, action, and feedback mechanisms</li><li>Implement tool integration carefully to ensure agents can safely compose and chain external API calls</li><li>Use structured prompting and context management to maintain reasoning coherence over long interaction sequences</li><li>Build fallback and error-handling strategies to handle agent failures gracefully in production</li><li>Architect for observability and testing by instrumenting agent workflows for debugging and validation</li></ul>
+          <ul><li>Coding agents combine LLMs with executable sandboxes and feedback loops to iteratively refine code solutions.</li><li>Tool integration (compilers, linters, test runners) allows agents to validate code and learn from execution failures.</li><li>Agent design requires careful prompt engineering and memory management to handle multi-step reasoning over large codebases.</li><li>Error-driven learning enables agents to recover from mistakes and improve subsequent attempts.</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#AI agents</span><span class="tag">#architecture patterns</span><span class="tag">#production systems</span>
+            <span class="tag">#coding agents</span><span class="tag">#AI systems</span><span class="tag">#software automation</span>
           </div>
-          <a class="read-link" href="https://resources.anthropic.com/hubfs/Building%20Effective%20AI%20Agents-%20Architecture%20Patterns%20and%20Implementation%20Frameworks.pdf" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://simonwillison.net/guides/agentic-engineering-patterns/how-coding-agents-work" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
       <article class="article" data-category="blog">
-        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__score-bar" style="width: 78%"></div>
         <div class="article__top">
           <span class="category cat-blog">blog</span>
-          <span class="score">relevance 0.88</span>
+          <span class="score">relevance 0.78</span>
         </div>
         <h2 class="article__title">
-          <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Effective Context Engineering For AI Agents</a>
+          <a href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener">Effective Harnesses For Long Running Agents</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
+          <a class="host" href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
           Unknown author
           <span class="dot">·</span>
           2026-05-23
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This article explores context engineering as a foundational technique for building effective AI agents in 2026. It examines how to structure, prioritize, and dynamically manage context windows to improve agent reasoning, reduce hallucinations, and enable more complex multi-step tasks. The piece argues that deliberate context design—including selective information retrieval, hierarchical prompt structures, and adaptive context allocation—is critical as agent capabilities expand and system prompts become insufficient for sophisticated agentic workflows.</p>
+        <p class="article__summary">This article discusses the architectural patterns and design principles needed to build harnesses that manage long-running autonomous agents effectively. The piece addresses key challenges in agent lifecycle management, including graceful shutdown mechanisms, state persistence, error recovery, and monitoring during extended operations. For technical readers building production agent systems, understanding harness design is critical—poor harness architecture leads to resource leaks, data loss, and unpredictable failures in agents that may run for hours or days without human intervention.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Structured context hierarchies with explicit relevance signals outperform uniform prompt concatenation for agent task performance.</li><li>Dynamic context pruning based on task requirements reduces token waste and improves latency without sacrificing reasoning quality.</li><li>Agentic workflows require separating system constraints from task-specific context to enable flexible agent behavior.</li><li>Context engineering directly impacts agent reliability; poor context design is a primary cause of agent failures in production.</li><li>Metadata-rich context representations enable agents to reason about information provenance and confidence.</li></ul>
+          <ul><li>Implement checkpoint-based state persistence to enable agent recovery without data loss during failures</li><li>Design harnesses with graceful shutdown that allows agents to complete critical operations before termination</li><li>Monitor resource consumption (memory, CPU, connections) continuously to prevent degradation over extended runs</li><li>Separate agent logic from harness concerns (scheduling, lifecycle, error handling) for maintainability and reusability</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#AI agents</span><span class="tag">#context optimization</span><span class="tag">#prompt engineering</span>
+            <span class="tag">#agent systems</span><span class="tag">#system design</span><span class="tag">#reliability</span>
           </div>
-          <a class="read-link" href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
       <article class="article" data-category="blog">
-        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__score-bar" style="width: 78%"></div>
         <div class="article__top">
           <span class="category cat-blog">blog</span>
-          <span class="score">relevance 0.88</span>
+          <span class="score">relevance 0.78</span>
         </div>
         <h2 class="article__title">
-          <a href="https://www.martinfowler.com/tags/2026.html" target="_blank" rel="noopener">2026</a>
+          <a href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">Building Effective Agents</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://www.martinfowler.com/tags/2026.html" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=martinfowler.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">martinfowler.com</a><span class="dot">·</span>
+          <a class="host" href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
           Unknown author
           <span class="dot">·</span>
           2026-05-23
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This article collection surveys agentic design patterns and AI-assisted programming practices expected in 2026. It documents the evolution from traditional code-writing to LLM-driven development paradigms, including vibe coding (prompting LLMs without reviewing generated code), agentic programming (humans reviewing LLM-generated code), and structured prompt-driven development (SPDD). Key figures like Martin Fowler and Kent Beck reflect on how AI fundamentally reshapes programming skills, development workflows, and the nature of source code itself. The collection emphasizes that while LLMs now generate most code, humans remain responsible for oversight, correctness, and strategic decisions—requiring new skills centered on prompt engineering, abstraction, and iterative review rather than manual coding.</p>
+        <p class="article__summary">This article outlines foundational principles for designing production-ready AI agents that are reliable and maintainable. It covers key architectural patterns including message passing, state management, and error handling mechanisms that enable agents to operate effectively in real-world systems. The piece emphasizes practical patterns developers should adopt when building agents, such as designing for observability, implementing robust feedback loops, and creating clear separation of concerns. This is directly relevant to engineers currently deploying or planning to deploy agentic systems who need concrete guidance on moving beyond prototype-stage implementations.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Vibe coding enables non-programmers to build software via LLM prompts, but produces poor maintainability and security—suitable only for disposable applications.</li><li>Agentic programming shifts developers from typing code to prompting LLMs and reviewing results, fundamentally changing required programming skills.</li><li>SPDD treats prompts as first-class artifacts in version control, requiring developers to master alignment, abstraction-first thinking, and iterative review.</li><li>LLM-assisted pair programming patterns—onboarding, structured design, shared standards—reduce friction and shift from tool correction to genuine collaboration.</li><li>November 2025 marked an inflection point with Anthropic&#39;s Opus 4.5 and OpenAI&#39;s GPT-5.2, enabling practical AI-assisted team development.</li></ul>
+          <ul><li>Design agents with message passing and clear state management for reliability and debuggability.</li><li>Implement comprehensive observability and logging to track agent behavior and failure modes.</li><li>Create explicit feedback loops and human-in-the-loop mechanisms for course correction.</li><li>Separate concerns between reasoning, planning, and execution layers.</li><li>Build agents with graceful degradation and fallback strategies for production resilience.</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#generative AI</span><span class="tag">#agentic programming</span><span class="tag">#LLM development patterns</span>
+            <span class="tag">#AI agents</span><span class="tag">#system architecture</span><span class="tag">#production systems</span>
           </div>
-          <a class="read-link" href="https://www.martinfowler.com/tags/2026.html" target="_blank" rel="noopener">Read article &rarr;</a>
-        </div>
-      </article>
-    
-      
-      
-      <article class="article" data-category="tutorial">
-        <div class="article__score-bar" style="width: 85%"></div>
-        <div class="article__top">
-          <span class="category cat-tutorial">tutorial</span>
-          <span class="score">relevance 0.85</span>
-        </div>
-        <h2 class="article__title">
-          <a href="https://huggingface.co/learn/agents-course/bonus-unit2/what-is-agent-observability-and-evaluation" target="_blank" rel="noopener">AI Agent Observability and Evaluation · Hugging Face</a>
-        </h2>
-        
-        <div class="article__meta">
-          <a class="host" href="https://huggingface.co/learn/agents-course/bonus-unit2/what-is-agent-observability-and-evaluation" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
-          Unknown author
-          <span class="dot">·</span>
-          2026-05-23
-          <span class="date-fallback">(discovered)</span>
-        </div>
-        <p class="article__summary">This Hugging Face course documentation covers AI agent observability and evaluation—essential practices for deploying production-ready agents. Observability means monitoring external signals (logs, metrics, traces) to understand agent behavior, detect issues, and optimize performance. The guide explains key concepts: traces represent complete agent tasks while spans are individual steps; critical metrics include latency, costs, request errors, user feedback, and accuracy. Tools like Langfuse and Arize provide dashboards for real-time monitoring. The document emphasizes that observability transforms agents from black boxes into transparent, debuggable systems, enabling cost-accuracy trade-off analysis, latency measurement, and harm detection. It advocates combining multiple metrics and automated evaluations (using LLMs or libraries like RAGAS) for comprehensive agent health assessment before production deployment.</p>
-        
-        <div class="takeaways">
-          <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Observability makes AI agents transparent by tracking logs, metrics, and traces to understand costs, latency, and accuracy trade-offs.</li><li>Use traces (complete tasks) and spans (individual steps) to identify bottlenecks; e.g., 20-second latency might indicate slow models or sequential calls.</li><li>Monitor multiple metrics: latency, costs per run, request errors, explicit user ratings, implicit signals (repeated queries), and automated evaluation scores.</li><li>Tools like Langfuse and Arize use OpenTelemetry standards; check documentation for framework-specific integrations and custom instrumentations.</li><li>Define success metrics upfront; combine user feedback, error tracking, and automated evals (RAGAS for RAG, LLM Guard for harm) for robust health assessment.</li></ul>
-        </div>
-        
-        <div class="article__footer">
-          <div class="tags">
-            <span class="tag">#AI agents</span><span class="tag">#observability</span><span class="tag">#LLMOps</span>
-          </div>
-          <a class="read-link" href="https://huggingface.co/learn/agents-course/bonus-unit2/what-is-agent-observability-and-evaluation" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://www.anthropic.com/research/building-effective-agents" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
       <article class="article" data-category="blog">
-        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__score-bar" style="width: 75%"></div>
         <div class="article__top">
           <span class="category cat-blog">blog</span>
-          <span class="score">relevance 0.85</span>
+          <span class="score">relevance 0.75</span>
         </div>
         <h2 class="article__title">
-          <a href="https://resources.anthropic.com/building-effective-ai-agents" target="_blank" rel="noopener">Building Effective AI Agents</a>
+          <a href="https://magazine.sebastianraschka.com/p/components-of-a-coding-agent" target="_blank" rel="noopener">Components Of A Coding Agent</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://resources.anthropic.com/building-effective-ai-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=resources.anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">resources.anthropic.com</a><span class="dot">·</span>
+          <a class="host" href="https://magazine.sebastianraschka.com/p/components-of-a-coding-agent" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=magazine.sebastianraschka.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">magazine.sebastianraschka.com</a><span class="dot">·</span>
           Unknown author
           <span class="dot">·</span>
           2026-05-23
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This resource from Anthropic discusses best practices and architectural patterns for building effective AI agents. The article covers key design principles, implementation strategies, and considerations for creating agents that can reliably perform multi-step tasks, interact with tools, and maintain context over extended interactions. Technical teams building agent systems will benefit from understanding Anthropic&#39;s recommended approaches to prompt engineering, tool integration, planning, and error handling that improve agent reliability and performance in production environments.</p>
+        <p class="article__summary">This article outlines the fundamental components that constitute a coding agent architecture. It examines the key building blocks required for an AI system to autonomously write, test, and deploy code. The piece clarifies the structural design patterns necessary for agents to integrate planning, code generation, and error handling into a cohesive system. Understanding these components is essential for developers building or deploying coding agents, as it establishes a mental model for how such systems function and where potential failure points may occur.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Design agents with clear tool definitions, proper error handling, and feedback loops for robust multi-step task execution</li><li>Implement structured prompts that specify agent capabilities, constraints, and decision-making logic to improve consistency</li><li>Use iterative refinement and monitoring to identify failure modes and improve agent behavior over time</li><li>Plan for context management and long-running interactions to maintain coherent agent behavior across multiple steps</li></ul>
+          <ul><li>Coding agents require integrated planning, execution, and feedback loops to function autonomously.</li><li>Error handling and code validation are critical components that prevent invalid outputs.</li><li>Integration with version control and testing frameworks is necessary for safe code deployment.</li><li>Memory mechanisms allow agents to learn from past errors and improve over iterations.</li><li>Modular architecture enables agents to specialize in different programming domains.</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#AI agents</span><span class="tag">#prompt engineering</span><span class="tag">#production systems</span>
+            <span class="tag">#AI agents</span><span class="tag">#code generation</span><span class="tag">#system architecture</span>
           </div>
-          <a class="read-link" href="https://resources.anthropic.com/building-effective-ai-agents" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://magazine.sebastianraschka.com/p/components-of-a-coding-agent" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
-      <article class="article" data-category="tutorial">
-        <div class="article__score-bar" style="width: 85%"></div>
+      <article class="article" data-category="opinion">
+        <div class="article__score-bar" style="width: 75%"></div>
         <div class="article__top">
-          <span class="category cat-tutorial">tutorial</span>
-          <span class="score">relevance 0.85</span>
+          <span class="category cat-opinion">opinion</span>
+          <span class="score">relevance 0.75</span>
         </div>
         <h2 class="article__title">
-          <a href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener">Demystifying Evals For AI Agents</a>
+          <a href="https://martinfowler.com/articles/exploring-gen-ai/harness-engineering-memo.html" target="_blank" rel="noopener">Harness Engineering - first thoughts</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
+          <a class="host" href="https://martinfowler.com/articles/exploring-gen-ai/harness-engineering-memo.html" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=martinfowler.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">martinfowler.com</a><span class="dot">·</span>
+          Birgitta BÃ¶ckeler
+          <span class="dot">·</span>
+          2026-05-23
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">Birgitta Böckeler analyzes the concept of &#39;harness engineering&#39; for maintaining large AI-generated codebases, drawing from OpenAI&#39;s recent work maintaining a 1M+ line codebase with AI agents. A harness comprises computational guides, sensors, and constraints—context engineering, architectural rules, and periodic cleanup processes—that keep AI agents aligned with codebase quality standards. Rather than aiming for full automation, well-designed harnesses direct human expertise where it matters most. Böckeler explores implications: harnesses may evolve into organization-wide service templates, AI adoption could converge tech stacks around &#39;AI-friendly&#39; architectures, and runtime constraints may prove essential for maintaining code quality at scale, trading generation flexibility for reliability.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Harnesses combine context engineering, architectural constraints, and periodic &#39;garbage collection&#39; to keep AI agents productive and codebase quality high</li><li>Runtime and architectural constraints increase trustworthiness of AI-generated code; unlimited flexibility trades off against maintainability at scale</li><li>Future may see convergence on fewer tech stacks chosen for AI-friendliness and harness availability rather than developer preference</li><li>Service templates could evolve into harnesses—shared guides, linters, tests, and context—adopted across organizations but facing similar forking/sync challenges</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#code generation</span><span class="tag">#harness engineering</span>
+          </div>
+          <a class="read-link" href="https://martinfowler.com/articles/exploring-gen-ai/harness-engineering-memo.html" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 75%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.75</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://resources.anthropic.com/ty-building-effective-ai-agents" target="_blank" rel="noopener">Ty Building Effective AI Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://resources.anthropic.com/ty-building-effective-ai-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=resources.anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">resources.anthropic.com</a><span class="dot">·</span>
           Unknown author
           <span class="dot">·</span>
           2026-05-23
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This article demystifies evaluation methodologies for AI agents, addressing the challenge of assessing agent performance beyond simple benchmarks. It explores how to design comprehensive evaluation frameworks that capture agent behavior across diverse scenarios, reliability, and robustness. The piece emphasizes moving beyond single-metric evaluations toward multi-dimensional assessments that account for task complexity, failure modes, and real-world constraints. For technical teams building or deploying AI agents, understanding rigorous evaluation practices is critical for ensuring reliability, safety, and production readiness before deployment.</p>
+        <p class="article__summary">This article examines the architectural principles and design patterns necessary for building reliable, production-grade AI agents. It discusses how to structure agents that can reliably perform complex tasks, integrate with external systems, and maintain consistency across interactions. The piece emphasizes the importance of thoughtful design in agent architecture, covering aspects like tool integration, state management, and error handling that distinguish experimental agents from those suitable for real-world deployment.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Multi-dimensional evals capture agent behavior better than single metrics or benchmarks</li><li>Design evaluations to test failure modes, edge cases, and robustness systematically</li><li>Real-world agent assessment requires scenario diversity and complexity stratification</li><li>Comprehensive evals inform deployment decisions and identify reliability gaps</li><li>Agent evaluation frameworks must account for task-specific success criteria and constraints</li></ul>
+          <ul><li>Design agents with clear tool interfaces and proper error handling for production reliability</li><li>Implement robust state management to track context and prevent inconsistent agent behavior</li><li>Separate concerns between reasoning, planning, and execution layers in agent architecture</li><li>Validate agent outputs and maintain audit trails for safety and debugging</li><li>Plan for graceful degradation when external tools or APIs become unavailable</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#AI agents</span><span class="tag">#evaluation methods</span><span class="tag">#testing frameworks</span>
+            <span class="tag">#AI agents</span><span class="tag">#system design</span><span class="tag">#production architecture</span>
           </div>
-          <a class="read-link" href="https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://resources.anthropic.com/ty-building-effective-ai-agents" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
