@@ -4,7 +4,7 @@ from urllib.parse import urlparse
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
-from .config import OUTPUT_DIR, TEMPLATES_DIR
+from .config import OUTPUT_DIR, TEMPLATES_DIR, newsletter_name
 
 
 def _hostname(url):
@@ -45,6 +45,7 @@ def generate_newsletter_page(date_key, articles, index):
             "run_count": len(articles),
             "index": index,
             "overview": overview,
+            "newsletter_name": newsletter_name(),
             "generated_at": datetime.utcnow().isoformat() + "Z",
         },
     )
@@ -57,6 +58,7 @@ def generate_index_page(index):
         "index.html",
         {
             "runs": index.get("runs", []),
+            "newsletter_name": newsletter_name(),
         },
     )
     return write_output("index.html", content)

@@ -30,6 +30,12 @@ DEFAULT_KEYWORDS = [
     "data science",
 ]
 DEFAULT_MODEL = "claude-haiku-4-5"
+NEWSLETTER_NAME_ENV = "NEWSLETTER_NAME"
+DEFAULT_NEWSLETTER_NAME = "The AI Promptly"
+
+
+def newsletter_name():
+    return os.environ.get(NEWSLETTER_NAME_ENV, DEFAULT_NEWSLETTER_NAME)
 DEFAULT_EXCLUDE_DOMAINS = [
     "medium.com",
     "levelup.gitconnected.com",

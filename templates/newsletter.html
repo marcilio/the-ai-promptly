@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Frontier Newsletter &middot; {{ date_key }}</title>
+  <title>{{ newsletter_name }} &middot; {{ date_key }}</title>
   <style>
     :root {
       --bg: #0b0c10;
@@ -153,7 +153,7 @@
 <body>
   <div class="page">
     <a class="back-link" href="index.html">&larr; Back to timeline</a>
-    <div class="eyebrow" style="margin-top: 16px;">Frontier Newsletter</div>
+    <div class="eyebrow" style="margin-top: 16px;">{{ newsletter_name }}</div>
     <h1>{{ date_key }}</h1>
     <p class="meta">
       Generated {{ generated_at }} UTC &nbsp;·&nbsp; {{ run_count }} article{{ "s" if run_count != 1 else "" }}

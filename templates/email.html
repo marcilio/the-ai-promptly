@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Frontier Newsletter — {{ date_key }}</title>
+  <title>{{ newsletter_name }} — {{ date_key }}</title>
 </head>
 <body style="margin:0; padding:0; background:#f6f7fa; font-family:-apple-system,BlinkMacSystemFont,'Inter','Segoe UI',system-ui,sans-serif; color:#15171c;">
   <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="background:#f6f7fa; padding:24px 12px;">
@@ -13,7 +13,7 @@
 
           <tr>
             <td style="padding:0 4px 20px;">
-              <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#0d9488; font-weight:600; margin-bottom:6px;">Frontier Newsletter</div>
+              <div style="font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#0d9488; font-weight:600; margin-bottom:6px;">{{ newsletter_name }}</div>
               <div style="font-size:26px; font-weight:700; letter-spacing:-0.01em; color:#15171c;">{{ date_key }}</div>
               <div style="font-size:13px; color:#5d626c; margin-top:6px;">{{ run_count }} article{{ "s" if run_count != 1 else "" }}</div>
             </td>
@@ -75,7 +75,7 @@
 
           <tr>
             <td style="padding:20px 4px 0; font-size:11px; color:#8b8d96; text-align:center;">
-              Sent {{ generated_at }} UTC &middot; Frontier Newsletter
+              Sent {{ generated_at }} UTC &middot; {{ newsletter_name }}
             </td>
           </tr>
 
