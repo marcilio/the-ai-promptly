@@ -4,7 +4,7 @@ from urllib.parse import urljoin, urlparse
 
 from bs4 import BeautifulSoup
 
-from .utils import normalize_url, extract_text_nodes
+from .utils import extract_text_nodes, humanize_url_slug, normalize_url
 
 ARTICLE_PATH_HINTS = ["article", "blog", "post", "paper", "research", "news", "note"]
 
@@ -60,7 +60,7 @@ def extract_article_metadata(url, html):
     if not html:
         return None
     soup = BeautifulSoup(html, "html.parser")
-    title = _get_title(soup)
+    title = _get_title(soup) or humanize_url_slug(url)
     summary = _get_summary(soup)
     author = _get_author(soup)
     published_at = _get_published_date(soup)
@@ -75,18 +75,36 @@ def extract_article_metadata(url, html):
     }
 
 
+_TITLE_META_SELECTORS = [
+    {"property": "og:title"},
+    {"name": "og:title"},
+    {"property": "twitter:title"},
+    {"name": "twitter:title"},
+    {"name": "citation_title"},
+    {"name": "dc.title"},
+    {"name": "DC.title"},
+    {"itemprop": "headline"},
+    {"itemprop": "name"},
+]
+
+
 def _get_title(soup):
-    title = None
-    title_tag = soup.find("meta", property="og:title") or soup.find("meta", attrs={"name": "og:title"})
-    if title_tag:
-        title = title_tag.get("content")
-    if not title and soup.title:
-        title = soup.title.string
-    if not title:
-        heading = soup.find(re.compile("^h[1-3]$"))
-        if heading:
-            title = heading.get_text(strip=True)
-    return title.strip() if title else None
+    for selector in _TITLE_META_SELECTORS:
+        tag = soup.find("meta", attrs=selector)
+        if tag and tag.get("content"):
+            text = tag["content"].strip()
+            if text:
+                return text
+    if soup.title and soup.title.string:
+        text = soup.title.string.strip()
+        if text:
+            return text
+    heading = soup.find(re.compile("^h[1-3]$"))
+    if heading:
+        text = heading.get_text(strip=True)
+        if text:
+            return text
+    return None
 
 
 def _get_summary(soup):

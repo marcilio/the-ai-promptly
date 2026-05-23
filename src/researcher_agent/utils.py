@@ -108,6 +108,56 @@ def url_hostname(url):
     return host[4:] if host.startswith("www.") else host
 
 
+_KNOWN_ACRONYMS = {
+    "ai", "ml", "llm", "llms", "nlp", "rag", "mcp", "api", "apis", "sdk", "cli",
+    "ui", "ux", "ide", "os", "io", "gpu", "gpus", "cpu", "tpu", "rl", "ir",
+    "html", "css", "json", "xml", "yaml", "sql", "aws", "gcp", "gpt", "etl",
+    "iot", "faq", "https", "http", "tcp", "udp", "rest", "ci", "cd", "vm",
+    "saas", "paas", "iaas", "pdf", "p2p", "qa", "sre",
+}
+
+
+def humanize_url_slug(url):
+    """Turn a URL's last meaningful path segment into a readable title.
+
+    Examples:
+      https://example.com/posts/why-it-matters       -> 'Why It Matters'
+      https://resources.example.com/hubfs/Some%20PDF.pdf -> 'Some PDF'
+      https://arxiv.org/abs/2501.12345v2             -> None  (no human slug)
+    """
+    from urllib.parse import unquote
+    if not url:
+        return None
+    try:
+        parsed = urlparse(url)
+    except ValueError:
+        return None
+    path = parsed.path.rstrip("/")
+    if not path or path == "/":
+        return None
+    slug = unquote(path.rsplit("/", 1)[-1])
+    slug = re.sub(r"\.(html?|php|aspx?|jsp|md|pdf|txt)$", "", slug, flags=re.I)
+    # arxiv-style version suffix
+    slug = re.sub(r"v\d+$", "", slug)
+    # If slug is mostly digits / hyphens (e.g. arxiv IDs), skip
+    if re.fullmatch(r"[\d\.\-_v]+", slug):
+        return None
+    cleaned = re.sub(r"[-_+]+", " ", slug).strip()
+    cleaned = re.sub(r"\s+", " ", cleaned)
+    if not cleaned or len(cleaned) < 3:
+        return None
+    words = []
+    for w in cleaned.split():
+        lw = w.lower()
+        if lw in _KNOWN_ACRONYMS:
+            words.append(lw.upper())
+        elif w.isupper() and 2 <= len(w) <= 5 and w.isalpha():
+            words.append(w)
+        else:
+            words.append(w[:1].upper() + w[1:])
+    return " ".join(words)
+
+
 def extract_text_nodes(html_text):
     cleaned = re.sub(r"\s+", " ", html_text or "").strip()
     return cleaned
