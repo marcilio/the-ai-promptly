@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-05-24",
+      "generated_at": "2026-05-24T12:02:43.728747Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 10,
+      "filename": "newsletter-2026-05-24.html",
+      "overview": "Recent research emphasizes systematic evaluation and architectural design of AI agents across diverse domains, with key findings that agent architecture can shift performance by twelve percentage points while backbone models remain dominant, and that production systems require workflow graphs balancing flexibility with strict constraints rather than pure autonomy."
+    },
+    {
       "date": "2026-05-23",
       "generated_at": "2026-05-23T12:05:08.706086Z",
       "source_urls": [
