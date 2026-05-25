@@ -9,6 +9,7 @@ from .config import (
     newsletter_author_name as _newsletter_author_name,
     newsletter_author_url as _newsletter_author_url,
     newsletter_name as _newsletter_name,
+    newsletter_repo_url as _newsletter_repo_url,
 )
 from .dashboard import render_template
 
@@ -53,6 +54,7 @@ def send_newsletter(date_key, articles, overview, recipient, smtp_user=None, smt
         "newsletter_name": brand,
         "newsletter_author_name": _newsletter_author_name(),
         "newsletter_author_url": _newsletter_author_url(),
+        "newsletter_repo_url": _newsletter_repo_url(),
         "generated_at": datetime.utcnow().isoformat(timespec="seconds") + "Z",
     })
     text_body = _build_plain_text(date_key, articles, overview, brand)

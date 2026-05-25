@@ -81,6 +81,7 @@
           <tr>
             <td style="padding:20px 4px 0; font-size:11px; color:#8b8d96; text-align:center;">
               Sent {{ generated_at }} UTC &middot; {{ newsletter_name }}
+              {% if newsletter_repo_url %}&middot; <a href="{{ newsletter_repo_url }}" style="color:#8b8d96; text-decoration:none;">view source</a>{% endif %}
             </td>
           </tr>
 

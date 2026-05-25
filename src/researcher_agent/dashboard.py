@@ -11,6 +11,7 @@ from .config import (
     newsletter_author_url,
     newsletter_base_url,
     newsletter_name,
+    newsletter_repo_url,
 )
 
 
@@ -69,6 +70,7 @@ def generate_newsletter_page(date_key, articles, index):
             "newsletter_name": newsletter_name(),
             "newsletter_author_name": newsletter_author_name(),
             "newsletter_author_url": newsletter_author_url(),
+            "newsletter_repo_url": newsletter_repo_url(),
             "newsletter_base_url": base_url,
             "page_url": page_url,
             "og_description": _build_og_description(overview, newsletter_author_name()),
@@ -87,6 +89,7 @@ def generate_index_page(index):
             "newsletter_name": newsletter_name(),
             "newsletter_author_name": newsletter_author_name(),
             "newsletter_author_url": newsletter_author_url(),
+            "newsletter_repo_url": newsletter_repo_url(),
             "newsletter_base_url": newsletter_base_url(),
         },
     )

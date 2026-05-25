@@ -37,6 +37,8 @@ DEFAULT_NEWSLETTER_AUTHOR_NAME = "Marcilio Mendonca, PhD, Staff AI FDE at Google
 NEWSLETTER_AUTHOR_URL_ENV = "NEWSLETTER_AUTHOR_URL"
 DEFAULT_NEWSLETTER_AUTHOR_URL = "https://www.linkedin.com/in/marcilio/"
 NEWSLETTER_BASE_URL_ENV = "NEWSLETTER_BASE_URL"
+NEWSLETTER_REPO_URL_ENV = "NEWSLETTER_REPO_URL"
+DEFAULT_NEWSLETTER_REPO_URL = "https://github.com/marcilio/the-ai-promptly"
 
 
 def newsletter_name():
@@ -58,6 +60,13 @@ def newsletter_base_url():
     """
     url = os.environ.get(NEWSLETTER_BASE_URL_ENV, "").strip()
     return url.rstrip("/") if url else ""
+
+
+def newsletter_repo_url():
+    """Public GitHub (or other forge) URL of the source. When set, renders a
+    'view source' link near the byline. Set NEWSLETTER_REPO_URL='' to hide.
+    """
+    return os.environ.get(NEWSLETTER_REPO_URL_ENV, DEFAULT_NEWSLETTER_REPO_URL).strip()
 DEFAULT_EXCLUDE_DOMAINS = [
     "medium.com",
     "levelup.gitconnected.com",
