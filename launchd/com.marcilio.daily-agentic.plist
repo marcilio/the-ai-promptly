@@ -15,9 +15,12 @@
     <key>WorkingDirectory</key>
     <string>/Users/marcilio/projects/researcher-agent-dashboard</string>
 
-    <!-- Run daily at 05:00 local time -->
+    <!-- Run weekly: every Tuesday at 05:00 local time
+         (Weekday: 0=Sun, 1=Mon, 2=Tue, ..., 6=Sat) -->
     <key>StartCalendarInterval</key>
     <dict>
+        <key>Weekday</key>
+        <integer>2</integer>
         <key>Hour</key>
         <integer>5</integer>
         <key>Minute</key>
