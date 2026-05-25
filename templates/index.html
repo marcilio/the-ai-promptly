@@ -17,6 +17,8 @@
       --accent: #5eead4;
       --accent-soft: rgba(94, 234, 212, 0.12);
       --accent-line: rgba(94, 234, 212, 0.35);
+      --linkedin: #0a66c2;
+      --linkedin-hover: #004182;
       --cat-blog: #818cf8;
       --cat-research: #5eead4;
       --cat-tutorial: #fbbf24;
@@ -29,62 +31,143 @@
     html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
-      font-size: 15px;
-      line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-      min-height: 100vh;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased; min-height: 100vh;
     }
 
-    .page {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 48px 24px 96px;
-    }
+    .page { max-width: 1200px; margin: 0 auto; padding: 48px 24px 96px; }
 
-    /* Header */
-    .header { margin-bottom: 40px; }
-    .eyebrow {
-      font-size: 12px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
+    /* Top header */
+    .header { margin-bottom: 32px; }
     h1 {
-      font-size: 36px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin: 0 0 8px;
+      font-size: 36px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px;
     }
-    .subtitle { color: var(--text-2); font-size: 15px; }
-    .byline {
-      font-size: 13px;
-      color: var(--text-2);
-      margin: 6px 0 0;
-    }
+    .byline { font-size: 13px; color: var(--text-2); margin: 6px 0 0; }
     .byline a {
-      color: var(--text-2);
-      text-decoration: underline;
+      color: var(--text-2); text-decoration: underline;
       text-decoration-color: var(--accent-line);
-      text-underline-offset: 3px;
-      transition: color 0.15s;
+      text-underline-offset: 3px; transition: color 0.15s;
     }
     .byline a:hover { color: var(--accent); }
 
-    .share-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 16px 0 0; align-items: center; }
-    .share-btn {
+    /* Layout: sidebar + main */
+    .layout {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .layout { grid-template-columns: 1fr; gap: 24px; }
+      .sidebar { position: static !important; max-height: none !important; }
+    }
+
+    /* Sidebar: previous episodes */
+    .sidebar {
+      position: sticky;
+      top: 24px;
+      max-height: calc(100vh - 48px);
+      overflow-y: auto;
+    }
+    .sidebar-label {
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--text-3); font-weight: 600;
+      padding: 0 12px 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .sidebar-label .pip {
+      width: 5px; height: 5px; border-radius: 50%;
+      background: var(--accent); display: inline-block;
+    }
+    .episode-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 4px; }
+    .episode-list li {
+      padding: 10px 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+    .episode-list li:hover { background: var(--surface); }
+    .episode-list li.active {
+      background: var(--accent-soft);
+      border-left-color: var(--accent);
+    }
+    .episode-list li.active .episode-list__date { color: var(--accent); }
+    .episode-list__date {
+      font-size: 13px; font-weight: 600; color: var(--text);
+      transition: color 0.15s;
+    }
+    .episode-list__meta {
+      font-size: 11px; color: var(--text-3); margin-top: 2px;
+    }
+    @media (max-width: 768px) {
+      .episode-list { flex-direction: row; flex-wrap: nowrap; overflow-x: auto; gap: 8px; padding-bottom: 8px; }
+      .episode-list li { flex-shrink: 0; min-width: 130px; }
+    }
+
+    /* Main column: episode content */
+    .main { min-width: 0; }
+    .episode-header { margin-bottom: 20px; }
+    .episode-date {
+      font-size: 24px; font-weight: 700; letter-spacing: -0.01em;
+      margin: 0 0 4px;
+    }
+    .episode-meta { color: var(--text-2); font-size: 14px; margin: 0; }
+
+    /* "In this episode" callout */
+    .overview-section {
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      margin: 0 0 20px;
+    }
+    .overview-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .overview-text {
+      font-size: 15px; line-height: 1.65; color: var(--text);
+      margin: 0;
+    }
+    .overview-section.empty .overview-text { color: var(--text-3); font-style: italic; }
+    .overview-section.empty { border-left-color: var(--border-strong); }
+    .overview-section.empty .overview-label { color: var(--text-3); }
+
+    /* Share row */
+    .share-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 24px; align-items: center; }
+
+    /* LinkedIn share — primary CTA with brand colors */
+    .share-btn--linkedin {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; padding: 9px 16px;
+      border-radius: 999px; cursor: pointer;
+      background: var(--linkedin); color: #ffffff;
+      border: 1px solid var(--linkedin);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+      box-shadow: 0 2px 8px rgba(10, 102, 194, 0.25);
+    }
+    .share-btn--linkedin:hover {
+      background: var(--linkedin-hover); border-color: var(--linkedin-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(10, 102, 194, 0.35);
+    }
+    .share-btn--linkedin svg { width: 16px; height: 16px; flex-shrink: 0; fill: #ffffff; }
+
+    /* Copy link — secondary */
+    .share-btn--copy {
       display: inline-flex; align-items: center; gap: 6px;
-      font-size: 12px; font-weight: 500; padding: 6px 12px;
+      font-size: 12px; font-weight: 500; padding: 8px 14px;
       border-radius: 999px; cursor: pointer;
       border: 1px solid var(--border-strong);
       background: var(--surface); color: var(--text-2);
       text-decoration: none; transition: all 0.15s;
       font-family: inherit;
     }
-    .share-btn:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
-    .share-btn--linkedin:hover { color: var(--accent); }
-    .share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-btn--copy:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--copy svg { width: 14px; height: 14px; flex-shrink: 0; }
     .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
     .share-toast {
       position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
@@ -93,193 +176,50 @@
       opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
     }
     .share-toast.show { opacity: 1; }
-    .overview {
-      font-size: 15px; line-height: 1.65; color: var(--text);
-      background: var(--surface); border-left: 3px solid var(--accent);
-      border-radius: 0 10px 10px 0; padding: 14px 18px;
-      margin: 18px 0 0;
-      transition: opacity 0.15s;
-    }
-    .overview.empty { color: var(--text-3); font-style: italic; border-left-color: var(--border-strong); }
-
-    /* Controls panel */
-    .controls {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 20px 24px 24px;
-      margin-bottom: 24px;
-    }
-    .controls-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--text-3);
-      font-weight: 600;
-      margin-bottom: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .controls-eyebrow .pip {
-      width: 5px; height: 5px; border-radius: 50%;
-      background: var(--accent); display: inline-block;
-    }
-    .date-nav {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-    .date-current {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-    .date-current .date-label { font-size: 20px; font-weight: 600; }
-    .date-current .date-meta { font-size: 13px; color: var(--text-2); }
-    .nav-btn {
-      background: transparent;
-      border: 1px solid var(--border-strong);
-      color: var(--text);
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.15s, border-color 0.15s;
-    }
-    .nav-btn:hover:not(:disabled) { background: var(--surface-hover); border-color: var(--accent-line); color: var(--accent); }
-    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-    .slider {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 999px;
-      outline: none;
-    }
-    .slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 18px;
-      height: 18px;
-      background: var(--accent);
-      border-radius: 50%;
-      cursor: pointer;
-      box-shadow: 0 0 0 4px var(--accent-soft);
-      transition: transform 0.1s;
-    }
-    .slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
-    .slider::-moz-range-thumb {
-      width: 18px;
-      height: 18px;
-      background: var(--accent);
-      border-radius: 50%;
-      cursor: pointer;
-      border: none;
-      box-shadow: 0 0 0 4px var(--accent-soft);
-    }
-
-    .source-line {
-      font-size: 12px;
-      color: var(--text-3);
-      margin-top: 14px;
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      word-break: break-all;
-    }
 
     /* Filter pills */
-    .filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 24px;
-    }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
     .pill {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-2);
-      padding: 7px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      cursor: pointer;
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-2); padding: 7px 14px; border-radius: 999px;
+      font-size: 13px; font-weight: 500; cursor: pointer;
       transition: all 0.15s;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: inherit;
     }
     .pill:hover { border-color: var(--border-strong); color: var(--text); }
-    .pill.active {
-      background: var(--accent-soft);
-      border-color: var(--accent-line);
-      color: var(--accent);
-    }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
     .pill .count {
-      background: rgba(255, 255, 255, 0.06);
-      padding: 1px 7px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px;
+      border-radius: 999px; font-size: 11px; font-weight: 600;
     }
     .pill.active .count { background: rgba(94, 234, 212, 0.18); }
 
     /* Article cards */
     .articles { display: flex; flex-direction: column; gap: 14px; }
-
     .article {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px 24px;
-      position: relative;
-      overflow: hidden;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 24px;
+      position: relative; overflow: hidden;
       transition: border-color 0.15s, transform 0.15s;
     }
-    .article:hover {
-      border-color: var(--border-strong);
-      transform: translateY(-1px);
-    }
-
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
     .article__score-bar {
-      position: absolute;
-      top: 0; left: 0;
-      height: 2px;
-      background: var(--accent);
-      opacity: 0.6;
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
     }
-
     .article__top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      gap: 12px;
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
     }
     .category {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 6px;
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 6px;
       background: rgba(255, 255, 255, 0.04);
     }
     .category::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
+      content: ""; width: 6px; height: 6px; border-radius: 50%;
       background: currentColor;
     }
     .cat-blog { color: var(--cat-blog); }
@@ -288,56 +228,29 @@
     .cat-opinion { color: var(--cat-opinion); }
     .cat-news { color: var(--cat-news); }
     .cat-other { color: var(--cat-other); }
-
-    .score {
-      font-size: 12px;
-      color: var(--text-3);
-      font-family: ui-monospace, "SF Mono", Menlo, monospace;
-    }
-
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
     .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
     .article__title a { color: var(--text); text-decoration: none; }
     .article__title a:hover { color: var(--accent); }
-
     .article__meta {
-      font-size: 13px;
-      color: var(--text-2);
-      margin-bottom: 12px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 4px;
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
     }
     .article__meta .dot { color: var(--text-3); padding: 0 4px; }
     .article__meta .host {
       font-family: ui-monospace, "SF Mono", Menlo, monospace;
-      font-size: 12px;
-      color: var(--text-2);
+      font-size: 12px; color: var(--text-2);
       background: rgba(255, 255, 255, 0.04);
-      padding: 2px 8px 2px 6px;
-      border-radius: 4px;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
     }
     .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
     .article__meta .favicon {
-      width: 14px;
-      height: 14px;
-      border-radius: 2px;
-      flex-shrink: 0;
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
       background: rgba(255, 255, 255, 0.06);
     }
-    .article__meta .date-fallback {
-      font-size: 11px;
-      color: var(--text-3);
-      font-style: italic;
-      margin-left: 4px;
-    }
-
+    .article__meta .date-fallback { font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px; }
     .article__summary { color: var(--text-2); margin: 0 0 14px; }
-
     .takeaways {
       background: rgba(255, 255, 255, 0.02);
       border-left: 2px solid var(--accent-line);
@@ -346,60 +259,34 @@
       margin: 0 0 14px;
     }
     .takeaways__label {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 6px;
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
     }
     .takeaways ul { list-style: none; padding: 0; margin: 0; }
     .takeaways li {
-      position: relative;
-      padding-left: 16px;
-      margin: 4px 0;
-      font-size: 13.5px;
-      line-height: 1.5;
-      color: var(--text);
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
     }
     .takeaways li::before {
-      content: "→";
-      position: absolute;
-      left: 0;
-      color: var(--accent);
-      font-weight: 600;
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
     }
-
     .article__footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 10px;
     }
     .tags { display: flex; gap: 6px; flex-wrap: wrap; }
     .tag {
-      font-size: 11px;
-      color: var(--text-3);
+      font-size: 11px; color: var(--text-3);
       background: rgba(255, 255, 255, 0.04);
-      padding: 3px 8px;
-      border-radius: 4px;
+      padding: 3px 8px; border-radius: 4px;
       font-family: ui-monospace, "SF Mono", Menlo, monospace;
     }
-    .read-link {
-      color: var(--accent);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 500;
-    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
     .read-link:hover { text-decoration: underline; }
-
     .empty {
-      text-align: center;
-      padding: 60px 20px;
-      color: var(--text-3);
-      background: var(--surface);
-      border: 1px dashed var(--border);
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border);
       border-radius: 14px;
     }
   </style>
@@ -413,71 +300,86 @@
         {% if newsletter_author_url %}<a href="{{ newsletter_author_url }}" target="_blank" rel="noopener">{{ newsletter_author_name }}</a>{% else %}{{ newsletter_author_name }}{% endif %}
       </p>
       {% endif %}
-      <p id="overview" class="overview empty">Loading&hellip;</p>
     </header>
 
-    <section class="controls">
-      <div class="controls-eyebrow">
-        <span class="pip"></span>
-        Timeline &middot; <span id="timelineDays">&mdash;</span> days
-      </div>
-      <div class="date-nav">
-        <button id="prevBtn" class="nav-btn" aria-label="Previous day">&larr;</button>
-        <div class="date-current">
-          <span id="dateLabel" class="date-label">Loading&hellip;</span>
-          <span id="dateMeta" class="date-meta"></span>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-label">
+          <span class="pip"></span>
+          Previous Episodes
         </div>
-        <button id="nextBtn" class="nav-btn" aria-label="Next day">&rarr;</button>
-      </div>
-      <input id="timeline" class="slider" type="range" min="0" max="0" value="0" />
-      <div id="sourceLine" class="source-line"></div>
-      {% if newsletter_base_url %}
-      <div class="share-row" id="shareRow" style="display: none;">
-        <a id="shareLinkedIn" class="share-btn share-btn--linkedin"
-           href="#" target="_blank" rel="noopener"
-           title="Share this day's newsletter on LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zM20 19h-3v-5.6c0-1.34-.48-2.25-1.68-2.25-.92 0-1.46.62-1.7 1.22-.09.21-.11.51-.11.81V19h-3V8h3v1.27c.4-.62 1.12-1.5 2.72-1.5 1.98 0 3.47 1.3 3.47 4.08V19z"/></svg>
-          Share on LinkedIn
-        </a>
-        <button type="button" id="shareCopy" class="share-btn share-btn--copy">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-          Copy link
-        </button>
-        {% if newsletter_author_name %}<span class="share-hint">tag the author when you post</span>{% endif %}
-      </div>
-      {% endif %}
-    </section>
+        <ul id="episodeList" class="episode-list"></ul>
+      </aside>
+
+      <main class="main">
+        <div class="episode-header">
+          <h2 id="dateLabel" class="episode-date">Loading&hellip;</h2>
+          <p id="dateMeta" class="episode-meta"></p>
+        </div>
+
+        <section id="overviewSection" class="overview-section empty">
+          <div class="overview-label">In this episode</div>
+          <p id="overview" class="overview-text">Loading&hellip;</p>
+        </section>
+
+        {% if newsletter_base_url %}
+        <div class="share-row" id="shareRow" style="display: none;">
+          <a id="shareLinkedIn" class="share-btn--linkedin"
+             href="#" target="_blank" rel="noopener"
+             title="Share this episode on LinkedIn">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zM20 19h-3v-5.6c0-1.34-.48-2.25-1.68-2.25-.92 0-1.46.62-1.7 1.22-.09.21-.11.51-.11.81V19h-3V8h3v1.27c.4-.62 1.12-1.5 2.72-1.5 1.98 0 3.47 1.3 3.47 4.08V19z"/></svg>
+            Share on LinkedIn
+          </a>
+          <button type="button" id="shareCopy" class="share-btn--copy">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy link
+          </button>
+          {% if newsletter_author_name %}<span class="share-hint">tag the author when you post</span>{% endif %}
+        </div>
+        {% endif %}
+
+        <nav id="filters" class="filters"></nav>
+        <section id="content" class="articles"></section>
+      </main>
+    </div>
     {% if newsletter_base_url %}<div id="shareToast" class="share-toast">Copied!</div>{% endif %}
-
-    <nav id="filters" class="filters"></nav>
-
-    <main id="content" class="articles"></main>
   </div>
 
   <script>
     const NEWSLETTER_BASE_URL = {{ newsletter_base_url|tojson }};
     const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
-    const state = {
-      runs: [],
-      currentIndex: 0,
-      articles: [],
-      filter: "all",
-    };
+    const state = { runs: [], currentIndex: 0, articles: [], filter: "all" };
 
-    const timeline = document.getElementById("timeline");
+    const episodeListEl = document.getElementById("episodeList");
     const dateLabel = document.getElementById("dateLabel");
     const dateMeta = document.getElementById("dateMeta");
-    const sourceLine = document.getElementById("sourceLine");
     const filtersEl = document.getElementById("filters");
     const content = document.getElementById("content");
-    const prevBtn = document.getElementById("prevBtn");
-    const nextBtn = document.getElementById("nextBtn");
     const overviewEl = document.getElementById("overview");
-    const timelineDaysEl = document.getElementById("timelineDays");
+    const overviewSection = document.getElementById("overviewSection");
     const shareRow = document.getElementById("shareRow");
     const shareLinkedIn = document.getElementById("shareLinkedIn");
     const shareCopy = document.getElementById("shareCopy");
     const shareToast = document.getElementById("shareToast");
+
+    function escapeHtml(s) {
+      return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+    }
+    function fmtScore(s) { return s == null ? "" : Number(s).toFixed(2); }
+    function hostname(url) {
+      try { return new URL(url).hostname.replace(/^www\./, ""); }
+      catch { return ""; }
+    }
+    function fmtDateLong(dateKey) {
+      return new Date(dateKey + "T00:00:00").toLocaleDateString(undefined, {
+        weekday: "long", year: "numeric", month: "long", day: "numeric"
+      });
+    }
+    function fmtDateShort(dateKey) {
+      return new Date(dateKey + "T00:00:00").toLocaleDateString(undefined, {
+        month: "short", day: "numeric"
+      });
+    }
 
     function updateShareButtons(dateKey) {
       if (!shareRow || !NEWSLETTER_BASE_URL) return;
@@ -499,53 +401,49 @@
       });
     }
 
-    function escapeHtml(s) {
-      return String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
-    }
-
-    function fmtScore(s) {
-      if (s == null) return "";
-      return Number(s).toFixed(2);
-    }
-
     async function loadIndex() {
       const response = await fetch("../data/index.json");
       const payload = await response.json();
-      // Index is newest-first; reverse so slider left = oldest, right = newest
-      state.runs = (payload.runs || []).slice().reverse();
+      // index.json is already newest-first
+      state.runs = payload.runs || [];
       if (!state.runs.length) {
-        dateLabel.textContent = "No data yet.";
-        dateMeta.textContent = "Run the agent to populate the timeline.";
-        timeline.disabled = true;
-        prevBtn.disabled = true;
-        nextBtn.disabled = true;
+        dateLabel.textContent = "No episodes yet";
+        dateMeta.textContent = "Run the agent to populate.";
         return;
       }
-      timeline.max = state.runs.length - 1;
-      timeline.value = state.runs.length - 1; // default to most recent
-      timelineDaysEl.textContent = state.runs.length;
-      await selectIndex(state.runs.length - 1);
+      renderSidebar();
+      await selectIndex(0); // default: latest (index 0 since newest-first)
+    }
+
+    function renderSidebar() {
+      episodeListEl.innerHTML = state.runs.map((run, i) => `
+        <li data-index="${i}" class="${i === state.currentIndex ? "active" : ""}">
+          <div class="episode-list__date">${escapeHtml(fmtDateShort(run.date))}</div>
+          <div class="episode-list__meta">${run.count} article${run.count === 1 ? "" : "s"}</div>
+        </li>
+      `).join("");
+      episodeListEl.querySelectorAll("li").forEach(li => {
+        li.addEventListener("click", () => selectIndex(Number(li.dataset.index)));
+      });
     }
 
     async function selectIndex(i) {
       state.currentIndex = i;
-      timeline.value = i;
       const run = state.runs[i];
-      dateLabel.textContent = new Date(run.date + "T00:00:00").toLocaleDateString(undefined, {
-        weekday: "long", year: "numeric", month: "long", day: "numeric"
-      });
+      dateLabel.textContent = fmtDateLong(run.date);
       dateMeta.textContent = `${run.count} article${run.count === 1 ? "" : "s"}`;
-      sourceLine.textContent = `Sources: ${(run.source_urls || []).join(" · ")}`;
       if (run.overview) {
         overviewEl.textContent = run.overview;
-        overviewEl.classList.remove("empty");
+        overviewSection.classList.remove("empty");
       } else {
-        overviewEl.textContent = "No overview generated for this day yet.";
-        overviewEl.classList.add("empty");
+        overviewEl.textContent = "No overview generated for this episode yet.";
+        overviewSection.classList.add("empty");
       }
-      prevBtn.disabled = i === 0;
-      nextBtn.disabled = i === state.runs.length - 1;
       updateShareButtons(run.date);
+      // Update sidebar active state
+      episodeListEl.querySelectorAll("li").forEach((li, idx) => {
+        li.classList.toggle("active", idx === i);
+      });
       const dailyResponse = await fetch(`../data/daily/${run.date}.json`);
       state.articles = await dailyResponse.json();
       renderFilters();
@@ -580,15 +478,10 @@
         ? state.articles
         : state.articles.filter(a => (a.category || "other").toLowerCase() === state.filter);
       if (!filtered.length) {
-        content.innerHTML = `<div class="empty">No articles in this category for the selected day.</div>`;
+        content.innerHTML = `<div class="empty">No articles in this category for this episode.</div>`;
         return;
       }
       content.innerHTML = filtered.map(renderArticle).join("");
-    }
-
-    function hostname(url) {
-      try { return new URL(url).hostname.replace(/^www\./, ""); }
-      catch { return ""; }
     }
 
     function renderArticle(article) {
@@ -630,10 +523,6 @@
         </article>
       `;
     }
-
-    timeline.addEventListener("input", e => selectIndex(Number(e.target.value)));
-    prevBtn.addEventListener("click", () => state.currentIndex > 0 && selectIndex(state.currentIndex - 1));
-    nextBtn.addEventListener("click", () => state.currentIndex < state.runs.length - 1 && selectIndex(state.currentIndex + 1));
 
     loadIndex();
   </script>
