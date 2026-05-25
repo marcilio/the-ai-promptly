@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Agentic &middot; 2026-05-25</title>
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Daily Agentic — 2026-05-25" />
+  <meta property="og:description" content="Recent research converges on agent orchestration and runtime infrastructure as critical levers for LLM-based systems. Key advances include unified frameworks abstracting over multiple LLM providers,… — Curated by Marcilio Mendonca" />
+  <meta property="og:url" content="https://the-ai-promptly.vercel.app/newsletter-2026-05-25.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Daily Agentic — 2026-05-25" />
+  <meta name="twitter:description" content="Recent research converges on agent orchestration and runtime infrastructure as critical levers for LLM-based systems. Key advances include unified frameworks abstracting over multiple LLM providers,… — Curated by Marcilio Mendonca" />
+  
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
+
+    .share-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 20px; align-items: center; }
+    .share-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 6px 12px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+    }
+    .share-btn:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--linkedin:hover { color: #5eead4; }
+    .share-btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #0a0a0f; padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
+    .overview {
+      font-size: 15px; line-height: 1.65; color: var(--text);
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; Back to timeline</a>
+    <div class="eyebrow" style="margin-top: 16px;">Daily Agentic</div>
+    <h1>2026-05-25</h1>
+    
+    <p class="byline">Brought to you by
+      <a href="https://www.linkedin.com/in/marcilio/" target="_blank" rel="noopener">Marcilio Mendonca, PhD, Staff AI FDE at Google</a>
+    </p>
+    
+    <p class="meta">
+      Generated 2026-05-25T12:03:52.665545Z UTC &nbsp;·&nbsp; 10 articles
+    </p>
+
+    <p class="overview">Recent research converges on agent orchestration and runtime infrastructure as critical levers for LLM-based systems. Key advances include unified frameworks abstracting over multiple LLM providers, dynamic topology selection for multi-agent coordination, and automated harness engineering that shifts burden from manual configuration to meta-learning approaches.</p>
+
+    
+    <div class="share-row">
+      <a class="share-btn share-btn--linkedin"
+         href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//the-ai-promptly.vercel.app/newsletter-2026-05-25.html"
+         target="_blank" rel="noopener"
+         title="Share this day's newsletter on LinkedIn. Tip: tag @marcilio when posting.">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zM20 19h-3v-5.6c0-1.34-.48-2.25-1.68-2.25-.92 0-1.46.62-1.7 1.22-.09.21-.11.51-.11.81V19h-3V8h3v1.27c.4-.62 1.12-1.5 2.72-1.5 1.98 0 3.47 1.3 3.47 4.08V19z"/></svg>
+        Share on LinkedIn
+      </a>
+      <button type="button" class="share-btn share-btn--copy" data-url="https://the-ai-promptly.vercel.app/newsletter-2026-05-25.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy link
+      </button>
+      <span class="share-hint">tag the author when you post</span>
+    </div>
+    <div id="shareToast" class="share-toast">Copied!</div>
+    
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2601.12560v1" target="_blank" rel="noopener">Agentic Artificial Intelligence (AI): Architectures, Taxonomies, and Evaluation of Large Language Model Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2601.12560v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          V, Arunkumar, R., Gangadharan G., Buyya, Rajkumar
+          <span class="dot">·</span>
+          2026-05-25
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This arXiv paper presents a comprehensive framework for understanding agentic AI systems built on large language models. The authors propose a unified taxonomy decomposing agents into six core components: Perception, Brain, Planning, Action, Tool Use, and Collaboration. The work traces the evolution from passive text-generation models to autonomous systems capable of reasoning, planning, and acting in complex environments—spanning software engineering, scientific discovery, and robotics. Beyond architectural analysis, the paper surveys evaluation methodologies and identifies critical open challenges including hallucination in action execution, infinite loops, and prompt injection vulnerabilities. This is essential reading for engineers and researchers building or deploying LLM-based agent systems, offering both conceptual grounding and practical insights into emerging design patterns and standards like Model Context Protocol (MCP).</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Agents decompose into six architectural components: Perception, Brain, Planning, Action, Tool Use, Collaboration—enabling systematic comparison across designs.</li><li>Evolution from linear reasoning to native inference-time reasoning models and fixed APIs to open standards (MCP, Native Computer Use) reshapes agent capabilities.</li><li>Key open challenges: hallucination during action execution, infinite loop prevention, and prompt injection attacks require focused research for robust deployment.</li><li>Agent evaluation practices remain nascent; standardized benchmarks across digital OS, embodied robotics, and specialized domains are critical.</li><li>Hierarchical multi-agent systems represent a design frontier beyond simple single-loop agents for automating complex workflows.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM agents</span><span class="tag">#agentic AI</span><span class="tag">#autonomous systems</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2601.12560v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2601.02577" target="_blank" rel="noopener">Orchestral AI: A Framework for Agent Orchestration</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2601.02577" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Roman, Alexander, Roman, Jacob
+          <span class="dot">·</span>
+          2026-05-25
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">Orchestral is a lightweight Python framework that addresses the fragmentation problem in LLM agent development by providing a unified, type-safe interface for building agents across multiple LLM providers. The paper tackles vendor lock-in and API incompatibility by introducing a single universal representation for messages, tools, and LLM usage, eliminating manual format translation and reducing framework complexity. Key innovations include automatic tool schema generation from Python type hints, synchronous execution with streaming support for deterministic behavior, and a modular architecture supporting advanced capabilities like tool calling, context compaction, workspace sandboxing, and MCP integration—making it valuable for developers building portable, reproducible agent systems across heterogeneous LLM providers.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Unified interface eliminates vendor lock-in and API fragmentation across major LLM providers with type-safe message/tool representations</li><li>Automatic tool schema generation from Python type hints removes handwritten descriptors while maintaining cross-provider type safety</li><li>Synchronous execution model with streaming enables deterministic debugging and real-time interaction without server dependencies</li><li>Modular architecture cleanly separates provider integration, tool execution, and orchestration for extensibility without architectural entanglement</li><li>Supports advanced agent capabilities: tool calling, context compaction, sandboxing, approval workflows, sub-agents, memory management, and MCP integration</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM agents</span><span class="tag">#framework design</span><span class="tag">#agent orchestration</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2601.02577" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/papers?q=orchestration" target="_blank" rel="noopener">Daily Papers - Hugging Face</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/papers?q=orchestration" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-25
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">AdaptOrch presents a formal framework for dynamically orchestrating multiple LLM agents across different topologies (parallel, sequential, hierarchical, hybrid) based on task characteristics. As LLM performance across providers converges, the paper argues that multi-agent orchestration topology selection has become more important than individual model capability. The framework contributes a Performance Convergence Scaling Law, a polynomial-time Topology Routing Algorithm, and an Adaptive Synthesis Protocol with theoretical guarantees. Validation on coding, reasoning, and RAG tasks shows 12-23% improvements over static baselines using identical models, positioning orchestration design as an independent optimization lever distinct from model scaling.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Orchestration topology now dominates performance when LLM benchmarks converge across providers</li><li>Dynamic topology selection (parallel/sequential/hierarchical/hybrid) improves results 12-23% over static approaches</li><li>Topology routing maps task DAGs to optimal patterns in O(|V|+|E|) time with formal complexity guarantees</li><li>Performance Convergence Scaling Law formalizes when orchestration outweighs model selection as optimization target</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#multi-agent orchestration</span><span class="tag">#LLM systems</span><span class="tag">#task optimization</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/papers?q=orchestration" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.85</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/blog/aufklarer/ai-trends-2026-test-time-reasoning-reflective-agen" target="_blank" rel="noopener">AI Trends 2026: Test-Time Reasoning and the Rise of Reflective Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/blog/aufklarer/ai-trends-2026-test-time-reasoning-reflective-agen" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-19T07:37:45
+          
+        </div>
+        <p class="article__summary">This article surveys key AI trends for 2026, focusing on test-time reasoning, reinforcement learning for strategic tool use, and evolving agent architectures. The main argument is that AI systems are shifting from static inference to dynamic reasoning—allocating more compute at inference time, using RL to teach models when and how to invoke tools, and adopting cleaner agent designs with memory and self-critique. For technical readers, this matters because it explains the architectural and training shifts reshaping LLM-based applications: systems are becoming more reflective, transparent about limitations, and capable of multi-step problem-solving without requiring larger models or retraining.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Test-time compute scaling lets models allocate extra inference cycles for complex problems, trading latency/cost for better reasoning and fewer errors.</li><li>RL and process reward models train agents to reflect on reasoning steps and strategically invoke tools (code, search) when needed, enabling self-correction.</li><li>Single well-structured agents with ReAct loops outperform complex multi-agent systems; specialized sub-agents work best when encapsulated with defined roles and isolation.</li><li>MCP and agent SDKs standardize tool integration; context engineering and long-term memory become critical for maintaining agent coherence across sessions.</li><li>Multimodal models blur vision-language boundaries, enabling richer reasoning loops that combine text, images, and tool outputs in unified agentic pipelines.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#test-time reasoning</span><span class="tag">#agentic AI</span><span class="tag">#reinforcement learning</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/blog/aufklarer/ai-trends-2026-test-time-reasoning-reflective-agen" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="other">
+        <div class="article__score-bar" style="width: 72%"></div>
+        <div class="article__top">
+          <span class="category cat-other">other</span>
+          <span class="score">relevance 0.72</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://community.openai.com/t/do-you-use-function-calling-or-use-intent-recognition-internal-orchestration/1380376" target="_blank" rel="noopener">https://community.openai.com/t/do-you-use-function-calling-or-use-intent-recognition-internal-orchestration/1380376</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://community.openai.com/t/do-you-use-function-calling-or-use-intent-recognition-internal-orchestration/1380376" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=community.openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">community.openai.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-25
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This community discussion explores design patterns for LLM-based systems, specifically comparing function calling versus intent recognition with internal orchestration. Function calling uses the model directly to invoke external tools via structured outputs, while intent recognition relies on the model to identify user intent and have external logic orchestrate the appropriate actions. The comparison addresses how different architectures trade off simplicity, control, and flexibility—a critical decision for developers building production LLM applications that need reliable tool use and multi-step reasoning.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Function calling delegates tool selection to the LLM; intent recognition centralizes orchestration logic outside the model</li><li>Function calling may be simpler for straightforward workflows; intent recognition offers tighter control over execution paths</li><li>Intent recognition with external orchestration can enforce business logic constraints independent of model behavior</li><li>Tool-use architecture choice impacts model latency, error handling, and system observability</li><li>Hybrid approaches combining both patterns may optimize for specific application requirements</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM tool use</span><span class="tag">#system design</span><span class="tag">#agent orchestration</span>
+          </div>
+          <a class="read-link" href="https://community.openai.com/t/do-you-use-function-calling-or-use-intent-recognition-internal-orchestration/1380376" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 72%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.72</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.anthropic.com/engineering/managed-agents" target="_blank" rel="noopener">Managed Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.anthropic.com/engineering/managed-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-25
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article discusses the design and architecture of managed agents within an AI agent harness framework. It explores how to structure agent systems that operate under external control and supervision, addressing challenges in orchestration, state management, and communication protocols. The piece is relevant to practitioners building production AI agent systems who need patterns for reliable, auditable, and scalable agent deployment.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Managed agents require explicit control surfaces and lifecycle management beyond standalone agent implementations</li><li>State synchronization and persistence mechanisms are critical for reliable multi-step agent workflows</li><li>Harness architecture should enforce audit trails and decision logging for transparency and debugging</li><li>Communication protocols between agents and harness must handle failures, timeouts, and race conditions gracefully</li><li>Resource constraints and concurrency limits must be enforced at the harness level rather than individual agents</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#system design</span><span class="tag">#orchestration</span>
+          </div>
+          <a class="read-link" href="https://www.anthropic.com/engineering/managed-agents" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2604.21003" target="_blank" rel="noopener">The Last Harness You&#39;ll Ever Build</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2604.21003" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Seong, Haebin, Yin, Li, Zhang, Haoran, Shi, Zhan
+          <span class="dot">·</span>
+          2026-05-25
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper addresses the challenge of adapting AI agents to new domain-specific tasks, which typically requires expensive manual harness engineering (designing prompts, tools, orchestration logic, and evaluation criteria). The authors propose a two-level automated framework: the Harness Evolution Loop optimizes a worker agent&#39;s configuration for a single task through iterative feedback from an evaluator and evolution agent, while the Meta-Evolution Loop learns a reusable blueprint across diverse tasks that enables rapid convergence on novel domains without human intervention. This approach fundamentally shifts the burden from manual harness design to fully automated harness engineering and meta-learning, potentially enabling practitioners to deploy agents to new workflows with minimal overhead.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Two-level framework automates harness design: worker agent executes tasks, evaluator diagnoses failures, evolution agent modifies configuration iteratively.</li><li>Meta-evolution loop learns generalizable blueprint across diverse tasks, enabling zero-shot adaptation to novel domains without human engineering.</li><li>Shifts burden from manual prompt/tool/orchestration design to fully automated optimization through adversarial evaluation and evolutionary search.</li><li>Formalizes correspondence to meta-learning, enabling rapid harness convergence on any new task by learning the automation process itself.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#automated engineering</span><span class="tag">#meta-learning</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2604.21003" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2504.13472v2" target="_blank" rel="noopener">CodeVisionary: An Agent-based Framework for Evaluating Large Language Models in Code Generation</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2504.13472v2" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Wang, Xinchen, Gao, Pengfei, Peng, Chao, Hu, Ruida, Gao, Cuiyun
+          <span class="dot">·</span>
+          2026-05-25
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">CodeVisionary is an agent-based evaluation framework addressing limitations of existing LLM code generation evaluation methods. Traditional approaches—human-centered, metric-based, and static LLM-based—struggle with complex, multi-requirement code scenarios and lack fine-grained explainability. CodeVisionary introduces a two-stage pipeline: requirement-guided multi-dimensional context distillation followed by fine-grained scoring and summarization, generating comprehensive evaluation reports. Validated on a new 363-sample benchmark spanning 37 coding scenarios and 23 programming languages, CodeVisionary outperforms baselines by 0.217, 0.163, and 0.141 in Pearson, Spearman, and Kendall-Tau correlations respectively, offering significantly improved explainability for complex code evaluation.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Agent-based evaluation framework handles complex code with multiple requirements better than static LLM-based approaches.</li><li>Two-stage pipeline: requirement-guided context distillation followed by fine-grained multi-dimensional scoring with explainability.</li><li>New benchmark: 363 samples across 37 coding scenarios and 23 programming languages enables rigorous evaluation.</li><li>Outperforms baselines by 0.217+ in correlation metrics, demonstrating substantial improvement over existing methods.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#code generation evaluation</span><span class="tag">#LLM assessment</span><span class="tag">#agent-based systems</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2504.13472v2" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2604.25083v1" target="_blank" rel="noopener">Agentic Architect: An Agentic AI Framework for Architecture Design Exploration and Optimization</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2604.25083v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Blasberg, Alexander, Kypriotis, Vasilis, Skarlatos, Dimitrios
+          <span class="dot">·</span>
+          2026-05-25
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">Agentic Architect presents an LLM-driven framework for automated exploration and optimization of computer architecture designs. The system combines large language models with cycle-accurate simulation to evolve implementations for cache replacement, branch prediction, and data prefetching policies. By specifying optimization targets, seed designs, and scoring functions, human architects guide the LLM&#39;s exploration of vast combinatorial microarchitectural spaces. The framework demonstrates competitive or superior results: 1.062x IPC speedup over LRU for cache replacement, 1.100x over Bimodal for branch prediction, and 1.76x over baseline for prefetching. Key insight: evolved designs often recombine known techniques in novel ways, with seed quality and human guidance remaining critical constraints on what agentic search can achieve.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>LLM-driven architecture exploration matches or exceeds state-of-the-art designs across cache, branch prediction, and prefetching policies.</li><li>Evolved designs recombine known techniques rather than discovering fundamentally new mechanisms; novelty emerges from component coordination.</li><li>Seed design quality fundamentally bounds optimization outcomes; evolution refines existing mechanisms but cannot overcome weak foundations.</li><li>Human architect role shifts but remains central; objectives, constraints, and prompt guidance critically affect reliability and generalization.</li><li>First open-source end-to-end framework for agentic AI-driven microarchitecture design and optimization.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agentic AI</span><span class="tag">#computer architecture</span><span class="tag">#design optimization</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2604.25083v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2605.13357v1" target="_blank" rel="noopener">AI Harness Engineering: A Runtime Substrate for Foundation-Model Software Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2605.13357v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Zhong, Hailin, Zhu, Shengxin
+          <span class="dot">·</span>
+          2026-05-25
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This research paper argues that autonomous software-engineering agents fail not primarily due to model capability gaps, but due to inadequate runtime infrastructure. The authors introduce AI Harness Engineering, a framework that formalizes the runtime substrate mediating how foundation-model agents observe projects, act on them, and receive feedback. They identify eleven critical component responsibilities and propose a four-level progression (H0-H3) that systematically exposes runtime support, along with a trace-based evaluation protocol producing auditable episode packages. The work reframes the central challenge from whether models can generate patches to whether the entire model-harness-environment system produces verifiably correct, attributed, and maintainable changes, outlining a research agenda for essential runtime infrastructure.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Runtime substrate design, not just model capability, determines autonomous agent reliability in realistic development settings.</li><li>Eleven harness components address task specification, context selection, tool access, memory, state, observability, failure attribution, verification, permissions, entropy auditing, and intervention recording.</li><li>Four-level harness ladder (H0-H3) progressively exposes runtime support; higher levels produce detailed diagnostics, failure attributions, and structured verification reports.</li><li>Trace-based evaluation converts agent runs into auditable episode packages with systematic evidence structures.</li><li>Core question shifts from model patch generation to system-level verification, attribution, and maintainability.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#software engineering</span><span class="tag">#runtime systems</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2605.13357v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+
+    // Copy-link button (no-op if button not present)
+    const copyBtn = document.querySelector(".share-btn--copy");
+    const toast = document.getElementById("shareToast");
+    if (copyBtn && toast) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1500);
+        } catch (_) {
+          // Older browsers: fall back to a prompt
+          window.prompt("Copy this URL:", copyBtn.dataset.url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
