@@ -20,7 +20,7 @@ import sys
 from pathlib import Path
 
 
-def build_dist(output_dir: Path, data_dir: Path, dest: Path) -> None:
+def build_dist(output_dir: Path, data_dir: Path, dest: Path, assets_dir: Path = Path("assets")) -> None:
     if not output_dir.exists():
         sys.exit(f"output dir not found: {output_dir} — run the agent first")
 
@@ -52,9 +52,15 @@ def build_dist(output_dir: Path, data_dir: Path, dest: Path) -> None:
     # body text of every historical article for MinHash dedup. The dashboard does
     # not load it, and publishing it would leak a lot of content and bloat deploys.
 
+    asset_count = 0
+    if assets_dir.exists():
+        shutil.copytree(assets_dir, dest / "assets", dirs_exist_ok=True)
+        asset_count = sum(1 for _ in (dest / "assets").rglob("*") if _.is_file())
+
     print(f"Built {dest}/")
     print(f"  HTML pages : {html_count}")
     print(f"  Data files : {json_count}")
+    print(f"  Assets     : {asset_count}")
     print(f"  Size       : {sum(f.stat().st_size for f in dest.rglob('*') if f.is_file()) / 1024:.0f} KB")
 
 

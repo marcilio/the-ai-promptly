@@ -39,6 +39,8 @@ DEFAULT_NEWSLETTER_AUTHOR_URL = "https://www.linkedin.com/in/marcilio/"
 NEWSLETTER_BASE_URL_ENV = "NEWSLETTER_BASE_URL"
 NEWSLETTER_REPO_URL_ENV = "NEWSLETTER_REPO_URL"
 DEFAULT_NEWSLETTER_REPO_URL = "https://github.com/marcilio/the-ai-promptly"
+NEWSLETTER_AUTHOR_PHOTO_URL_ENV = "NEWSLETTER_AUTHOR_PHOTO_URL"
+DEFAULT_NEWSLETTER_AUTHOR_PHOTO_URL = "assets/avatar.jpg"
 
 
 def newsletter_name():
@@ -67,6 +69,14 @@ def newsletter_repo_url():
     'view source' link near the byline. Set NEWSLETTER_REPO_URL='' to hide.
     """
     return os.environ.get(NEWSLETTER_REPO_URL_ENV, DEFAULT_NEWSLETTER_REPO_URL).strip()
+
+
+def newsletter_author_photo_url():
+    """Avatar image URL. Defaults to 'assets/avatar.jpg' (relative — file must
+    live under dist/assets/ at deploy time). Can be set to an absolute URL
+    (https://...) for an externally-hosted photo, or '' to hide entirely.
+    """
+    return os.environ.get(NEWSLETTER_AUTHOR_PHOTO_URL_ENV, DEFAULT_NEWSLETTER_AUTHOR_PHOTO_URL).strip()
 DEFAULT_EXCLUDE_DOMAINS = [
     "medium.com",
     "levelup.gitconnected.com",

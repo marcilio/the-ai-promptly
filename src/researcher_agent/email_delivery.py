@@ -7,7 +7,9 @@ from email.mime.text import MIMEText
 
 from .config import (
     newsletter_author_name as _newsletter_author_name,
+    newsletter_author_photo_url as _newsletter_author_photo_url,
     newsletter_author_url as _newsletter_author_url,
+    newsletter_base_url as _newsletter_base_url,
     newsletter_name as _newsletter_name,
     newsletter_repo_url as _newsletter_repo_url,
 )
@@ -19,6 +21,19 @@ SMTP_USER_ENV = "SMTP_USER"
 SMTP_PASSWORD_ENV = "SMTP_APP_PASSWORD"
 DEFAULT_SMTP_HOST = "smtp.gmail.com"
 DEFAULT_SMTP_PORT = 587
+
+
+def _absolute_url(maybe_relative, base_url):
+    """Resolve a maybe-relative URL against the deployed base URL.
+    Returns '' if no usable URL is available (e.g. relative path + no base).
+    """
+    if not maybe_relative:
+        return ""
+    if maybe_relative.startswith(("http://", "https://")):
+        return maybe_relative
+    if not base_url:
+        return ""
+    return f"{base_url.rstrip('/')}/{maybe_relative.lstrip('/')}"
 
 
 def _build_plain_text(date_key, articles, overview, brand):
@@ -55,6 +70,7 @@ def send_newsletter(date_key, articles, overview, recipient, smtp_user=None, smt
         "newsletter_author_name": _newsletter_author_name(),
         "newsletter_author_url": _newsletter_author_url(),
         "newsletter_repo_url": _newsletter_repo_url(),
+        "newsletter_author_photo_url": _absolute_url(_newsletter_author_photo_url(), _newsletter_base_url()),
         "generated_at": datetime.utcnow().isoformat(timespec="seconds") + "Z",
     })
     text_body = _build_plain_text(date_key, articles, overview, brand)
