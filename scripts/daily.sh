@@ -23,6 +23,12 @@ fi
 PROJECT_DIR="/Users/marcilio/projects/researcher-agent-dashboard"
 cd "$PROJECT_DIR"
 
+# Pull the recipient from .env (gitignored) so it stays out of this tracked
+# script. We extract just this one key rather than sourcing .env, because
+# bash `source` would try to execute values containing spaces (e.g. the
+# Gmail app password) as commands.
+NEWSLETTER_EMAIL_TO="$(grep -E '^NEWSLETTER_EMAIL_TO=' .env 2>/dev/null | tail -1 | cut -d= -f2-)"
+
 log() { printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*"; }
 
 log "=== daily cycle start ==="
@@ -32,7 +38,7 @@ log "step 1/3: agent run"
     --search-file content_search_seeds.txt \
     --search-provider tavily \
     --domain-mode strict \
-    --email-to marcilio.mendonca@gmail.com
+    --email-to "${NEWSLETTER_EMAIL_TO:?set NEWSLETTER_EMAIL_TO in .env}"
 
 log "step 2/3: build dist"
 .venv/bin/python scripts/build_dist.py
