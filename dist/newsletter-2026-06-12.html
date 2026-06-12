@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Agentic &middot; 2026-06-12</title>
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Daily Agentic — 2026-06-12" />
+  <meta property="og:description" content="Agent systems require safety evaluation at execution rather than just output level, with code-based harnesses providing the infrastructure for governance, runtime adjudication, and multi-agent coordi… — Curated by Marcilio Mendonca" />
+  <meta property="og:url" content="https://the-daily-agentic.vercel.app/newsletter-2026-06-12.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Daily Agentic — 2026-06-12" />
+  <meta name="twitter:description" content="Agent systems require safety evaluation at execution rather than just output level, with code-based harnesses providing the infrastructure for governance, runtime adjudication, and multi-agent coordi… — Curated by Marcilio Mendonca" />
+  
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --linkedin: #0a66c2;
+      --linkedin-hover: #004182;
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .header-content { display: flex; align-items: center; gap: 18px; margin-top: 16px; }
+    .author-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--border-strong);
+    }
+    .header-text { flex: 1; min-width: 0; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
+    .byline-sep { color: var(--text-3); margin: 0 6px; }
+    .byline-source {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: var(--text-2); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .byline-source:hover { color: var(--accent); }
+    .byline-source svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .share-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 24px; align-items: center; }
+    .share-btn--linkedin {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; padding: 9px 16px;
+      border-radius: 999px; cursor: pointer;
+      background: var(--linkedin); color: #ffffff;
+      border: 1px solid var(--linkedin);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+      box-shadow: 0 2px 8px rgba(10, 102, 194, 0.25);
+    }
+    .share-btn--linkedin:hover {
+      background: var(--linkedin-hover); border-color: var(--linkedin-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(10, 102, 194, 0.35);
+    }
+    .share-btn--linkedin svg { width: 16px; height: 16px; flex-shrink: 0; fill: #ffffff; }
+    .share-btn--copy {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 8px 14px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+    }
+    .share-btn--copy:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--copy svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #0a0a0f; padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
+    .overview-section {
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .overview-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); font-weight: 700; margin-bottom: 8px;
+    }
+    .overview-text {
+      font-size: 15px; line-height: 1.65; color: var(--text); margin: 0;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; All episodes</a>
+    <div class="header-content">
+      
+      <img class="author-avatar" src="assets/avatar.jpg" alt="Marcilio Mendonca, PhD, Staff AI FDE at Google" />
+      
+      <div class="header-text">
+        <div class="eyebrow">Daily Agentic</div>
+        <h1>2026-06-12</h1>
+        
+        <p class="byline">
+          Brought to you by
+          <a href="https://www.linkedin.com/in/marcilio/" target="_blank" rel="noopener">Marcilio Mendonca, PhD, Staff AI FDE at Google</a>
+          <span class="byline-sep">·</span>
+          <a class="byline-source" href="https://github.com/marcilio/the-ai-promptly" target="_blank" rel="noopener" title="View source on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> view source</a>
+        </p>
+        
+      </div>
+    </div>
+    <p class="meta">
+      Generated 2026-06-12T15:31:30.029850Z UTC &nbsp;·&nbsp; 10 articles
+    </p>
+
+    
+    <section class="overview-section">
+      <div class="overview-label">In this episode</div>
+      <p class="overview-text">Agent systems require safety evaluation at execution rather than just output level, with code-based harnesses providing the infrastructure for governance, runtime adjudication, and multi-agent coordination—yet current architectures struggle with intermediate-state violations and protocol-level security threats.</p>
+    </section>
+    
+
+    
+    <div class="share-row">
+      <a class="share-btn--linkedin"
+         href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//the-daily-agentic.vercel.app/newsletter-2026-06-12.html"
+         target="_blank" rel="noopener"
+         title="Share this day's newsletter on LinkedIn. Tip: tag @marcilio when posting.">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zM20 19h-3v-5.6c0-1.34-.48-2.25-1.68-2.25-.92 0-1.46.62-1.7 1.22-.09.21-.11.51-.11.81V19h-3V8h3v1.27c.4-.62 1.12-1.5 2.72-1.5 1.98 0 3.47 1.3 3.47 4.08V19z"/></svg>
+        Share on LinkedIn
+      </a>
+      <button type="button" class="share-btn--copy" data-url="https://the-daily-agentic.vercel.app/newsletter-2026-06-12.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy link
+      </button>
+      <span class="share-hint">tag the author when you post</span>
+    </div>
+    <div id="shareToast" class="share-toast">Copied!</div>
+    
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/papers/2605.14271" target="_blank" rel="noopener">Paper page - Auditing Agent Harness Safety</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/papers/2605.14271" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-18T23:49:16
+          
+        </div>
+        <p class="article__summary">This research paper introduces HarnessAudit, a framework for evaluating the safety of LLM agent execution harnesses through trajectory-level auditing. The key insight is that agents can produce correct outputs while violating safety constraints during execution—a failure mode invisible to output-level evaluation. The authors created HarnessAudit-Bench, a 210-task benchmark across eight domains, and evaluated ten harness configurations. They found that task completion often misaligns with safe execution, violations accumulate with trajectory length, and multi-agent systems significantly expand the safety risk surface. This work addresses a critical gap in AI safety evaluation by focusing on intermediate execution states rather than terminal outputs.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Output-level safety evaluation misses mid-trajectory violations; full trajectory auditing is necessary for agent harness safety.</li><li>Task completion and safe execution are misaligned; violations accumulate as trajectory length increases.</li><li>Multi-agent collaboration expands safety risks; harness design fundamentally bounds safe deployment capability.</li><li>Resource access and inter-agent information transfer are primary violation points across domains.</li><li>HarnessAudit-Bench provides systematic evaluation across eight domains with embedded safety constraints for benchmarking.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM agents</span><span class="tag">#multi-agent systems</span><span class="tag">#safety evaluation</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/papers/2605.14271" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2605.18747" target="_blank" rel="noopener">Code as Agent Harness</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2605.18747" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-12
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This arXiv paper presents a comprehensive survey on &#34;Code as Agent Harness,&#34; proposing that code serves as the foundational infrastructure for agentic AI systems beyond mere output generation. The authors organize their analysis across three layers: the harness interface connecting agents to reasoning and action, harness mechanisms including planning, memory, and tool use, and scaling considerations for multi-agent systems. The survey covers applications spanning coding assistants, GUI automation, embodied agents, scientific discovery, and enterprise workflows, while identifying critical open challenges such as evaluation metrics, verification under incomplete feedback, and human oversight for safety-critical operations. This work provides a unified framework for understanding how executable, verifiable, and stateful code infrastructure enables more reliable and capable AI agent systems.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Code functions as operational substrate for agent reasoning, action, environment modeling, and execution-based verification</li><li>Three-layer architecture: harness interface, mechanisms (planning/memory/tool-use), and multi-agent coordination</li><li>Spans applications from coding assistants to scientific discovery, GUI automation, and enterprise DevOps workflows</li><li>Open challenges include evaluation beyond task success, regression-free improvement, and human oversight for safety-critical actions</li><li>Framework enables executable, verifiable, stateful AI systems with shared code artifacts across multi-agent settings</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#code generation</span><span class="tag">#agentic systems</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2605.18747" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2606.12320" target="_blank" rel="noopener">A Five-Plane Reference Architecture for Runtime Governance of Production AI Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2606.12320" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Tallam, Krti
+          <span class="dot">·</span>
+          2026-06-12
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper presents a five-plane reference architecture for runtime governance of production AI agents, addressing a fundamental shift in enterprise security. Traditional security models protect data boundaries through access control and perimeter inspection, but autonomous agents dissolve this assumption by executing sequences of individually-permitted actions that may transform business processes without explicit authorization. The authors propose a decomposition into a reasoning plane (intent adjudication) and four enforcement planes (network, identity, endpoint, data), combined with composite principals, capability attenuation, and structured audit. The work defines interruption primitives, correctness invariants, and demonstrates threat foreclosure across five workflows, with a reference implementation showing microsecond-scale adjudication and tamper-evident auditing.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Five-plane architecture separates intent reasoning from enforcement across network, identity, endpoint, and data planes for agent governance.</li><li>Composite principals with capability attenuation handle delegated authority chains, replacing atomic principal-based policy engines.</li><li>Six interruption primitives generalize allow/deny semantics for stateful, workflow-aware policy decisions in agentic systems.</li><li>Audit substrate provides structured, tamper-evident evidence of governance decisions at microsecond adjudication latency.</li><li>Scope limited to delegated action governance, not model behavior—full-system evaluation on live benchmarks identified as future work.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#runtime governance</span><span class="tag">#security architecture</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2606.12320" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 82%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.82</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://simonwillison.net/guides/agentic-engineering-patterns/subagents" target="_blank" rel="noopener">Subagents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://simonwillison.net/guides/agentic-engineering-patterns/subagents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=simonwillison.net&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">simonwillison.net</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-12
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article introduces subagents as a key architectural pattern in agentic systems, where complex tasks are decomposed into specialized agent instances that operate autonomously within defined scopes. Subagents enable modularity, improved fault isolation, and scalability by allowing each agent to focus on a specific domain or capability rather than requiring a monolithic agent to handle all responsibilities. Technical teams should care because this pattern directly addresses challenges in building reliable, maintainable multi-agent systems while reducing cognitive load on individual agents and improving overall system resilience.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Subagents decompose complex tasks into specialized, autonomous agent instances with bounded responsibilities</li><li>Each subagent operates independently within defined scope, enabling better fault isolation and debugging</li><li>Pattern improves scalability by distributing work across focused agents rather than centralizing logic</li><li>Subagents enhance modularity, making systems easier to maintain, test, and extend with new capabilities</li><li>Clear interface boundaries between subagents reduce complexity and improve system comprehensibility</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agentic systems</span><span class="tag">#design patterns</span><span class="tag">#multi-agent architecture</span>
+          </div>
+          <a class="read-link" href="https://simonwillison.net/guides/agentic-engineering-patterns/subagents" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 78%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.78</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/datasets/GloriaaaM/LLM-Agent-Harness-Survey" target="_blank" rel="noopener">GloriaaaM/LLM-Agent-Harness-Survey · Datasets at Hugging Face</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/datasets/GloriaaaM/LLM-Agent-Harness-Survey" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-04-17T00:00:00
+          
+        </div>
+        <p class="article__summary">This dataset or survey catalog presents a comparative security threat modeling analysis across four emerging AI-agent communication protocols: MCP (Model Context Protocol), A2A, Agora, and ANP. The work appears to focus on identifying vulnerabilities and security considerations unique to agent-to-agent and agent-to-system communication paradigms. For technical researchers building or deploying multi-agent systems, understanding threat landscapes across these competing protocol standards is critical for selecting secure architectures and implementing appropriate mitigations before production deployment.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Four major AI-agent protocols analyzed for security vulnerabilities: MCP, A2A, Agora, ANP</li><li>Threat modeling reveals protocol-specific attack surfaces in agent communication</li><li>Security analysis essential for teams selecting or implementing agent frameworks</li><li>Comparative approach enables informed protocol selection based on threat tolerance</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#security threat modeling</span><span class="tag">#protocols</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/datasets/GloriaaaM/LLM-Agent-Harness-Survey" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 78%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.78</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://community.openai.com/t/open-source-cybertron-a-governance-first-architecture-for-agentic-ai-systems/1370412" target="_blank" rel="noopener">https://community.openai.com/t/open-source-cybertron-a-governance-first-architecture-for-agentic-ai-systems/1370412</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://community.openai.com/t/open-source-cybertron-a-governance-first-architecture-for-agentic-ai-systems/1370412" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=community.openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">community.openai.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-12
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This post introduces Cybertron, an open-source governance-first architecture designed for agentic AI systems. The core thesis is that as AI agents become more autonomous and powerful, they require robust governance frameworks embedded at the architectural level rather than bolted on afterward. Cybertron prioritizes safety constraints, policy enforcement, and auditability as first-class design concerns, enabling organizations to deploy agents with confidence. The architecture is relevant to teams building production AI systems at scale, particularly those facing regulatory requirements or managing high-stakes autonomous workflows.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Governance-first architecture embeds safety policies and constraints at the core design level, not as afterthoughts</li><li>Cybertron provides auditability and policy enforcement mechanisms essential for regulated agentic AI deployments</li><li>Open-source design allows community scrutiny and collaborative hardening of critical safety components</li><li>Architecture enables teams to maintain human oversight and control over increasingly autonomous agent behaviors</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agentic AI</span><span class="tag">#governance</span><span class="tag">#safety architectures</span>
+          </div>
+          <a class="read-link" href="https://community.openai.com/t/open-source-cybertron-a-governance-first-architecture-for-agentic-ai-systems/1370412" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 78%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.78</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://simonwillison.net/tags/coding-agents?page=2" target="_blank" rel="noopener">Coding Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://simonwillison.net/tags/coding-agents?page=2" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=simonwillison.net&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">simonwillison.net</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-12
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article examines coding agents—AI systems that autonomously write, debug, and optimize code. The piece explores design patterns and architectural decisions for building effective code-generating agents, covering how they integrate with development workflows, handle context windows, and maintain code quality. For technical teams, understanding these patterns is critical as AI-assisted development becomes mainstream, offering insights into agent design tradeoffs and integration strategies that impact developer productivity and code reliability.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Coding agents require careful context management to handle large codebases within token limits</li><li>Design patterns should balance autonomy with human oversight for safety and debugging</li><li>Effective agents combine code generation with testing and validation loops</li><li>Integration with version control and IDE workflows improves practical utility</li><li>Agent performance depends on prompt engineering and retrieval of relevant code context</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#code generation</span><span class="tag">#software engineering</span>
+          </div>
+          <a class="read-link" href="https://simonwillison.net/tags/coding-agents?page=2" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="other">
+        <div class="article__score-bar" style="width: 40%"></div>
+        <div class="article__top">
+          <span class="category cat-other">other</span>
+          <span class="score">relevance 0.40</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://martinfowler.com/tags" target="_blank" rel="noopener">All Content</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://martinfowler.com/tags" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=martinfowler.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">martinfowler.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-12
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This is an index page listing 926 content items from martinfowler.com, organized alphabetically with tags for subject exploration. It serves as a comprehensive directory of articles covering software architecture, design patterns, agile methodologies, distributed systems, DevOps, and modern development practices. The page provides navigation through Martin Fowler&#39;s extensive body of published work spanning technical topics, case studies, and professional commentary relevant to software engineers and architects.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Index contains 926 articles spanning architecture, patterns, agile, and DevOps topics</li><li>Tags enable subject-based exploration rather than alphabetical navigation alone</li><li>Content covers distributed systems, domain-driven design, continuous delivery, and LLM applications</li><li>Range includes both foundational patterns and contemporary topics like GenAI and data mesh</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#index</span><span class="tag">#architecture</span><span class="tag">#software-engineering</span>
+          </div>
+          <a class="read-link" href="https://martinfowler.com/tags" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="other">
+        <div class="article__score-bar" style="width: 10%"></div>
+        <div class="article__top">
+          <span class="category cat-other">other</span>
+          <span class="score">relevance 0.10</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://developers.openai.com/blog/eval-skills" target="_blank" rel="noopener">Eval Skills</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://developers.openai.com/blog/eval-skills" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=developers.openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">developers.openai.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-12
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This appears to be a stub or placeholder document with minimal content. Without substantive material—no thesis, findings, arguments, or detailed discussion—it is impossible to extract meaningful insights for a technical audience. The title &#39;Eval Skills&#39; suggests potential relevance to evaluation methodologies in AI or agent systems, but the absence of actual content prevents proper assessment. Technical readers would gain no actionable information from this document.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>No substantive content provided for extraction</li><li>Document appears incomplete or placeholder-only</li><li>Title suggests agent evaluation focus but lacks development</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#evaluation</span><span class="tag">#agents</span><span class="tag">#methods</span>
+          </div>
+          <a class="read-link" href="https://developers.openai.com/blog/eval-skills" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="other">
+        <div class="article__score-bar" style="width: 10%"></div>
+        <div class="article__top">
+          <span class="category cat-other">other</span>
+          <span class="score">relevance 0.10</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://openai.com/careers/ai-systems-engineer-codex-agents-san-francisco" target="_blank" rel="noopener">AI Systems Engineer Codex Agents San Francisco</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://openai.com/careers/ai-systems-engineer-codex-agents-san-francisco" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">openai.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-12
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article appears to be a title or heading fragment without substantive content. It mentions AI systems engineering, codex agents, and San Francisco but provides no actual thesis, argument, findings, or detailed information for analysis. Without the full article body, technical readers cannot assess the relevance of the work or extract meaningful insights about AI agent design, engineering practices, or related topics.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Insufficient content provided for meaningful takeaways</li><li>Unable to extract concrete claims or recommendations</li><li>Title-only submission lacks substantive technical detail</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#systems engineering</span>
+          </div>
+          <a class="read-link" href="https://openai.com/careers/ai-systems-engineer-codex-agents-san-francisco" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+
+    // Copy-link button (no-op if button not present)
+    const copyBtn = document.querySelector(".share-btn--copy");
+    const toast = document.getElementById("shareToast");
+    if (copyBtn && toast) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1500);
+        } catch (_) {
+          // Older browsers: fall back to a prompt
+          window.prompt("Copy this URL:", copyBtn.dataset.url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

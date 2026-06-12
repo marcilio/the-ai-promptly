@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-06-12",
+      "generated_at": "2026-06-12T15:31:30.029424Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 10,
+      "filename": "newsletter-2026-06-12.html",
+      "overview": "Agent systems require safety evaluation at execution rather than just output level, with code-based harnesses providing the infrastructure for governance, runtime adjudication, and multi-agent coordination—yet current architectures struggle with intermediate-state violations and protocol-level security threats."
+    },
+    {
       "date": "2026-05-25",
       "generated_at": "2026-05-25T12:03:52.665184Z",
       "source_urls": [
