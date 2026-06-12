@@ -15,17 +15,27 @@
     <key>WorkingDirectory</key>
     <string>/Users/marcilio/projects/researcher-agent-dashboard</string>
 
-    <!-- Run weekly: every Tuesday at 05:00 local time
-         (Weekday: 0=Sun, 1=Mon, 2=Tue, ..., 6=Sat) -->
+    <!-- Run twice weekly: Monday and Thursday at 02:00 local time
+         (Weekday: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, ..., 6=Sat) -->
     <key>StartCalendarInterval</key>
-    <dict>
-        <key>Weekday</key>
-        <integer>2</integer>
-        <key>Hour</key>
-        <integer>5</integer>
-        <key>Minute</key>
-        <integer>0</integer>
-    </dict>
+    <array>
+        <dict>
+            <key>Weekday</key>
+            <integer>1</integer>
+            <key>Hour</key>
+            <integer>2</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key>
+            <integer>4</integer>
+            <key>Hour</key>
+            <integer>2</integer>
+            <key>Minute</key>
+            <integer>0</integer>
+        </dict>
+    </array>
 
     <!-- Logs: tail -f either of these to watch the daily cycle -->
     <key>StandardOutPath</key>

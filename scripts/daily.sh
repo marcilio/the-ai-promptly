@@ -12,6 +12,14 @@
 
 set -euo pipefail
 
+# Hold the Mac awake for the full run, then let it idle-sleep again.
+# A scheduled wake (pmset repeat wake) only gets us ~1 min before the idle
+# timer (pmset sleep=1) would re-sleep mid-job, so re-exec under caffeinate:
+#   -i block idle sleep, -s block system sleep — released when this exits.
+if [ -z "${_CAFFEINATED:-}" ]; then
+    exec env _CAFFEINATED=1 caffeinate -i -s "$0" "$@"
+fi
+
 PROJECT_DIR="/Users/marcilio/projects/researcher-agent-dashboard"
 cd "$PROJECT_DIR"
 
