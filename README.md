@@ -43,7 +43,7 @@ Built for personal use; configurable enough to be your own.
 - **Gmail SMTP** for email (App Password, not account password)
 - **Static HTML/CSS/JS** dashboard — no framework, no build step beyond
   template rendering
-- **launchd** for daily scheduling on macOS
+- **launchd** for scheduling on macOS (Mon & Thu 02:00)
 - **Vercel** for hosting
 
 ---
@@ -100,21 +100,34 @@ root → `http://localhost:8000/output/`) to see the dashboard.
 
 ---
 
-## Daily schedule (macOS)
+## Schedule (macOS)
 
-A sample plist is in `launchd/`. Customize the paths and email, then:
+The plist in `launchd/` runs `scripts/daily.sh` twice weekly — **Monday and
+Thursday at 02:00** local time. Customize the paths and email, then:
 
 ```bash
 mkdir -p ~/Library/Logs ~/Library/LaunchAgents
-cp launchd/com.marcilio.frontier-newsletter.plist \
+cp launchd/com.marcilio.daily-agentic.plist \
    ~/Library/LaunchAgents/
 launchctl bootstrap gui/$(id -u) \
-   ~/Library/LaunchAgents/com.marcilio.frontier-newsletter.plist
+   ~/Library/LaunchAgents/com.marcilio.daily-agentic.plist
 ```
 
-Logs land at `~/Library/Logs/frontier-newsletter.{out,err}.log`. Mac must
-be awake at the scheduled time; launchd will catch up on next wake if
-asleep.
+Logs land at `~/Library/Logs/daily-agentic.{out,err}.log`.
+
+**Staying awake for the run.** launchd does not wake a sleeping Mac, and
+once awake the idle-sleep timer (`pmset sleep`, set to 1 min here) would
+re-sleep mid-job. Two pieces fix this:
+
+1. A scheduled wake a couple minutes before the job fires:
+   ```bash
+   sudo pmset repeat wake MR 01:58:00   # MR = Monday + Thursday
+   ```
+2. `daily.sh` re-execs itself under `caffeinate -i -s`, holding the Mac
+   awake until the run finishes; it idle-sleeps again ~1 min after.
+
+If the Mac is fully shut down (not just asleep) at the scheduled time, that
+run is missed — launchd does not retroactively run it.
 
 ---
 
