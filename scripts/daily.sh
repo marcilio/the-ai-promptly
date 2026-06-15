@@ -13,8 +13,9 @@
 set -euo pipefail
 
 # Hold the Mac awake for the full run, then let it idle-sleep again.
-# A scheduled wake (pmset repeat wake) only gets us ~1 min before the idle
-# timer (pmset sleep=1) would re-sleep mid-job, so re-exec under caffeinate:
+# The scheduled wake (pmset) is aligned to this job's minute so the Mac can't
+# idle-sleep (pmset sleep=1) in the gap before we start; once we're running,
+# re-exec under caffeinate to stay awake for the whole cycle:
 #   -i block idle sleep, -s block system sleep — released when this exits.
 if [ -z "${_CAFFEINATED:-}" ]; then
     exec env _CAFFEINATED=1 caffeinate -i -s "$0" "$@"
@@ -32,6 +33,28 @@ NEWSLETTER_EMAIL_TO="$(grep -E '^NEWSLETTER_EMAIL_TO=' .env 2>/dev/null | tail -
 log() { printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*"; }
 
 log "=== daily cycle start ==="
+
+# --- host status snapshot: helps debug failed unattended runs after the fact.
+# All best-effort (|| true) so a probe failure never aborts the cycle.
+log "host status (for debugging unattended runs):"
+log "  uptime  : $(uptime 2>/dev/null || true)"
+while IFS= read -r _l; do [ -n "$_l" ] && log "  power   : ${_l}"; done < <(pmset -g batt 2>/dev/null || true)
+_wake="$( (pmset -g log 2>/dev/null | grep -E 'Wake from|DarkWake from' | tail -1 | tr -s ' ') || true)"
+log "  lastwake: ${_wake:-unknown}"
+
+# After a scheduled wake, Wi-Fi may not be reconnected yet. Wait up to ~60s for
+# the search host to be reachable before starting, so the run doesn't die on a
+# cold-network timeout. (The search step also retries internally as a backstop.)
+log "  waiting for network (api.tavily.com reachable)..."
+_net="UNREACHABLE after ~60s"
+for _i in $(seq 1 30); do
+    if curl -s --max-time 3 -o /dev/null https://api.tavily.com; then
+        _net="reachable on attempt ${_i} (~$(( (_i - 1) * 2 ))s after wake)"
+        break
+    fi
+    sleep 2
+done
+log "  network : ${_net}"
 
 log "step 1/3: agent run"
 .venv/bin/researcher-dashboard \

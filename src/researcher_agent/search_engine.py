@@ -1,5 +1,6 @@
 import logging
 import os
+import time
 from pathlib import Path
 from typing import List, Optional, Tuple
 
@@ -158,8 +159,34 @@ def tavily_search(query: str, api_key: str, max_results: int = 10,
         json_body["exclude_domains"] = exclude_domains
     if include_domains:
         json_body["include_domains"] = include_domains
-    response = requests.post(endpoint, headers=headers, json=json_body, timeout=20)
-    response.raise_for_status()
+
+    # Retry transient failures (timeouts, dropped connections, 429/5xx) with
+    # exponential backoff. Unattended runs fire right after a scheduled wake,
+    # when Wi-Fi may still be flaky — a single timeout should not kill the run.
+    max_attempts = 4
+    last_err: Optional[Exception] = None
+    for attempt in range(1, max_attempts + 1):
+        try:
+            response = requests.post(endpoint, headers=headers, json=json_body, timeout=30)
+            response.raise_for_status()
+            break
+        except requests.exceptions.HTTPError as exc:
+            status = exc.response.status_code if exc.response is not None else None
+            # Only 429 / 5xx are worth retrying; 4xx is a real (non-transient) error.
+            if status is not None and status != 429 and status < 500:
+                raise
+            last_err = exc
+        except (requests.exceptions.Timeout, requests.exceptions.ConnectionError) as exc:
+            last_err = exc
+        if attempt < max_attempts:
+            backoff = 2 ** attempt  # 2s, 4s, 8s
+            print(f"Tavily search '{query}' failed ({type(last_err).__name__}); "
+                  f"retry {attempt}/{max_attempts - 1} in {backoff}s")
+            time.sleep(backoff)
+    else:
+        # Loop exhausted without a successful break.
+        raise last_err  # type: ignore[misc]
+
     data = response.json()
     results = data.get("results", [])
     urls = []
