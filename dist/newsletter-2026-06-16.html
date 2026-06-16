@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Agentic &middot; 2026-06-16</title>
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Daily Agentic — 2026-06-16" />
+  <meta property="og:description" content="Today&#39;s articles converge on a critical challenge in multi-agent AI systems: designing adaptive, standardized, and properly evaluated agentic workflows. Key insights include difficulty-aware orchestr… — Curated by Marcilio Mendonca" />
+  <meta property="og:url" content="https://the-daily-agentic.vercel.app/newsletter-2026-06-16.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Daily Agentic — 2026-06-16" />
+  <meta name="twitter:description" content="Today&#39;s articles converge on a critical challenge in multi-agent AI systems: designing adaptive, standardized, and properly evaluated agentic workflows. Key insights include difficulty-aware orchestr… — Curated by Marcilio Mendonca" />
+  
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --linkedin: #0a66c2;
+      --linkedin-hover: #004182;
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .header-content { display: flex; align-items: center; gap: 18px; margin-top: 16px; }
+    .author-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--border-strong);
+    }
+    .header-text { flex: 1; min-width: 0; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
+    .byline-sep { color: var(--text-3); margin: 0 6px; }
+    .byline-source {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: var(--text-2); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .byline-source:hover { color: var(--accent); }
+    .byline-source svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .share-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 24px; align-items: center; }
+    .share-btn--linkedin {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; padding: 9px 16px;
+      border-radius: 999px; cursor: pointer;
+      background: var(--linkedin); color: #ffffff;
+      border: 1px solid var(--linkedin);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+      box-shadow: 0 2px 8px rgba(10, 102, 194, 0.25);
+    }
+    .share-btn--linkedin:hover {
+      background: var(--linkedin-hover); border-color: var(--linkedin-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(10, 102, 194, 0.35);
+    }
+    .share-btn--linkedin svg { width: 16px; height: 16px; flex-shrink: 0; fill: #ffffff; }
+    .share-btn--copy {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 8px 14px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+    }
+    .share-btn--copy:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--copy svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #0a0a0f; padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
+    .overview-section {
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .overview-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); font-weight: 700; margin-bottom: 8px;
+    }
+    .overview-text {
+      font-size: 15px; line-height: 1.65; color: var(--text); margin: 0;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; All episodes</a>
+    <div class="header-content">
+      
+      <img class="author-avatar" src="assets/avatar.jpg" alt="Marcilio Mendonca, PhD, Staff AI FDE at Google" />
+      
+      <div class="header-text">
+        <div class="eyebrow">Daily Agentic</div>
+        <h1>2026-06-16</h1>
+        
+        <p class="byline">
+          Brought to you by
+          <a href="https://www.linkedin.com/in/marcilio/" target="_blank" rel="noopener">Marcilio Mendonca, PhD, Staff AI FDE at Google</a>
+          <span class="byline-sep">·</span>
+          <a class="byline-source" href="https://github.com/marcilio/the-ai-promptly" target="_blank" rel="noopener" title="View source on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> view source</a>
+        </p>
+        
+      </div>
+    </div>
+    <p class="meta">
+      Generated 2026-06-16T00:18:26.817484Z UTC &nbsp;·&nbsp; 10 articles
+    </p>
+
+    
+    <section class="overview-section">
+      <div class="overview-label">In this episode</div>
+      <p class="overview-text">Today&#39;s articles converge on a critical challenge in multi-agent AI systems: designing adaptive, standardized, and properly evaluated agentic workflows. Key insights include difficulty-aware orchestration that scales reasoning complexity to query requirements, unified agent specifications enabling cross-framework portability, and decomposed evaluation frameworks that diagnose failures at the goal-plan-action level rather than treating agents as black boxes.</p>
+    </section>
+    
+
+    
+    <div class="share-row">
+      <a class="share-btn--linkedin"
+         href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//the-daily-agentic.vercel.app/newsletter-2026-06-16.html"
+         target="_blank" rel="noopener"
+         title="Share this day's newsletter on LinkedIn. Tip: tag @marcilio when posting.">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zM20 19h-3v-5.6c0-1.34-.48-2.25-1.68-2.25-.92 0-1.46.62-1.7 1.22-.09.21-.11.51-.11.81V19h-3V8h3v1.27c.4-.62 1.12-1.5 2.72-1.5 1.98 0 3.47 1.3 3.47 4.08V19z"/></svg>
+        Share on LinkedIn
+      </a>
+      <button type="button" class="share-btn--copy" data-url="https://the-daily-agentic.vercel.app/newsletter-2026-06-16.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy link
+      </button>
+      <span class="share-hint">tag the author when you post</span>
+    </div>
+    <div id="shareToast" class="share-toast">Copied!</div>
+    
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2509.11079v1" target="_blank" rel="noopener">Difficulty-Aware Agentic Orchestration for Query-Specific Multi-Agent Workflows</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2509.11079v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Su, Jinwei, Lan, Qizhen, Xia, Yinghui, Sun, Lifan, Tian, Weiyou, Shi, Tianyu, Song, Xinyuan, He, Lewei, Jingsong, Yang
+          <span class="dot">·</span>
+          2026-06-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper introduces Difficulty-Aware Agentic Orchestration (DAAO), a framework that dynamically generates query-specific multi-agent workflows by predicting query difficulty. Unlike static multi-agent systems that apply uniform processing strategies, DAAO adapts workflow complexity to query characteristics, using a variational autoencoder for difficulty estimation, a modular operator allocator, and a cost-aware LLM router. A self-adjusting policy refines difficulty predictions based on workflow outcomes, enabling efficient handling of simple queries while deploying sophisticated reasoning strategies for complex ones. Experiments across six benchmarks show DAAO achieves superior accuracy and inference efficiency compared to existing multi-agent systems, addressing a critical gap in adaptive LLM-based reasoning.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Difficulty prediction enables dynamic workflow generation, allocating appropriate computational resources per query rather than using fixed processing strategies.</li><li>VAE-based difficulty estimation combined with self-adjusting policies allows continuous refinement of query classifications based on actual workflow performance.</li><li>Cost-aware LLM routing balances inference efficiency against accuracy across heterogeneous models, optimizing the efficiency-performance trade-off.</li><li>Modular operator architecture decouples workflow components, enabling flexible composition of reasoning strategies for variable task complexity.</li><li>Validated across six benchmarks with improvements in both accuracy and latency over static multi-agent orchestration approaches.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#multi-agent systems</span><span class="tag">#LLM orchestration</span><span class="tag">#query difficulty</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2509.11079v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2510.04173v4" target="_blank" rel="noopener">Open Agent Specification (Agent Spec): A Unified Representation for AI Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2510.04173v4" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Amini, Soufiane, Benajiba, Yassine, Bernardis, Cesare, Cayet, Paul, Chafi, Hassan, Fathan, Abderrahim, Faucon, Louis, Hilloulin, Damien, Hong, Sungpack, Kossyk, Ingo, Le, Tran Minh Son, Patra, Rhicheek, Ravi, Sujith, Schweizer, Jonas, Singh, Jyotika, Singh, Shailender, Sun, Weiyi, Talamadupula, Kartik, Xu, Jerry
+          <span class="dot">·</span>
+          2026-06-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">Open Agent Specification (Agent Spec) addresses fragmentation in AI agent frameworks by introducing a unified, declarative language for defining agents and agentic workflows compatible across diverse runtimes. The paper proposes a standardized schema covering component definitions, control/data flow semantics, and tool integrations, enabling agents defined once to execute across different frameworks like LangGraph, CrewAI, AutoGen, and WayFlow. The authors introduce a standardized evaluation harness analogous to HELM for LLM evaluation, allowing consistent benchmarking of agent behavior, performance, and robustness across frameworks using three benchmarks (SimpleQA Verified, τ²-Bench, BIRD-SQL). The work includes a Python SDK (PyAgentSpec), reference runtime (WayFlow), and adapters for popular frameworks, bridging the gap between model-centric and agent-centric standardization.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Open Agent Spec defines unified abstractions and schemas enabling agents to run across LangGraph, CrewAI, AutoGen, WayFlow without framework-specific recoding.</li><li>Standardized evaluation harness allows consistent benchmarking of agent performance, robustness, and efficiency across different runtimes using common metrics.</li><li>Provides production tooling: PyAgentSpec SDK, WayFlow reference runtime, and adapters for existing frameworks to enable adoption.</li><li>Addresses critical fragmentation problem where agent workflows lack portability, reproducibility, and consistent evaluation methodologies across ecosystem.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agent-frameworks</span><span class="tag">#standardization</span><span class="tag">#interoperability</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2510.04173v4" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 82%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.82</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/learn/agents-course/bonus-unit2/introduction" target="_blank" rel="noopener">AI Agent Observability &amp; Evaluation · Hugging Face</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/learn/agents-course/bonus-unit2/introduction" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This is course documentation from Hugging Face&#39;s Agents Course, specifically a bonus unit on AI agent observability and evaluation. The unit teaches developers how to monitor, observe, and evaluate AI agents in production through integration with observability tools like OpenTelemetry, tracking performance metrics (token usage, latency, error traces), and implementing both real-time evaluation via user feedback and LLM-as-a-judge approaches, plus offline analysis using benchmark datasets. This is relevant for engineers building production AI agents who need to ensure reliability, diagnose issues, optimize costs, and continuously improve agent performance.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Instrument agents with OpenTelemetry for production observability and monitoring capabilities</li><li>Track token usage costs, latency, and error traces to optimize resource efficiency and performance</li><li>Implement real-time evaluation combining user feedback and LLM-as-a-judge techniques</li><li>Use offline benchmark datasets like GSM8K to systematically test and compare agent behaviors</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#observability</span><span class="tag">#evaluation</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/learn/agents-course/bonus-unit2/introduction" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 75%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.75</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://docs.anyscale.com/llm" target="_blank" rel="noopener">LLMs and agentic AI on Anyscale | Anyscale Docs</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://docs.anyscale.com/llm" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=docs.anyscale.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">docs.anyscale.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">Anyscale provides a comprehensive platform for developing and deploying LLM applications in production, powered by Ray&#39;s distributed computing framework. The documentation outlines three core capabilities: LLM serving with Ray Serve and vLLM for real-time inference with automatic scaling and multi-model support; post-training methods including supervised fine-tuning, preference tuning, reinforcement learning, and agentic tuning to specialize models for specific tasks; and batch inference via Ray Data for offline processing at scale. The platform supports parameter-efficient methods like LoRA, distributed training strategies (FSDP, DeepSpeed, Megatron), and modern alignment techniques (DPO, RLVR, GRPO), making it suitable for organizations seeking production-grade LLM infrastructure with flexibility across serving, training, and inference workloads.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Anyscale integrates Ray Serve with vLLM for scalable LLM serving, supporting auto-scaling, multi-model deployment, and dynamic LoRA adapters with OpenAI-compatible APIs.</li><li>Post-training options span continued pre-training, SFT, preference tuning (RLHF, DPO, SimPO, ORPO), and RLVR with algorithms like PPO, GRPO, and DAPO for specialized use cases.</li><li>Agentic tuning trains models for autonomous reasoning, tool use, and multi-step interactions using verifiable reward feedback.</li><li>Batch inference via ray.data.llm handles terabyte-scale offline processing with continuous batching optimizations from vLLM.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM infrastructure</span><span class="tag">#distributed training</span><span class="tag">#model serving</span>
+          </div>
+          <a class="read-link" href="https://docs.anyscale.com/llm" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 72%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.72</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://community.openai.com/t/real-world-ai-agent-case-study/1383647" target="_blank" rel="noopener">https://community.openai.com/t/real-world-ai-agent-case-study/1383647</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://community.openai.com/t/real-world-ai-agent-case-study/1383647" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=community.openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">community.openai.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This community post discusses a real-world AI agent implementation, likely covering practical architectural decisions and lessons learned from deploying agentic systems in production. The case study would be valuable for practitioners building AI applications, offering concrete insights into design patterns, failure modes, and trade-offs when moving from prototype to production. Such real-world examples are critical for engineers evaluating agent frameworks and deployment strategies.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Production AI agents require careful architecture design beyond basic LLM calls</li><li>Practical constraints and monitoring strategies essential for reliable agent systems</li><li>Real-world implementations reveal trade-offs between complexity, cost, and performance</li><li>Agent design patterns from production systems inform best practices for new projects</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#production systems</span><span class="tag">#architecture</span>
+          </div>
+          <a class="read-link" href="https://community.openai.com/t/real-world-ai-agent-case-study/1383647" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="opinion">
+        <div class="article__score-bar" style="width: 68%"></div>
+        <div class="article__top">
+          <span class="category cat-opinion">opinion</span>
+          <span class="score">relevance 0.68</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/blog/agent-glossary" target="_blank" rel="noopener">Harness, Scaffold, and the AI Agent Terms Worth Getting Right</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/blog/agent-glossary" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-05-25T18:15:51
+          
+        </div>
+        <p class="article__summary">This article examines critical terminology in AI agent design, focusing on the concepts of &#39;harness&#39; and &#39;scaffold&#39; and their precise definitions within the context of reinforcement learning environments for large language models. The piece argues that accurate technical terminology is essential for practitioners building and scaling RL environments in the LLM era, as imprecise language can lead to implementation errors and miscommunication across teams. Understanding these distinctions helps developers correctly architect agent training systems and avoid common pitfalls when designing complex RL setups.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Precise terminology (harness vs. scaffold) is critical for avoiding implementation errors in RL agent design</li><li>Harness and scaffold serve distinct architectural roles in LLM-based RL environment construction</li><li>Clear definitions reduce miscommunication when teams scale AI agent training systems</li><li>Proper terminology alignment improves reproducibility and knowledge sharing in agent development</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#reinforcement learning</span><span class="tag">#LLM training</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/blog/agent-glossary" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="other">
+        <div class="article__score-bar" style="width: 45%"></div>
+        <div class="article__top">
+          <span class="category cat-other">other</span>
+          <span class="score">relevance 0.45</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.anthropic.com/research/evaluating-ai-systems" target="_blank" rel="noopener">Evaluating AI Systems</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.anthropic.com/research/evaluating-ai-systems" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This brief document outlines approaches for evaluating AI systems, though without specific methodology details or novel frameworks. The emphasis appears to be on the importance of systematic evaluation in AI development, recognizing that rigorous assessment is critical for understanding model capabilities, limitations, and real-world readiness. Technical readers should care because proper evaluation frameworks are foundational to trustworthy AI deployment and identifying performance gaps before production use.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Systematic evaluation of AI systems is essential for deployment readiness</li><li>Assessment methods must capture both capabilities and limitations</li><li>Rigorous testing frameworks inform real-world AI reliability</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI evaluation</span><span class="tag">#AI systems</span><span class="tag">#methodology</span>
+          </div>
+          <a class="read-link" href="https://www.anthropic.com/research/evaluating-ai-systems" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="other">
+        <div class="article__score-bar" style="width: 10%"></div>
+        <div class="article__top">
+          <span class="category cat-other">other</span>
+          <span class="score">relevance 0.10</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://simonwillison.net/tags/code-review" target="_blank" rel="noopener">Code Review</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://simonwillison.net/tags/code-review" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=simonwillison.net&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">simonwillison.net</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This appears to be a minimal content entry with only a title &#34;Code Review&#34; from a 2026 source on agentic design patterns, but no substantive article content is provided. Without the actual article body, abstract, or detailed discussion, it&#39;s impossible to extract meaningful technical insights about code review practices, methodologies, or their relationship to agentic systems. A reader would need the full article text to understand the specific thesis, arguments, or recommendations being presented.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Unable to extract takeaways without substantive article content</li><li>Insufficient material for meaningful analysis</li><li>Title alone does not provide actionable insights</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#code-review</span><span class="tag">#agentic-systems</span><span class="tag">#design-patterns</span>
+          </div>
+          <a class="read-link" href="https://simonwillison.net/tags/code-review" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2603.19896" target="_blank" rel="noopener">Utility-Guided Agent Orchestration for Efficient LLM Tool Use</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2603.19896" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Liu, Boyan, Zhao, Gongming, Xu, Hongli
+          <span class="dot">·</span>
+          2026-06-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper addresses the quality-cost trade-off in tool-using LLM agents by proposing a utility-guided orchestration policy that explicitly balances answer quality against execution costs. Rather than relying solely on fixed workflows or free-form reasoning methods like ReAct, the authors introduce a controllable decision framework that selects among actions (respond, retrieve, tool call, verify, stop) by weighing estimated gain, step cost, uncertainty, and redundancy. Experiments demonstrate that explicit orchestration substantially influences agent behavior and enable practitioners to tune quality-cost trade-offs, offering a practical mechanism for efficient LLM agent control without claiming universal performance superiority.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Utility-guided policy selects agent actions by balancing gain, cost, uncertainty, and redundancy trade-offs.</li><li>Explicit orchestration signals substantially affect LLM agent behavior compared to implicit prompt-level control.</li><li>Framework enables controllable quality-cost tuning rather than pursuing universally optimal task performance.</li><li>Lightweight utility design provides defensible mechanism for managing tool-call overhead and latency.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM agents</span><span class="tag">#tool use orchestration</span><span class="tag">#quality-cost trade-off</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2603.19896" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2510.08847v1" target="_blank" rel="noopener">What Is Your Agent&#39;s GPA? A Framework for Evaluating Agent Goal-Plan-Action Alignment</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2510.08847v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Jia, Allison Sihan, Huang, Daniel, Vytla, Nikhil, Yoo, Seung Won Wilson, Choudhury, Nirvika, Sen, Shayak, Mitchell, John C., Datta, Anupam
+          <span class="dot">·</span>
+          2026-06-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper introduces Agent GPA, a framework for evaluating autonomous agents by decomposing failures into three dimensions: goal-setting, planning, and action execution. The authors operationalize this with factorized LLM judges that measure alignment across these components, using automated prompt optimization to generate domain-specific evaluation criteria. Validated across three diverse benchmarks (research agents, coding agents, and enterprise data agents), the framework identifies 95% of human-annotated errors while achieving 76-86% error coverage compared to manual approaches. This work addresses a critical gap in agent evaluation by providing scalable, interpretable diagnostics that enable targeted debugging rather than coarse success/failure metrics.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Agent GPA decomposes evaluation into goal-plan-action alignment, enabling granular error localization vs. binary pass/fail metrics.</li><li>Automated prompt optimization generates domain-specific evaluation criteria, achieving higher error coverage (76-86%) than manual prompting.</li><li>Framework detects 95% of human-annotated errors and aligns strongly with human evaluators across diverse agent types and datasets.</li><li>Evolutionary coding agents refined judge consistency by 38%, demonstrating iterative rubric improvement methodology.</li><li>Generalizes across multi-agent research, single coding agents, and enterprise settings, proving architectural versatility.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agent evaluation</span><span class="tag">#autonomous agents</span><span class="tag">#LLM-based assessment</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2510.08847v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+
+    // Copy-link button (no-op if button not present)
+    const copyBtn = document.querySelector(".share-btn--copy");
+    const toast = document.getElementById("shareToast");
+    if (copyBtn && toast) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1500);
+        } catch (_) {
+          // Older browsers: fall back to a prompt
+          window.prompt("Copy this URL:", copyBtn.dataset.url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>

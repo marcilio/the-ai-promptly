@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-06-16",
+      "generated_at": "2026-06-16T00:18:26.816799Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 10,
+      "filename": "newsletter-2026-06-16.html",
+      "overview": "Today's articles converge on a critical challenge in multi-agent AI systems: designing adaptive, standardized, and properly evaluated agentic workflows. Key insights include difficulty-aware orchestration that scales reasoning complexity to query requirements, unified agent specifications enabling cross-framework portability, and decomposed evaluation frameworks that diagnose failures at the goal-plan-action level rather than treating agents as black boxes."
+    },
+    {
       "date": "2026-06-12",
       "generated_at": "2026-06-12T15:31:30.029424Z",
       "source_urls": [
