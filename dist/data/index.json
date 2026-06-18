@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-06-18",
+      "generated_at": "2026-06-18T22:59:33.949772Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 9,
+      "filename": "newsletter-2026-06-18.html",
+      "overview": "Multiple research efforts tackle governance, efficiency, and reliability in LLM-based agent systems. A key theme emerges around schema-gating and cost-aware orchestration, where explicit validation boundaries and quantitative performance metrics improve both reproducibility and operational efficiency in production deployments."
+    },
+    {
       "date": "2026-06-16",
       "generated_at": "2026-06-16T00:18:26.816799Z",
       "source_urls": [

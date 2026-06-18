@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Agentic &middot; 2026-06-18</title>
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Daily Agentic — 2026-06-18" />
+  <meta property="og:description" content="Multiple research efforts tackle governance, efficiency, and reliability in LLM-based agent systems. A key theme emerges around schema-gating and cost-aware orchestration, where explicit validation b… — Curated by Marcilio Mendonca" />
+  <meta property="og:url" content="https://the-daily-agentic.vercel.app/newsletter-2026-06-18.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Daily Agentic — 2026-06-18" />
+  <meta name="twitter:description" content="Multiple research efforts tackle governance, efficiency, and reliability in LLM-based agent systems. A key theme emerges around schema-gating and cost-aware orchestration, where explicit validation b… — Curated by Marcilio Mendonca" />
+  
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --linkedin: #0a66c2;
+      --linkedin-hover: #004182;
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .header-content { display: flex; align-items: center; gap: 18px; margin-top: 16px; }
+    .author-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--border-strong);
+    }
+    .header-text { flex: 1; min-width: 0; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
+    .byline-sep { color: var(--text-3); margin: 0 6px; }
+    .byline-source {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: var(--text-2); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .byline-source:hover { color: var(--accent); }
+    .byline-source svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .share-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 24px; align-items: center; }
+    .share-btn--linkedin {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; padding: 9px 16px;
+      border-radius: 999px; cursor: pointer;
+      background: var(--linkedin); color: #ffffff;
+      border: 1px solid var(--linkedin);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+      box-shadow: 0 2px 8px rgba(10, 102, 194, 0.25);
+    }
+    .share-btn--linkedin:hover {
+      background: var(--linkedin-hover); border-color: var(--linkedin-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(10, 102, 194, 0.35);
+    }
+    .share-btn--linkedin svg { width: 16px; height: 16px; flex-shrink: 0; fill: #ffffff; }
+    .share-btn--copy {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 8px 14px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+    }
+    .share-btn--copy:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--copy svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #0a0a0f; padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
+    .overview-section {
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .overview-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); font-weight: 700; margin-bottom: 8px;
+    }
+    .overview-text {
+      font-size: 15px; line-height: 1.65; color: var(--text); margin: 0;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; All episodes</a>
+    <div class="header-content">
+      
+      <img class="author-avatar" src="assets/avatar.jpg" alt="Marcilio Mendonca, PhD, Staff AI FDE at Google" />
+      
+      <div class="header-text">
+        <div class="eyebrow">Daily Agentic</div>
+        <h1>2026-06-18</h1>
+        
+        <p class="byline">
+          Brought to you by
+          <a href="https://www.linkedin.com/in/marcilio/" target="_blank" rel="noopener">Marcilio Mendonca, PhD, Staff AI FDE at Google</a>
+          <span class="byline-sep">·</span>
+          <a class="byline-source" href="https://github.com/marcilio/the-ai-promptly" target="_blank" rel="noopener" title="View source on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> view source</a>
+        </p>
+        
+      </div>
+    </div>
+    <p class="meta">
+      Generated 2026-06-18T22:59:33.949994Z UTC &nbsp;·&nbsp; 9 articles
+    </p>
+
+    
+    <section class="overview-section">
+      <div class="overview-label">In this episode</div>
+      <p class="overview-text">Multiple research efforts tackle governance, efficiency, and reliability in LLM-based agent systems. A key theme emerges around schema-gating and cost-aware orchestration, where explicit validation boundaries and quantitative performance metrics improve both reproducibility and operational efficiency in production deployments.</p>
+    </section>
+    
+
+    
+    <div class="share-row">
+      <a class="share-btn--linkedin"
+         href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//the-daily-agentic.vercel.app/newsletter-2026-06-18.html"
+         target="_blank" rel="noopener"
+         title="Share this day's newsletter on LinkedIn. Tip: tag @marcilio when posting.">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zM20 19h-3v-5.6c0-1.34-.48-2.25-1.68-2.25-.92 0-1.46.62-1.7 1.22-.09.21-.11.51-.11.81V19h-3V8h3v1.27c.4-.62 1.12-1.5 2.72-1.5 1.98 0 3.47 1.3 3.47 4.08V19z"/></svg>
+        Share on LinkedIn
+      </a>
+      <button type="button" class="share-btn--copy" data-url="https://the-daily-agentic.vercel.app/newsletter-2026-06-18.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy link
+      </button>
+      <span class="share-hint">tag the author when you post</span>
+    </div>
+    <div id="shareToast" class="share-toast">Copied!</div>
+    
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2603.06394v1" target="_blank" rel="noopener">Talk Freely, Execute Strictly: Schema-Gated Agentic AI for Flexible and Reproducible Scientific Workflows</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2603.06394v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Strickland, Joel, Vijeta, Arjun, Moores, Chris, Bodek, Oliwia, Nenchev, Bogdan, Whitehead, Thomas, Phillips, Charles, Tassenberg, Karl, Conduit, Gareth, Pellegrini, Ben
+          <span class="dot">·</span>
+          2026-06-18
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper addresses the fundamental tension between conversational flexibility and deterministic execution in LLM-powered scientific workflows. Through interviews with 18 experts across 10 industrial R&amp;D organizations, the authors identify competing requirements: users want natural language interaction without workflow rigidity, yet science demands reproducibility and governance. They propose schema-gated orchestration, where a machine-checkable specification becomes a mandatory execution boundary, ensuring nothing runs unless validated. The paper evaluates 20 existing systems across five architectural groups using a novel multi-model LLM scoring protocol (15 sessions, 3 LLM families) achieving high inter-rater agreement (Krippendorff&#39;s α=0.80–0.98), revealing an empirical Pareto front but identifying a convergence zone. Three operational principles guide adoption: clarification-before-execution, constrained plan-act orchestration, and tool-to-workflow-level gating.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Schema-gated orchestration decouples conversational flexibility from execution determinism by separating human communication authority from machine execution authority.</li><li>Multi-model LLM scoring (Krippendorff&#39;s α≥0.80) is a reusable, scalable alternative to expert panels for evaluating architectural trade-offs.</li><li>No existing system achieves both high conversational flexibility and high execution determinism; convergence emerges between generative and workflow-centric extremes.</li><li>Three design principles resolve the trade-off: clarification-before-execution, constrained plan-act orchestration, and workflow-level gating.</li><li>Empirical validation via 18 expert stakeholders across industrial R&amp;D confirms human-in-the-loop control and transparency are non-negotiable boundary properties.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM agents</span><span class="tag">#scientific workflows</span><span class="tag">#reproducibility</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2603.06394v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/pdf/2512.01099" target="_blank" rel="noopener">Cost-Aware Model Orchestration for LLM-based Systems</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/pdf/2512.01099" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Smirnova, Daria, Nasiri, Hamid, Adamska, Marta, Yu, Zhengxin, Garraghan, Peter
+          <span class="dot">·</span>
+          2026-06-18
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This research paper addresses a critical limitation in LLM-based model orchestration systems: existing orchestrators rely on qualitative model descriptions for decision-making, leading to suboptimal model selection, reduced accuracy, and increased costs. The authors propose a cost-aware model selection method that incorporates quantitative performance characteristics and explicit performance-cost trade-offs into orchestration decisions. Experimental results demonstrate substantial improvements across multiple dimensions, including 0.90%-11.92% accuracy gains, up to 54% energy efficiency improvements, and dramatic latency reduction from 4.51 seconds to 7.2 milliseconds in model selection. This work is relevant for practitioners building production LLM systems where cost efficiency and task accuracy directly impact operational expenses and user experience.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>LLM orchestrators using only qualitative model descriptions make suboptimal selections; quantitative performance metrics improve accuracy 0.90%-11.92%.</li><li>Cost-aware orchestration achieves up to 54% energy efficiency gains by explicitly modeling performance-cost trade-offs.</li><li>Model selection latency reduced 626× (4.51s to 7.2ms) via improved orchestration method, critical for real-time systems.</li><li>Quantitative characteristics enable better performance prediction than natural language descriptions alone.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM orchestration</span><span class="tag">#cost optimization</span><span class="tag">#model selection</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/pdf/2512.01099" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 72%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.72</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.anthropic.com/research/claude-code-expertise" target="_blank" rel="noopener">Claude Code Expertise</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.anthropic.com/research/claude-code-expertise" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-18
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This article examines Claude&#39;s code generation and analysis capabilities within the context of agentic AI design patterns. It discusses how Claude can be leveraged as a component in autonomous agent systems, focusing on its strengths in understanding, writing, and reasoning about code. The piece is relevant for developers building AI-assisted development tools or autonomous coding agents, highlighting practical applications where Claude&#39;s language understanding translates to effective code manipulation and generation.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Claude excels at code generation, analysis, and debugging tasks within agentic workflows</li><li>Code expertise is a key component when designing AI agents for software development</li><li>Claude&#39;s reasoning capabilities enable effective handling of complex code refactoring and architecture decisions</li><li>Integration of code understanding with agent patterns improves autonomous software engineering systems</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#code generation</span><span class="tag">#autonomous systems</span>
+          </div>
+          <a class="read-link" href="https://www.anthropic.com/research/claude-code-expertise" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="other">
+        <div class="article__score-bar" style="width: 10%"></div>
+        <div class="article__top">
+          <span class="category cat-other">other</span>
+          <span class="score">relevance 0.10</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://www.anthropic.com/engineering" target="_blank" rel="noopener">Engineering</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://www.anthropic.com/engineering" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=anthropic.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">anthropic.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-06-18
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">The article appears to be a title-only reference to &#39;Engineering&#39; from a source about &#39;AI agent harness design&#39; with no substantive content provided. Without actual article body, methodology, or arguments to evaluate, this cannot be meaningfully summarized. A technical reader cannot extract concrete insights, findings, or recommendations from this stub.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Article content unavailable; cannot extract meaningful takeaways from title alone.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#engineering</span><span class="tag">#harness design</span>
+          </div>
+          <a class="read-link" href="https://www.anthropic.com/engineering" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 87%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.87</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2601.20408v2" target="_blank" rel="noopener">Meeting SLOs, Slashing Hours: Automated Enterprise LLM Optimization with OptiKIT</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2601.20408v2" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Santavas, Nicholas, Eissa, Kareem, Cieplicka, Patrycja, Florek, Piotr, Nulli, Matteo, Vasilev, Stefan, Hashemi, Seyyed Hadi, Gasteratos, Antonios, Khadivi, Shahram
+          <span class="dot">·</span>
+          2026-06-18
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">OptiKIT is a distributed LLM optimization framework that automates model compression and tuning workflows to democratize enterprise LLM deployment. The system addresses the critical challenge of scaling AI initiatives within constrained GPU budgets by enabling non-expert teams to optimize models without deep specialized knowledge. OptiKIT provides dynamic resource allocation, staged pipeline execution with automatic cleanup, and seamless enterprise integration, delivering over 2x GPU throughput improvement in production while reducing optimization complexity and cost.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>OptiKIT automates LLM optimization workflows, achieving 2x+ GPU throughput improvement while reducing expertise barriers for enterprise teams</li><li>System features dynamic resource allocation, staged pipelines with cleanup, and enterprise integration patterns for production-grade model optimization</li><li>Democratizes model compression and tuning to enable diverse teams with limited LLM expertise to deploy efficiently within constrained budgets</li><li>Open-sourced framework balances resource management, pipeline orchestration, and integration patterns for large-scale reproducibility</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM optimization</span><span class="tag">#distributed systems</span><span class="tag">#model compression</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2601.20408v2" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.85</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2410.21784v1" target="_blank" rel="noopener">MARCO: Multi-Agent Real-time Chat Orchestration</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2410.21784v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Shrimal, Anubhav, Kanagaraj, Stanley, Biswas, Kriti, Raghuraman, Swarnalatha, Nediyanchath, Anish, Zhang, Yi, Yenigalla, Promod
+          <span class="dot">·</span>
+          2026-06-18
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">MARCO is a multi-agent orchestration framework for automating complex tasks using large language models in real-time chat environments. The framework addresses critical challenges in LLM-based systems including inconsistent output formatting, hallucination of functions and parameters, and limited domain knowledge by implementing robust guardrails, output validation, and error recovery mechanisms. Evaluated on restaurant service and retail conversation datasets, MARCO achieves 94.48% and 92.74% task execution accuracy respectively, while reducing latency by 44.91% and costs by 33.71%. The modular design enables adaptation across domains and supports multi-turn interactions, making it relevant for practitioners building production LLM systems that require reliability and cost efficiency.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Guardrails and error recovery reduce hallucination and formatting errors, enabling 94%+ task execution accuracy</li><li>44.91% latency improvement and 33.71% cost reduction through framework optimization</li><li>Modular design supports cross-domain adaptation without requiring domain-specific retraining</li><li>Systematic comparison of open-source and proprietary LLMs guides model selection</li><li>Multi-turn conversation support enables complex, multi-step task automation</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#multi-agent systems</span><span class="tag">#LLM orchestration</span><span class="tag">#task automation</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2410.21784v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 82%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.82</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2507.01376v1" target="_blank" rel="noopener">AI Agents and Agentic AI-Navigating a Plethora of Concepts for Future Manufacturing</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2507.01376v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Ren, Yinwang, Liu, Yangyang, Ji, Tang, Xu, Xun
+          <span class="dot">·</span>
+          2026-06-18
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This arXiv research paper systematically reviews AI agents and agentic AI paradigms, examining their evolution and technological foundations. The authors clarify definitions and capability boundaries of LLM-based agents, multimodal LLM-based agents, and agentic AI systems, then explore their applications and integration into smart manufacturing. The paper addresses a critical gap in literature by providing structured analysis of how generative AI advances—particularly in semantic comprehension, complex reasoning, and autonomous decision-making—can enhance manufacturing systems. This work is relevant for researchers and practitioners developing autonomous systems in industrial settings.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>LLM-Agents and MLLM-Agents improve semantic understanding, complex reasoning, and autonomous decision-making in dynamic environments</li><li>Agentic AI emphasizes adaptability and goal-directed autonomy in complex manufacturing scenarios</li><li>Paper clarifies conceptual boundaries between LLM-Agents, MLLM-Agents, and Agentic AI for manufacturing applications</li><li>Identifies challenges for deploying these AI paradigms in smart manufacturing contexts</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#smart manufacturing</span><span class="tag">#large language models</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2507.01376v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 82%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.82</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2601.09750v1" target="_blank" rel="noopener">SAGE: Tool-Augmented LLM Task Solving Strategies in Scalable Multi-Agent Environments</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2601.09750v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Strehlow, Robert K., Küster, Tobias, Kupke, Oskar F., Kurps, Brandon Llanque, Sivrikaya, Fikret, Albayrak, Sahin
+          <span class="dot">·</span>
+          2026-06-18
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">SAGE is a conversational AI framework for integrating tools with Large Language Models in multi-agent environments. Built on the OPACA framework, it addresses the challenge of dynamically discovering and executing custom tools without manual pre-definition. The system implements multiple task-solving strategies using different prompting methods and agentic approaches, evaluated against benchmark services. The work demonstrates that different strategies exhibit distinct strengths and weaknesses, and provides open-source implementations to enable reproducible research in tool-augmented LLM task solving at scale.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Dynamic tool integration via OPACA framework eliminates need for manual pre-definition of custom tools</li><li>Multiple prompting strategies with varying agent complexity show different performance tradeoffs on benchmarks</li><li>System supports seamless model switching (GPT, LLAMA) and extensible agent selection mechanisms</li><li>Zero-shot prompting methods enable robust tool use without task-specific fine-tuning</li><li>Open-source release includes SAGE, OPACA, benchmarks, and results for reproducibility</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM tool use</span><span class="tag">#multi-agent systems</span><span class="tag">#prompt engineering</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2601.09750v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 82%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.82</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/pdf/2505.16120" target="_blank" rel="noopener">LLM-Powered AI Agent Systems and Their Applications in Industry</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/pdf/2505.16120" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Liang, Guannan, Tong, Qianqian
+          <span class="dot">·</span>
+          2026-06-18
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This research paper examines the evolution and current state of LLM-powered agent systems, contrasting them with traditional rule-based approaches. The authors categorize modern agents into software-based, physical, and adaptive hybrid systems, demonstrating applications across customer service, software development, manufacturing, education, finance, and healthcare. The paper identifies critical challenges—inference latency, output uncertainty, evaluation metrics, and security vulnerabilities—and proposes mitigation strategies. It provides a comprehensive overview of how multi-modal LLMs enable agents to process diverse data types (text, images, audio, structured data) for more flexible and adaptive real-world deployment.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>LLM agents surpass rule-based systems through cross-domain reasoning, natural language interaction, and multi-modal processing capabilities</li><li>Six major industrial applications span customer service, software development, manufacturing, education, financial trading, and healthcare domains</li><li>Key challenges include high inference latency, output uncertainty, insufficient evaluation metrics, and security vulnerabilities requiring targeted solutions</li><li>Multi-modal LLM integration enables richer real-world behavior by processing text, images, audio, and structured tabular data simultaneously</li><li>Agent systems evolve from pre-LLM rule-based architectures to flexible LLM-powered hybrid systems with adaptive capabilities</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM agents</span><span class="tag">#AI systems architecture</span><span class="tag">#industrial AI applications</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/pdf/2505.16120" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+
+    // Copy-link button (no-op if button not present)
+    const copyBtn = document.querySelector(".share-btn--copy");
+    const toast = document.getElementById("shareToast");
+    if (copyBtn && toast) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1500);
+        } catch (_) {
+          // Older browsers: fall back to a prompt
+          window.prompt("Copy this URL:", copyBtn.dataset.url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
