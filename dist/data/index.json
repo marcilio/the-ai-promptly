@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-06-19",
+      "generated_at": "2026-06-19T00:28:23.627851Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 3,
+      "filename": "newsletter-2026-06-19.html",
+      "overview": "Today's articles explore building trustworthy agentic AI systems through careful engineering frameworks and human oversight. Key theme: robust architectures combining context management, decision transparency, and stakeholder alignment enable reliable AI deployment in high-stakes domains like pharmaceuticals and finance."
+    },
+    {
       "date": "2026-06-18",
       "generated_at": "2026-06-18T22:59:33.949772Z",
       "source_urls": [
