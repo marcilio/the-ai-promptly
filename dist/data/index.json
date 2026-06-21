@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-06-21",
+      "generated_at": "2026-06-21T01:14:07.045354Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 3,
+      "filename": "newsletter-2026-06-21.html",
+      "overview": "Tool-augmented LLM systems improve reliability through explicit orchestration-level failure detection and recovery rather than model-level reasoning alone, achieving 98.8% task success on benchmarks. The main contribution is treating failure management as a bounded runtime control problem with targeted recovery actions."
+    },
+    {
       "date": "2026-06-19",
       "generated_at": "2026-06-19T00:28:23.627851Z",
       "source_urls": [
