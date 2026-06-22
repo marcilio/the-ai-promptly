@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-06-22",
+      "generated_at": "2026-06-22T09:02:20.725239Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 10,
+      "filename": "newsletter-2026-06-22.html",
+      "overview": "Today's research centers on operationalizing multi-agent AI systems for production environments, addressing the gap between prototype capabilities and enterprise deployment. Key threads span systematic evaluation frameworks (EDDOps), security considerations for agentic architectures, persistent memory systems, and organizational transition strategies, with implementations demonstrating substantial efficiency gains in manufacturing, document processing, and domain-specific tasks."
+    },
+    {
       "date": "2026-06-21",
       "generated_at": "2026-06-21T01:14:07.045354Z",
       "source_urls": [
