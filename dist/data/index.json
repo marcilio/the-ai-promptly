@@ -2,7 +2,7 @@
   "runs": [
     {
       "date": "2026-06-24",
-      "generated_at": "2026-06-24T00:08:38.167571Z",
+      "generated_at": "2026-06-24T00:15:46.436891Z",
       "source_urls": [
         "search:AI agent harness design",
         "search:agentic design patterns 2026",
@@ -10,8 +10,9 @@
         "search:LLM tool use and orchestration",
         "search:agent evaluation methods"
       ],
-      "count": 0,
-      "filename": "newsletter-2026-06-24.html"
+      "count": 2,
+      "filename": "newsletter-2026-06-24.html",
+      "overview": "Research explores how graph-based structures enhance AI agents' capabilities in planning and coordination, while emerging agentic coding tools reshape development practices toward autonomous systems."
     },
     {
       "date": "2026-06-22",
