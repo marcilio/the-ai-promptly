@@ -2,7 +2,7 @@
   "runs": [
     {
       "date": "2026-06-25",
-      "generated_at": "2026-06-25T05:56:54.005708Z",
+      "generated_at": "2026-06-25T23:51:47.201648Z",
       "source_urls": [
         "search:AI agent harness design",
         "search:agentic design patterns 2026",
@@ -10,8 +10,9 @@
         "search:LLM tool use and orchestration",
         "search:agent evaluation methods"
       ],
-      "count": 0,
-      "filename": "newsletter-2026-06-25.html"
+      "count": 5,
+      "filename": "newsletter-2026-06-25.html",
+      "overview": "These articles collectively examine how AI agents are being architected and deployed in production systems, emphasizing that scaling agentic AI requires rethinking infrastructure beyond model capacity to focus on orchestration, resource management, and constraint enforcement for reliable autonomous systems."
     },
     {
       "date": "2026-06-24",
