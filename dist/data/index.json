@@ -1,6 +1,19 @@
 {
   "runs": [
     {
+      "date": "2026-06-26",
+      "generated_at": "2026-06-26T00:15:23.950671Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 0,
+      "filename": "newsletter-2026-06-26.html"
+    },
+    {
       "date": "2026-06-25",
       "generated_at": "2026-06-25T23:51:47.201648Z",
       "source_urls": [
