@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-06-28",
+      "generated_at": "2026-06-28T05:07:41.948371Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 1,
+      "filename": "newsletter-2026-06-28.html",
+      "overview": "Modern large language models like Codex are shifting from passive query responders to autonomous agents capable of planning and executing tasks with minimal human oversight, fundamentally changing how AI systems are architected and deployed."
+    },
+    {
       "date": "2026-06-27",
       "generated_at": "2026-06-27T03:05:05.195331Z",
       "source_urls": [

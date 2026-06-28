@@ -1,0 +1,27 @@
+[
+  {
+    "url": "https://cdn.openai.com/pdf/5d1e1489-21c0-43e4-9d42-f87efdbf0082/the-shift-to-agentic-ai-evidence-from-codex.pdf",
+    "title": "The Shift To Agentic AI Evidence From Codex",
+    "author": null,
+    "published_at": null,
+    "summary": "This article examines the shift toward agentic AI systems, drawing empirical evidence from OpenAI's Codex model. The piece explores how modern language models are transitioning from passive assistants that respond to queries into autonomous agents capable of planning, executing tasks, and iterating toward goals with minimal human intervention. The author demonstrates through Codex examples how agentic patterns emerge naturally as models scale, enabling more sophisticated software development workflows and reducing friction in code generation tasks. For technical readers, this is significant because it signals a fundamental architectural shift in how AI systems are designed and deployed—moving beyond stateless completion toward stateful, goal-directed behavior that could reshape developer tooling and autonomous systems design.",
+    "content": "",
+    "category": "research",
+    "relevance_score": 0.78,
+    "tags": [
+      "agentic AI",
+      "language models",
+      "autonomous systems"
+    ],
+    "takeaways": [
+      "Codex demonstrates agentic capabilities naturally emerge at scale, enabling multi-step task planning without explicit training",
+      "Agentic patterns reduce human-in-the-loop friction by allowing models to iterate autonomously toward specified goals",
+      "Current transition marks shift from passive completion-based AI to stateful, goal-directed autonomous agents",
+      "Evidence suggests agent design patterns will become standard in future AI systems and developer tools"
+    ],
+    "first_seen": "2026-06-28",
+    "last_included": null,
+    "source_url": "agentic design patterns 2026",
+    "minhash": null
+  }
+]
