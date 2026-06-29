@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-06-29",
+      "generated_at": "2026-06-29T00:15:43.056307Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 2,
+      "filename": "newsletter-2026-06-29.html",
+      "overview": "Agentic AI is maturing from conversational systems to outcome-focused autonomous agents, but both enterprise and financial domains reveal critical gaps: integration challenges in business contexts and severe reproducibility issues in trading applications."
+    },
+    {
       "date": "2026-06-28",
       "generated_at": "2026-06-28T05:07:41.948371Z",
       "source_urls": [
