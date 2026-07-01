@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-07-01",
+      "generated_at": "2026-07-01T01:47:53.885584Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 3,
+      "filename": "newsletter-2026-07-01.html",
+      "overview": "These articles showcase the evolution toward agentic AI systems that move beyond simple LLM judgments. Key developments include Agent-as-a-Judge for more robust evaluation through planning and tool use, omnimodal orchestration handling diverse data types simultaneously, and cross-domain coordination frameworks where agents manage complex infrastructure tasks across specialized domains."
+    },
+    {
       "date": "2026-06-30",
       "generated_at": "2026-06-30T02:06:33.003511Z",
       "source_urls": [
