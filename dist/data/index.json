@@ -2,7 +2,7 @@
   "runs": [
     {
       "date": "2026-07-02",
-      "generated_at": "2026-07-02T05:09:44.654708Z",
+      "generated_at": "2026-07-02T13:27:33.714994Z",
       "source_urls": [
         "search:AI agent harness design",
         "search:agentic design patterns 2026",
@@ -10,7 +10,7 @@
         "search:LLM tool use and orchestration",
         "search:agent evaluation methods"
       ],
-      "count": 1,
+      "count": 0,
       "filename": "newsletter-2026-07-02.html",
       "overview": "Recent research demonstrates how hybrid AI systems combining large language models with specialized agents can enhance smart manufacturing, particularly for predictive maintenance tasks that require both strategic reasoning and precise domain execution."
     },
