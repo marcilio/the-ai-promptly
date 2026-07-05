@@ -1,0 +1,28 @@
+[
+  {
+    "url": "https://resources.anthropic.com/hubfs/The%202026%20State%20of%20AI%20Agents%20Report.pdf?_bhlid=f5832f1e00cadd0eaf3ef8debb58fa368031c9de",
+    "title": "The 2026 State Of AI Agents Report",
+    "author": null,
+    "published_at": null,
+    "summary": "This report examines the current landscape of AI agents as of 2026, analyzing design patterns, deployment trends, and practical applications across industries. It provides insights into how agentic systems have evolved, their architectural approaches, and key challenges organizations face when building and deploying autonomous agent systems. The report serves as a reference for engineers and researchers developing next-generation AI systems, offering patterns and lessons learned from production deployments.",
+    "content": "",
+    "category": "research",
+    "relevance_score": 0.82,
+    "tags": [
+      "AI agents",
+      "design patterns",
+      "autonomous systems"
+    ],
+    "takeaways": [
+      "Agentic design patterns have standardized around specific architectures for reasoning, planning, and tool use.",
+      "Production AI agent deployments reveal common failure modes and reliability challenges requiring robust error handling.",
+      "Organizations increasingly adopt multi-agent systems with coordination mechanisms for complex task decomposition.",
+      "Tool integration and grounding remain critical bottlenecks in achieving reliable autonomous agent behavior.",
+      "Enterprise adoption accelerates where agents integrate with existing workflows and maintain human oversight loops."
+    ],
+    "first_seen": "2026-07-05",
+    "last_included": null,
+    "source_url": "agentic design patterns 2026",
+    "minhash": null
+  }
+]

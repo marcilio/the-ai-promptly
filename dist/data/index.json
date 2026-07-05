@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-07-05",
+      "generated_at": "2026-07-05T16:24:59.423120Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 1,
+      "filename": "newsletter-2026-07-05.html",
+      "overview": "AI agents have matured into distinct design patterns and deployment strategies across industries, with production systems revealing both architectural best practices and persistent challenges in building autonomous systems at scale."
+    },
+    {
       "date": "2026-07-04",
       "generated_at": "2026-07-04T04:14:27.633107Z",
       "source_urls": [
