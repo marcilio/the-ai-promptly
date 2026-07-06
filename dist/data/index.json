@@ -2,7 +2,7 @@
   "runs": [
     {
       "date": "2026-07-06",
-      "generated_at": "2026-07-06T21:28:23.546230Z",
+      "generated_at": "2026-07-06T23:07:30.293991Z",
       "source_urls": [
         "search:AI agent harness design",
         "search:agentic design patterns 2026",
@@ -10,7 +10,7 @@
         "search:LLM tool use and orchestration",
         "search:agent evaluation methods"
       ],
-      "count": 2,
+      "count": 0,
       "filename": "newsletter-2026-07-06.html",
       "overview": "These papers tackle deployment challenges in LLM-based systems: one proposes self-improving retrieval for tool selection through live feedback, while the other introduces systematic evaluation methods for conversational agents at scale."
     },
