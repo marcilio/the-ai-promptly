@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-07-08",
+      "generated_at": "2026-07-08T15:25:29.001891Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 1,
+      "filename": "newsletter-2026-07-08.html",
+      "overview": "Harness engineering—the system layer orchestrating execution, context management, and evaluation around base models—is as critical as model weights for enabling recursive self-improvement in AI agents."
+    },
+    {
       "date": "2026-07-06",
       "generated_at": "2026-07-06T23:07:30.293991Z",
       "source_urls": [
