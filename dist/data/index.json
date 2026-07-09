@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-07-09",
+      "generated_at": "2026-07-09T01:18:21.089095Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 1,
+      "filename": "newsletter-2026-07-09.html",
+      "overview": "Large language models augmented with tool use capabilities evolve from text-only systems into intelligent agents capable of automation, data retrieval, and multi-step workflows. Effective tool orchestration is critical for solving real-world problems beyond conversation."
+    },
+    {
       "date": "2026-07-08",
       "generated_at": "2026-07-08T15:25:29.001891Z",
       "source_urls": [

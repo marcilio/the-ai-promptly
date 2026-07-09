@@ -1,0 +1,28 @@
+[
+  {
+    "url": "https://simonwillison.net/tags/llm-tool-use",
+    "title": "LLM Tool Use",
+    "author": null,
+    "published_at": null,
+    "summary": "This article explores how large language models can be augmented with tool use capabilities, enabling them to interact with external systems and APIs rather than relying solely on text generation. The core thesis is that tool use represents a critical evolution in LLM capabilities, allowing models to take concrete actions, retrieve real-time information, and integrate with existing software ecosystems. Technical readers should care because tool use transforms LLMs from text-only systems into intelligent agents capable of automation, data retrieval, and complex multi-step workflows. Effective orchestration of these tools determines whether LLMs can solve real-world problems beyond conversation.",
+    "content": "",
+    "category": "blog",
+    "relevance_score": 0.78,
+    "tags": [
+      "LLM agents",
+      "tool integration",
+      "AI orchestration"
+    ],
+    "takeaways": [
+      "Tool use enables LLMs to call APIs, execute code, and interact with external systems beyond text generation.",
+      "Effective orchestration requires proper tool selection, chaining, and error handling for reliable multi-step workflows.",
+      "Tool use unlocks capabilities like real-time information retrieval, data manipulation, and system automation.",
+      "Model ability to understand when and how to use tools depends on prompt design and training.",
+      "Tool-augmented LLMs bridge the gap between conversational AI and practical software automation."
+    ],
+    "first_seen": "2026-07-09",
+    "last_included": null,
+    "source_url": "LLM tool use and orchestration",
+    "minhash": null
+  }
+]
