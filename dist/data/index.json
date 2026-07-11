@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-07-10",
+      "generated_at": "2026-07-11T16:42:25.414154Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 1,
+      "filename": "newsletter-2026-07-10.html",
+      "overview": "Agent Mentor automates the refinement of LLM agent system prompts by analyzing execution logs to identify problematic semantic patterns and inject targeted corrections, improving agent performance without manual intervention."
+    },
+    {
       "date": "2026-07-09",
       "generated_at": "2026-07-09T01:18:21.089095Z",
       "source_urls": [
