@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-07-16",
+      "generated_at": "2026-07-16T20:11:05.885187Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 3,
+      "filename": "newsletter-2026-07-16.html",
+      "overview": "LLM-based security agents show promise but face real constraints: client implementation and reasoning limitations significantly impact performance, while emerging agentic engineering patterns are becoming essential for building reliable autonomous systems in production environments."
+    },
+    {
       "date": "2026-07-10",
       "generated_at": "2026-07-11T16:42:25.414154Z",
       "source_urls": [
