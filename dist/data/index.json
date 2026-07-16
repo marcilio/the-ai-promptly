@@ -2,7 +2,7 @@
   "runs": [
     {
       "date": "2026-07-16",
-      "generated_at": "2026-07-16T20:11:05.885187Z",
+      "generated_at": "2026-07-16T20:11:12.718992Z",
       "source_urls": [
         "search:AI agent harness design",
         "search:agentic design patterns 2026",
@@ -10,9 +10,9 @@
         "search:LLM tool use and orchestration",
         "search:agent evaluation methods"
       ],
-      "count": 3,
+      "count": 8,
       "filename": "newsletter-2026-07-16.html",
-      "overview": "LLM-based security agents show promise but face real constraints: client implementation and reasoning limitations significantly impact performance, while emerging agentic engineering patterns are becoming essential for building reliable autonomous systems in production environments."
+      "overview": "Today's articles survey AI fundamentals and agentic workflows, establishing that current AI primarily leverages machine learning and deep learning to enable generative capabilities and autonomous task automation. Practical deployment requires understanding both conceptual hierarchies—from ML through foundation models—and infrastructural demands like memory management and safety guardrails for agent-based systems."
     },
     {
       "date": "2026-07-10",
