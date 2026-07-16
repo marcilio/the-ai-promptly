@@ -7,11 +7,11 @@
   
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Daily Agentic — 2026-07-16" />
-  <meta property="og:description" content="Today&#39;s articles survey AI fundamentals and agentic workflows, establishing that current AI primarily leverages machine learning and deep learning to enable generative capabilities and autonomous tas… — Curated by Marcilio Mendonca" />
+  <meta property="og:description" content="Recent research emphasizes that agent evaluation requires fundamentally different approaches than traditional software testing, spanning systematic skill design, multi-agent debate frameworks, and ca… — Curated by Marcilio Mendonca" />
   <meta property="og:url" content="https://the-daily-agentic.vercel.app/newsletter-2026-07-16.html" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Daily Agentic — 2026-07-16" />
-  <meta name="twitter:description" content="Today&#39;s articles survey AI fundamentals and agentic workflows, establishing that current AI primarily leverages machine learning and deep learning to enable generative capabilities and autonomous tas… — Curated by Marcilio Mendonca" />
+  <meta name="twitter:description" content="Recent research emphasizes that agent evaluation requires fundamentally different approaches than traditional software testing, spanning systematic skill design, multi-agent debate frameworks, and ca… — Curated by Marcilio Mendonca" />
   
   <style>
     :root {
@@ -249,13 +249,13 @@
       </div>
     </div>
     <p class="meta">
-      Generated 2026-07-16T20:11:12.719339Z UTC &nbsp;·&nbsp; 8 articles
+      Generated 2026-07-16T22:32:46.761605Z UTC &nbsp;·&nbsp; 10 articles
     </p>
 
     
     <section class="overview-section">
       <div class="overview-label">In this episode</div>
-      <p class="overview-text">Today&#39;s articles survey AI fundamentals and agentic workflows, establishing that current AI primarily leverages machine learning and deep learning to enable generative capabilities and autonomous task automation. Practical deployment requires understanding both conceptual hierarchies—from ML through foundation models—and infrastructural demands like memory management and safety guardrails for agent-based systems.</p>
+      <p class="overview-text">Recent research emphasizes that agent evaluation requires fundamentally different approaches than traditional software testing, spanning systematic skill design, multi-agent debate frameworks, and careful observability practices to capture non-deterministic reasoning patterns and prevent evaluation biases.</p>
     </section>
     
 
@@ -282,6 +282,108 @@
     
       
       
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 92%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.92</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2602.20867v1" target="_blank" rel="noopener">SoK: Agentic Skills -- Beyond Tool Use in LLM Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2602.20867v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Jiang, Yanna, Li, Delong, Deng, Haiyu, Ma, Baihe, Wang, Xu, Wang, Qin, Yu, Guangsheng
+          <span class="dot">·</span>
+          2026-07-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This systematization of knowledge (SoK) paper examines agentic skills—reusable procedural capabilities that enable LLM agents to execute complex workflows reliably. Unlike single tool calls, skills encapsulate procedural knowledge with explicit applicability conditions, execution policies, and reusable interfaces that generalize across tasks. The authors map the full skill lifecycle (discovery through update), introduce seven design patterns for skill packaging and execution, and present a representation-by-scope taxonomy. A critical contribution is analyzing security risks in skill-based agents, including a case study of the ClawHavoc campaign where 1,200 malicious skills infiltrated a major marketplace. The work also evaluates skill-based approaches against benchmarks and identifies open challenges for robust, verifiable agent systems.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Skills are reusable procedural modules with explicit conditions and policies, fundamentally different from atomic tool calls or one-off plans.</li><li>Seven design patterns capture how skills are packaged—from metadata-driven disclosure to self-evolving libraries and marketplace distribution.</li><li>Supply-chain attacks on skill marketplaces pose severe threats: 1,200 malicious skills exfiltrated API keys, wallets, and credentials at scale.</li><li>Curated skills substantially improve agent success rates, while self-generated skills may degrade performance.</li><li>Governance, verification, and trust-tiered execution remain open challenges for real-world autonomous agent deployment.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM agents</span><span class="tag">#agent security</span><span class="tag">#agentic skills</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2602.20867v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://blog.langchain.com/agent-evaluation-readiness-checklist" target="_blank" rel="noopener">Agent Evaluation Readiness Checklist</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://blog.langchain.com/agent-evaluation-readiness-checklist" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=blog.langchain.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">blog.langchain.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-03-27T14:00:00.000Z
+          
+        </div>
+        <p class="article__summary">This practical guide provides a step-by-step checklist for implementing agent evaluation systems, emphasizing that evaluation differs fundamentally from traditional software testing. The author argues that before building automated eval infrastructure, teams should manually review 20-50 real agent traces, define unambiguous success criteria, and conduct deep error analysis to understand failure patterns. The core thesis is that proper observability and evaluation setup—grounded in domain expertise and careful failure categorization—enables teams to measure both capability improvements and prevent regressions. Technical teams building production agents will find this essential for establishing reliable evaluation practices that catch real failures rather than gaming metrics.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Manually review 20-50 real traces before building eval infrastructure; this reveals more than any automated system.</li><li>Separate capability evals (measuring new abilities) from regression evals (ensuring existing behavior holds).</li><li>Spend 60-80% of eval effort on error analysis: gather traces, open-code issues, categorize into failure taxonomy, iterate until patterns stabilize.</li><li>Match evaluation to three levels: single-step (tool choice), full-turn (complete trajectory), multi-turn (stateful sessions); start with full-turn.</li><li>Assign eval ownership to a single domain expert who maintains datasets and decides pass/fail criteria for ambiguous cases.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agent evaluation</span><span class="tag">#observability</span><span class="tag">#LLM testing</span>
+          </div>
+          <a class="read-link" href="https://blog.langchain.com/agent-evaluation-readiness-checklist" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2507.21028v1" target="_blank" rel="noopener">Multi-Agent-as-Judge: Aligning LLM-Agent-Based Automated Evaluation with Multi-Dimensional Human Evaluation</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2507.21028v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Chen, Jiaju, Lu, Yuxuan, Wang, Xiaojie, Zeng, Huimin, Huang, Jing, Gesi, Jiri, Xu, Ying, Yao, Bingsheng, Wang, Dakuo
+          <span class="dot">·</span>
+          2026-07-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper introduces MAJ-EVAL, a Multi-Agent-as-Judge framework that automatically constructs multiple evaluator personas from domain documents and uses multi-agent debate to generate multi-dimensional evaluation feedback for NLP applications. Unlike existing LLM-as-a-judge approaches that rely on arbitrarily designed personas, MAJ-EVAL derives personas systematically from relevant research papers and instantiates LLM agents that engage in collaborative evaluation. Validated in educational and medical domains, the framework achieves better alignment with human expert ratings than conventional metrics and prior LLM-as-a-judge methods, addressing the scarcity of human evaluation resources while capturing diverse perspectives essential for real-world NLP assessment.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>MAJ-EVAL automatically derives evaluator personas from domain documents rather than using arbitrary designs, improving reproducibility and relevance.</li><li>Multi-agent debate mechanism generates more nuanced, multi-dimensional feedback that aligns better with human expert evaluations.</li><li>Framework is generalizable across domains (education, medicine) without task-specific engineering, enabling broader adoption.</li><li>Reduces reliance on scarce human evaluators by leveraging LLM agents with principled persona construction.</li><li>Outperforms both conventional metrics and existing LLM-as-a-judge baselines on alignment with expert ratings.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#LLM evaluation</span><span class="tag">#multi-agent systems</span><span class="tag">#NLP assessment</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2507.21028v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
       <article class="article" data-category="tutorial">
         <div class="article__score-bar" style="width: 82%"></div>
         <div class="article__top">
@@ -289,266 +391,233 @@
           <span class="score">relevance 0.82</span>
         </div>
         <h2 class="article__title">
-          <a href="https://academy.openai.com/public/clubs/builders-etkn1/videos/unlock-agentic-power-with-the-agents-sdk" target="_blank" rel="noopener">AI Techniques (Foundations): Introduction to Agentic Workflows - Video | OpenAI Academy</a>
+          <a href="https://blog.langchain.com/agent-observability-powers-agent-evaluation" target="_blank" rel="noopener">How to Debug &amp; Evaluate AI Agents with Observability — LangChain Guide</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://academy.openai.com/public/clubs/builders-etkn1/videos/unlock-agentic-power-with-the-agents-sdk" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=academy.openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">academy.openai.com</a><span class="dot">·</span>
+          <a class="host" href="https://blog.langchain.com/agent-observability-powers-agent-evaluation" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=blog.langchain.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">blog.langchain.com</a><span class="dot">·</span>
           Unknown author
           <span class="dot">·</span>
-          2025-08-07T03:19:59.509Z
+          2026-01-28T03:51:00.000Z
           
         </div>
-        <p class="article__summary">This OpenAI Academy video provides a foundational introduction to agentic workflows using the Agents SDK, targeting developers building with AI. It covers core concepts including how agents function, the orchestration of tools and memory systems, and use cases where agent-based architectures deliver the most value. The content is designed as an entry point for builders exploring agent design patterns before committing to production implementations, making it particularly useful for teams evaluating whether agentic approaches suit their needs.</p>
+        <p class="article__summary">This LangChain guide argues that debugging and evaluating AI agents fundamentally differs from traditional software because agent behavior emerges from non-deterministic LLM reasoning rather than deterministic code execution. The article explains that agent observability requires capturing reasoning context across multi-step traces (which may span hundreds of steps), not just service calls. It introduces three core observability primitives—runs, traces, and threads—and describes evaluation at multiple granularities: single-step (individual decisions), full-turn (end-to-end task), and multi-turn (conversational context). Crucially, production traces become the primary source of truth and test cases for iterative improvement, since real user interactions expose edge cases and failure modes that offline testing cannot anticipate.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Agentic systems combine LLMs with tools and memory to enable autonomous task execution and decision-making</li><li>Tools enable agents to interact with external systems; memory allows agents to maintain context across interactions</li><li>Agent-based approaches excel in specific domains; understanding trade-offs is critical before production deployment</li><li>Agents SDK provides practical patterns for orchestrating multi-step workflows with language models</li><li>Foundational knowledge of agent design patterns precedes reliable production architecture decisions</li></ul>
+          <ul><li>Agent observability differs from software observability: traces must capture reasoning context and multi-step decisions, not just service calls and latency.</li><li>Evaluate agents at three levels: single-step decisions, full-turn task completion, and multi-turn conversation coherence—not traditional unit/integration/e2e paths.</li><li>Production traces are your primary teacher; real-world interactions reveal unpredictable failure modes and become the foundation for growing your test suite.</li><li>Core primitives: runs (single LLM call), traces (complete execution), and threads (multi-turn conversations) capture non-deterministic reasoning across agent steps.</li><li>Agents require different debugging paradigms: without stack traces, you must ask why an agent chose a specific tool at a specific step given context and prompts.</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#agents</span><span class="tag">#LLM architecture</span><span class="tag">#AI workflows</span>
+            <span class="tag">#LLM observability</span><span class="tag">#agent evaluation</span><span class="tag">#AI debugging</span>
           </div>
-          <a class="read-link" href="https://academy.openai.com/public/clubs/builders-etkn1/videos/unlock-agentic-power-with-the-agents-sdk" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://blog.langchain.com/agent-observability-powers-agent-evaluation" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
-      <article class="article" data-category="tutorial">
+      <article class="article" data-category="research">
         <div class="article__score-bar" style="width: 78%"></div>
         <div class="article__top">
-          <span class="category cat-tutorial">tutorial</span>
+          <span class="category cat-research">research</span>
           <span class="score">relevance 0.78</span>
         </div>
         <h2 class="article__title">
-          <a href="https://www.ibm.com/think/topics/artificial-intelligence" target="_blank" rel="noopener">What Is Artificial Intelligence (AI)? | IBM</a>
+          <a href="https://huggingface.co/collections/SuperPauly/evaluation-methods-and-metrics" target="_blank" rel="noopener">Evaluation Methods &amp; Metrics  - a SuperPauly Collection</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://www.ibm.com/think/topics/artificial-intelligence" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ibm.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">ibm.com</a><span class="dot">·</span>
+          <a class="host" href="https://huggingface.co/collections/SuperPauly/evaluation-methods-and-metrics" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
           Unknown author
           <span class="dot">·</span>
-          2026-07-16
-          <span class="date-fallback">(discovered)</span>
+          2026-06-19T09:14:47
+          
         </div>
-        <p class="article__summary">This IBM article provides a comprehensive primer on artificial intelligence, explaining AI as technology enabling machines to simulate human cognitive functions like learning, problem-solving, and decision-making. It establishes a hierarchical framework where machine learning and deep learning underpin generative AI, the current focus of AI research. The article details supervised learning, neural networks, and deep learning architectures before explaining how foundation models—particularly large language models—enable generative AI to create original content from prompts. Technical readers should care because understanding these nested concepts and the distinction between ML, deep learning, and gen AI is essential for evaluating AI capabilities and limitations in contemporary applications.</p>
+        <p class="article__summary">RubricBench introduces a framework for evaluating whether model-generated rubrics align with human evaluation standards. The paper addresses a critical gap in automated evaluation: ensuring that rubrics produced by language models capture human judgment criteria accurately. This matters because as AI systems increasingly generate evaluation criteria, misalignment with human standards could lead to systematic biases or inconsistent assessment in downstream applications. The work provides both methodology and benchmark resources for validating rubric quality.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>AI hierarchy: AI contains machine learning, which contains deep learning, which enables generative AI; each level adds sophistication.</li><li>Deep learning uses multilayered neural networks (hundreds of hidden layers) enabling unsupervised feature extraction from unlabeled data at scale.</li><li>Foundation models (especially LLMs) are trained on massive unlabeled datasets using thousands of GPUs costing millions; they generate content via learned parameter representations.</li><li>Generative AI operates in three phases: foundation model creation, fine-tuning, and inference/deployment in downstream applications.</li><li>Deep learning powers most modern AI applications and enables natural language processing, computer vision, and autonomous decision-making without human intervention.</li></ul>
+          <ul><li>Model-generated rubrics often diverge from human evaluation standards, requiring dedicated alignment methodology</li><li>RubricBench provides benchmark data and evaluation framework for assessing rubric quality systematically</li><li>Rubric alignment is critical for reliable automated evaluation in educational and enterprise settings</li><li>Framework enables detection of systematic biases in AI-generated assessment criteria</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#AI fundamentals</span><span class="tag">#machine learning</span><span class="tag">#generative AI</span>
+            <span class="tag">#evaluation metrics</span><span class="tag">#model alignment</span><span class="tag">#benchmarking</span>
           </div>
-          <a class="read-link" href="https://www.ibm.com/think/topics/artificial-intelligence" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://huggingface.co/collections/SuperPauly/evaluation-methods-and-metrics" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
-      <article class="article" data-category="tutorial">
+      <article class="article" data-category="research">
         <div class="article__score-bar" style="width: 72%"></div>
         <div class="article__top">
-          <span class="category cat-tutorial">tutorial</span>
+          <span class="category cat-research">research</span>
           <span class="score">relevance 0.72</span>
         </div>
         <h2 class="article__title">
-          <a href="https://www.coursera.org/articles/what-is-artificial-intelligence" target="_blank" rel="noopener">What Is Artificial Intelligence? Definition, Uses, and Types</a>
+          <a href="https://huggingface.co/papers/2412.09645" target="_blank" rel="noopener">Paper page - Evaluation Agent: Efficient and Promptable Evaluation Framework for
+  Visual Generative Models</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://www.coursera.org/articles/what-is-artificial-intelligence" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=coursera.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">coursera.org</a><span class="dot">·</span>
-          Coursera Staff
+          <a class="host" href="https://huggingface.co/papers/2412.09645" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
           <span class="dot">·</span>
-          3/13/2026 11:35 PM CDT
+          2024-12-17T05:34:04
           
         </div>
-        <p class="article__summary">This Coursera article provides a comprehensive introduction to artificial intelligence, defining it as computer systems capable of performing tasks historically requiring human intelligence. The piece clarifies that current AI primarily refers to machine learning-powered technologies like ChatGPT and recommendation systems, distinguishing this from theoretical artificial general intelligence (AGI). The article covers AI applications across industries (finance fraud detection, healthcare robotics), explains key concepts like machine learning and deep learning, and contrasts strong versus weak AI. It emphasizes that understanding AI&#39;s mechanics helps leverage the technology effectively in professional and personal contexts while acknowledging ongoing philosophical debates about what constitutes &#34;true&#34; intelligence.</p>
+        <p class="article__summary">This paper introduces an Evaluation Agent framework designed to efficiently assess visual generative models through a promptable approach. The framework automates the evaluation process, making it adaptable to various assessment criteria without requiring extensive manual annotation or task-specific modifications. For technical readers, this addresses a critical bottleneck in model development—obtaining reliable, scalable evaluations for generative vision tasks that traditionally require significant human effort or domain expertise.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Current AI primarily means machine learning-powered technologies, not sentient AGI; most real-world applications are specialized narrow AI</li><li>Machine learning uses algorithms trained on datasets to enable systems like recommendation engines, translation, and fraud detection</li><li>AI applications span finance (fraud detection), healthcare (surgical robotics), transportation, and other industries with demonstrated ROI</li><li>Strong AI (human-level general intelligence) remains theoretical; weak AI addresses specific narrow tasks with existing technology</li><li>Understanding AI fundamentals helps professionals leverage the technology more effectively across work and personal domains</li></ul>
+          <ul><li>Promptable evaluation agent automates assessment of visual generative models with minimal task-specific engineering</li><li>Framework reduces manual annotation burden and enables flexible criterion specification via natural language prompts</li><li>Evaluation approach scales efficiently across diverse generative tasks and evaluation dimensions</li><li>Agent-based evaluation addresses reproducibility and consistency challenges in visual model assessment</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#artificial intelligence</span><span class="tag">#machine learning</span><span class="tag">#AI fundamentals</span>
+            <span class="tag">#visual generative models</span><span class="tag">#evaluation frameworks</span><span class="tag">#prompt-based evaluation</span>
           </div>
-          <a class="read-link" href="https://www.coursera.org/articles/what-is-artificial-intelligence" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://huggingface.co/papers/2412.09645" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
-      <article class="article" data-category="blog">
-        <div class="article__score-bar" style="width: 72%"></div>
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
         <div class="article__top">
-          <span class="category cat-blog">blog</span>
-          <span class="score">relevance 0.72</span>
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
         </div>
         <h2 class="article__title">
-          <a href="https://cloud.google.com/learn/what-is-artificial-intelligence" target="_blank" rel="noopener">What is Artificial Intelligence (AI)? | Google Cloud</a>
+          <a href="https://arxiv.org/html/2508.18929" target="_blank" rel="noopener">Diverse And Private Synthetic Datasets Generation for RAG evaluation: A multi-agent framework</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://cloud.google.com/learn/what-is-artificial-intelligence" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=cloud.google.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">cloud.google.com</a><span class="dot">·</span>
-          Unknown author
+          <a class="host" href="https://arxiv.org/html/2508.18929" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Driouich, Ilias, Cao, Hongliu, Thomas, Eoin
           <span class="dot">·</span>
           2026-07-16
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This Google Cloud article provides a comprehensive introduction to artificial intelligence, defining it as a set of technologies enabling computers to learn, reason, and perform tasks traditionally requiring human intelligence. The piece explains fundamental AI concepts—data, algorithms, and computational power—and covers key categories including narrow vs. general AI and reactive vs. learning systems. It addresses common misconceptions, highlights practical benefits like automation, error reduction, and accelerated R&amp;D, and surveys AI applications across industries. The article emphasizes emerging areas like generative AI, large language models, and AI agents, particularly noting their potential in software development for automated testing, code refactoring, and workflow management.</p>
+        <p class="article__summary">This paper addresses a critical gap in RAG (Retrieval-Augmented Generation) system evaluation by proposing a multi-agent framework for generating synthetic QA datasets that prioritize semantic diversity and privacy preservation. While RAG evaluation has focused heavily on performance metrics, the underlying evaluation datasets—crucial for reliable assessment—have received limited attention. The authors introduce three specialized agents: a Diversity agent using clustering for topical coverage, a Privacy agent for detecting and masking sensitive information, and a QA curation agent for synthesizing private, diverse ground-truth pairs. Experiments demonstrate superior diversity metrics and robust privacy masking on domain-specific datasets, offering a practical, ethically aligned approach to comprehensive RAG evaluation aligned with emerging AI regulations.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>AI fundamentally relies on data quality, algorithms, and computational power; systems learn by identifying patterns humans might miss.</li><li>AI agents represent the frontier, enabling autonomous interactions with development tools and APIs for complex software tasks.</li><li>AI augments human capabilities rather than replacing them; bias in training data directly translates to biased AI systems.</li><li>AI excels at automation, reducing human error, and processing information faster than humans across manufacturing, security, and analytics.</li><li>Modern AI traces to mid-20th century; recent breakthroughs in generative AI and LLMs are rapidly expanding the frontier.</li></ul>
+          <ul><li>Multi-agent framework generates diverse, privacy-preserving synthetic QA datasets for RAG evaluation</li><li>Diversity agent maximizes topical coverage and semantic variability through clustering techniques</li><li>Privacy agent detects and masks sensitive information across multiple domains</li><li>Approach outperforms baselines on diversity metrics while maintaining robust privacy protection</li><li>Provides pathway for compliant, comprehensive RAG system evaluation aligned with AI regulations</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#AI fundamentals</span><span class="tag">#AI agents</span><span class="tag">#generative AI</span>
+            <span class="tag">#RAG evaluation</span><span class="tag">#synthetic datasets</span><span class="tag">#privacy preservation</span>
           </div>
-          <a class="read-link" href="https://cloud.google.com/learn/what-is-artificial-intelligence" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://arxiv.org/html/2508.18929" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
-      <article class="article" data-category="other">
-        <div class="article__score-bar" style="width: 65%"></div>
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
         <div class="article__top">
-          <span class="category cat-other">other</span>
-          <span class="score">relevance 0.65</span>
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
         </div>
         <h2 class="article__title">
-          <a href="https://www.ibm.com/think/artificial-intelligence" target="_blank" rel="noopener">Artificial Intelligence | IBM</a>
+          <a href="https://arxiv.org/html/2511.06396v2" target="_blank" rel="noopener">Efficient LLM Safety Evaluation through Multi-Agent Debate</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://www.ibm.com/think/artificial-intelligence" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ibm.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">ibm.com</a><span class="dot">·</span>
-          Unknown author
+          <a class="host" href="https://arxiv.org/html/2511.06396v2" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Lin, Dachuan, Shen, Guobin, Yang, Zihao, Liu, Tianrong, Zhao, Dongcheng, Zeng, Yi
           <span class="dot">·</span>
           2026-07-16
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This IBM resource hub aggregates content on enterprise AI applications, particularly focusing on agentic AI systems that automate complex workflows across banking, software development, and operations. The material emphasizes practical deployment challenges: AI agents require specialized infrastructure (Agent OS) for memory management, tool orchestration, and safety guardrails; they fail predictably through infinite loops, hallucinations, and unsafe tool invocations rather than randomly. Organizations must build structural readiness via governance frameworks, legacy modernization strategies, and interconnected enterprise architectures to realize AI&#39;s estimated $500B+ economic potential while managing tech debt and compliance risks in KYC/AML and defense contexts.</p>
+        <p class="article__summary">This paper addresses the computational expense of LLM safety evaluation by proposing a multi-agent debate framework where critic, defender, and judge agents collaboratively assess model safety under a shared rubric. The authors introduce HAJailBench, a human-annotated benchmark of 11,100 jailbreak interactions across diverse attack methods, and demonstrate that their Multi-Agent Judge framework outperforms matched small-model baselines and prior multi-agent approaches while remaining more cost-effective than GPT-4o. Ablations show that few debate rounds capture most performance gains, suggesting structured debate is a practical, scalable alternative to expensive single-judge pipelines for safety evaluation.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>AI agents require dedicated operating systems managing memory, tools, identity, and guardrails for reliability at scale</li><li>Agentic AI failures follow predictable patterns: infinite loops, hallucinated planning, unsafe tool use—mitigated by design constraints and monitoring</li><li>RAG evolution enables multi-step reasoning; semantic search and hybrid retrieval power adaptive agentic systems beyond simple retrieval</li><li>Organizations need governance-by-design and infrastructure adaptability to support AI across full software development lifecycle, not just code completion</li><li>Legacy code modernization and interconnected enterprise workflows unlock competitive advantage in agentic AI adoption</li></ul>
+          <ul><li>Multi-agent debate with critic, defender, and judge agents improves safety evaluation reliability while reducing cost versus large-judge baselines.</li><li>HAJailBench benchmark of 11,100 labeled jailbreak interactions enables reproducible evaluation across diverse attack methods and target models.</li><li>Few debate rounds suffice to capture most safety assessment gains, supporting economical deployment without extensive iterative discussion.</li><li>Value-aligned debate structure outperforms prior multi-agent judges and matches performance of much larger, costlier evaluation models.</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#agentic AI</span><span class="tag">#enterprise AI infrastructure</span><span class="tag">#AI reliability</span>
+            <span class="tag">#LLM safety evaluation</span><span class="tag">#multi-agent systems</span><span class="tag">#jailbreak detection</span>
           </div>
-          <a class="read-link" href="https://www.ibm.com/think/artificial-intelligence" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://arxiv.org/html/2511.06396v2" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     
       
       
-      <article class="article" data-category="other">
-        <div class="article__score-bar" style="width: 35%"></div>
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
         <div class="article__top">
-          <span class="category cat-other">other</span>
-          <span class="score">relevance 0.35</span>
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
         </div>
         <h2 class="article__title">
-          <a href="https://en.wikipedia.org/wiki/Artificial_intelligence" target="_blank" rel="noopener">Artificial intelligence - Wikipedia</a>
+          <a href="https://arxiv.org/html/2605.09894v1" target="_blank" rel="noopener">Deterministic vs. LLM-Controlled Orchestration for COBOL-to-Python Modernization</a>
         </h2>
         
         <div class="article__meta">
-          <a class="host" href="https://en.wikipedia.org/wiki/Artificial_intelligence" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=en.wikipedia.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">en.wikipedia.org</a><span class="dot">·</span>
-          Unknown author
-          <span class="dot">·</span>
-          2001-10-08T16:55:49Z
-          
-        </div>
-        <p class="article__summary">This is a Wikipedia article overview of Artificial Intelligence that provides a comprehensive definition and taxonomy of the field. AI is defined as the capability of computational systems to perform tasks typically associated with human intelligence—learning, reasoning, problem-solving, perception, and decision-making. The article traces AI&#39;s history from its founding as an academic discipline in 1956 through multiple cycles of optimism and AI winters, accelerating growth after 2012 with GPUs and deep learning, and further expansion in the 2020s with generative AI. It covers major goals (AGI, intelligent agents, NLP, robotics), approaches (machine learning, symbolic AI, neural networks), applications across domains, and contemporary concerns around safety, ethics, and existential risk.</p>
-        
-        <div class="takeaways">
-          <div class="takeaways__label">Key takeaways</div>
-          <ul><li>AI founded as academic discipline in 1956; experienced cycles of optimism and &#39;winters&#39; before 2012 GPU acceleration.</li><li>Deep learning breakthroughs after 2012 and transformer architecture in 2017 drove exponential growth in capabilities and investment.</li><li>Generative AI in 2020s enabled text-to-image, audio, video creation; raised ethical concerns and existential risk discussions.</li><li>Core AI goals include AGI, NLP, computer vision, robotics, knowledge representation, and planning using neural networks and optimization.</li><li>AI safety, alignment, and unintended harms now central to research alongside technical capability advancement.</li></ul>
-        </div>
-        
-        <div class="article__footer">
-          <div class="tags">
-            <span class="tag">#artificial intelligence</span><span class="tag">#history</span><span class="tag">#overview</span>
-          </div>
-          <a class="read-link" href="https://en.wikipedia.org/wiki/Artificial_intelligence" target="_blank" rel="noopener">Read article &rarr;</a>
-        </div>
-      </article>
-    
-      
-      
-      <article class="article" data-category="other">
-        <div class="article__score-bar" style="width: 25%"></div>
-        <div class="article__top">
-          <span class="category cat-other">other</span>
-          <span class="score">relevance 0.25</span>
-        </div>
-        <h2 class="article__title">
-          <a href="https://ai.google" target="_blank" rel="noopener">Google AI - How we&#39;re making AI helpful for everyone</a>
-        </h2>
-        
-        <div class="article__meta">
-          <a class="host" href="https://ai.google" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=ai.google&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">ai.google</a><span class="dot">·</span>
-          Unknown author
-          <span class="dot">·</span>
-          May 2026
-          
-        </div>
-        <p class="article__summary">This appears to be promotional content for Google Flow Agent, a tool designed to scale workflows with AI automation. The article emphasizes user control and accessibility of AI capabilities. However, the content is minimal—consisting primarily of video placeholders and a call-to-action button—providing insufficient substantive information about the technical implementation, capabilities, or design philosophy of the system.</p>
-        
-        <div class="takeaways">
-          <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Google Flow Agent aims to enable workflow scaling with emphasis on user control</li><li>Tool positioned for accessibility and practical AI application</li><li>Content lacks technical depth or implementation details</li></ul>
-        </div>
-        
-        <div class="article__footer">
-          <div class="tags">
-            <span class="tag">#AI agents</span><span class="tag">#workflow automation</span><span class="tag">#Google AI</span>
-          </div>
-          <a class="read-link" href="https://ai.google" target="_blank" rel="noopener">Read article &rarr;</a>
-        </div>
-      </article>
-    
-      
-      
-      <article class="article" data-category="other">
-        <div class="article__score-bar" style="width: 10%"></div>
-        <div class="article__top">
-          <span class="category cat-other">other</span>
-          <span class="score">relevance 0.10</span>
-        </div>
-        <h2 class="article__title">
-          <a href="https://aistudio.google.com" target="_blank" rel="noopener">Google AI Studio</a>
-        </h2>
-        
-        <div class="article__meta">
-          <a class="host" href="https://aistudio.google.com" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=aistudio.google.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">aistudio.google.com</a><span class="dot">·</span>
-          Unknown author
+          <a class="host" href="https://arxiv.org/html/2605.09894v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Lwin, Naing Oo, Kumar, Rajesh
           <span class="dot">·</span>
           2026-07-16
           <span class="date-fallback">(discovered)</span>
         </div>
-        <p class="article__summary">This appears to be a stub or placeholder entry with no substantive content provided. Without actual article text, author information, or publication details, it is impossible to assess the article&#39;s thesis, arguments, or relevance to technical readers. The title &#39;Google AI Studio&#39; suggests it may concern Google&#39;s AI development platform, but no claims, findings, or recommendations are present to evaluate.</p>
+        <p class="article__summary">This paper presents a controlled empirical study comparing deterministic and LLM-controlled orchestration strategies for COBOL-to-Python modernization. The authors isolate orchestration as the sole experimental variable while holding models, prompts, tools, and test programs constant. Their findings demonstrate that deterministic orchestration achieves comparable functional correctness to agentic LLM-controlled workflows while providing superior robustness, lower performance variability, and up to 3.5x reduction in token consumption. The work challenges the prevailing assumption that agentic workflows universally improve software engineering outcomes, suggesting that fixed execution policies within structured modernization pipelines with explicit validation stages offer more stable and cost-efficient alternatives.</p>
         
         <div class="takeaways">
           <div class="takeaways__label">Key takeaways</div>
-          <ul><li>Insufficient content provided for meaningful extraction</li><li>No article body or substantive claims available</li><li>Cannot determine author perspective or recommendations</li></ul>
+          <ul><li>Deterministic orchestration matches LLM-controlled approaches on correctness while reducing token consumption by 3.5x and lowering operational costs.</li><li>Fixed execution policies provide better worst-case robustness and reduced variability across stochastic runs compared to agentic workflows.</li><li>For structured modernization with explicit validation, deterministic strategies outperform fully agentic orchestration without sacrificing translation quality.</li><li>LLM control doesn&#39;t guarantee improvement in software engineering workflows; execution strategy matters more than agent autonomy.</li></ul>
         </div>
         
         <div class="article__footer">
           <div class="tags">
-            <span class="tag">#google-ai</span><span class="tag">#placeholder</span>
+            <span class="tag">#legacy modernization</span><span class="tag">#LLM orchestration</span><span class="tag">#software engineering</span>
           </div>
-          <a class="read-link" href="https://aistudio.google.com" target="_blank" rel="noopener">Read article &rarr;</a>
+          <a class="read-link" href="https://arxiv.org/html/2605.09894v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 82%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.82</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/abs/2201.12163v1" target="_blank" rel="noopener">Biases in In Silico Evaluation of Molecular Optimization Methods and Bias-Reduced Evaluation Methodology</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/abs/2201.12163v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Kajino, Hiroshi, Miyaguchi, Kohei, Osogami, Takayuki
+          <span class="dot">·</span>
+          2026-07-16
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This research paper addresses fundamental evaluation issues in in silico molecular optimization, where agents are trained to discover molecules with desired properties. The authors identify two critical biases that arise when using a single predictor model for both training agents and evaluating their performance: bias from predictor misspecification and bias from data reuse. They comprehensively discuss bias reduction methods for each issue and empirically validate their effectiveness. This work is important for practitioners developing molecular optimization systems, as naive evaluation can drastically overestimate agent performance, leading to false claims about discovery capability.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Evaluator bias occurs when reusing training data and when predictor models misspecify the true property landscape</li><li>Predictor misspecification and sample reuse create distinct sources of bias requiring different mitigation strategies</li><li>Bias-reduced evaluation methodology is essential for accurate assessment of molecular optimization agent performance</li><li>Empirical validation demonstrates significant effectiveness differences among proposed bias reduction techniques</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#molecular optimization</span><span class="tag">#evaluation methodology</span><span class="tag">#machine learning bias</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/abs/2201.12163v1" target="_blank" rel="noopener">Read article &rarr;</a>
         </div>
       </article>
     

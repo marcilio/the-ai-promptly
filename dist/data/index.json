@@ -2,7 +2,7 @@
   "runs": [
     {
       "date": "2026-07-16",
-      "generated_at": "2026-07-16T20:11:12.718992Z",
+      "generated_at": "2026-07-16T22:32:46.760726Z",
       "source_urls": [
         "search:AI agent harness design",
         "search:agentic design patterns 2026",
@@ -10,9 +10,9 @@
         "search:LLM tool use and orchestration",
         "search:agent evaluation methods"
       ],
-      "count": 8,
+      "count": 10,
       "filename": "newsletter-2026-07-16.html",
-      "overview": "Today's articles survey AI fundamentals and agentic workflows, establishing that current AI primarily leverages machine learning and deep learning to enable generative capabilities and autonomous task automation. Practical deployment requires understanding both conceptual hierarchies—from ML through foundation models—and infrastructural demands like memory management and safety guardrails for agent-based systems."
+      "overview": "Recent research emphasizes that agent evaluation requires fundamentally different approaches than traditional software testing, spanning systematic skill design, multi-agent debate frameworks, and careful observability practices to capture non-deterministic reasoning patterns and prevent evaluation biases."
     },
     {
       "date": "2026-07-10",
