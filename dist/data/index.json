@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-07-17",
+      "generated_at": "2026-07-17T22:29:36.344788Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 2,
+      "filename": "newsletter-2026-07-17.html",
+      "overview": "These papers advance AI evaluation methodology through human-guided automation: one introduces scalable multi-turn agent assessment that encodes expert judgment upfront, while the other demonstrates efficient visual model evaluation using dynamic agent-driven strategies with minimal samples."
+    },
+    {
       "date": "2026-07-16",
       "generated_at": "2026-07-16T22:32:46.760726Z",
       "source_urls": [
