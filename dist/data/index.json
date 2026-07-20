@@ -1,6 +1,20 @@
 {
   "runs": [
     {
+      "date": "2026-07-20",
+      "generated_at": "2026-07-20T05:44:23.813055Z",
+      "source_urls": [
+        "search:AI agent harness design",
+        "search:agentic design patterns 2026",
+        "search:production AI agent architecture",
+        "search:LLM tool use and orchestration",
+        "search:agent evaluation methods"
+      ],
+      "count": 5,
+      "filename": "newsletter-2026-07-20.html",
+      "overview": "Today's articles explore harness engineering—the infrastructure surrounding AI agents—as a critical design domain. The main theme emphasizes treating agent harnesses as principled, analyzable systems rather than glue code, whether through natural-language specifications, layered policy-versus-script architectures, or computational and inferential controls that shift quality validation left in the development pipeline."
+    },
+    {
       "date": "2026-07-18",
       "generated_at": "2026-07-18T22:29:32.371447Z",
       "source_urls": [
