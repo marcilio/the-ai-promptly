@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daily Agentic &middot; 2026-07-22</title>
+  
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Daily Agentic — 2026-07-22" />
+  <meta property="og:description" content="Curated by Marcilio Mendonca" />
+  <meta property="og:url" content="https://the-daily-agentic.vercel.app/newsletter-2026-07-22.html" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Daily Agentic — 2026-07-22" />
+  <meta name="twitter:description" content="Curated by Marcilio Mendonca" />
+  
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #15171c;
+      --border: rgba(255, 255, 255, 0.08);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --text: #e7e9ee;
+      --text-2: #9aa0ab;
+      --text-3: #5d626c;
+      --accent: #5eead4;
+      --accent-soft: rgba(94, 234, 212, 0.12);
+      --accent-line: rgba(94, 234, 212, 0.35);
+      --linkedin: #0a66c2;
+      --linkedin-hover: #004182;
+      --cat-blog: #818cf8;
+      --cat-research: #5eead4;
+      --cat-tutorial: #fbbf24;
+      --cat-opinion: #f472b6;
+      --cat-news: #60a5fa;
+      --cat-other: #94a3b8;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", system-ui, sans-serif;
+      font-size: 15px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page { max-width: 860px; margin: 0 auto; padding: 48px 24px 96px; }
+    .eyebrow {
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 8px;
+    }
+    h1 { font-size: 32px; font-weight: 700; letter-spacing: -0.02em; margin: 0 0 8px; }
+    .header-content { display: flex; align-items: center; gap: 18px; margin-top: 16px; }
+    .author-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
+      border: 2px solid var(--border-strong);
+    }
+    .header-text { flex: 1; min-width: 0; }
+    .meta { color: var(--text-2); font-size: 14px; margin-bottom: 20px; }
+    .byline {
+      font-size: 13px; color: var(--text-2); margin: 6px 0 14px;
+    }
+    .byline a {
+      color: var(--text-2); text-decoration: underline;
+      text-decoration-color: var(--accent-line);
+      text-underline-offset: 3px; transition: color 0.15s;
+    }
+    .byline a:hover { color: var(--accent); }
+    .byline-sep { color: var(--text-3); margin: 0 6px; }
+    .byline-source {
+      display: inline-flex; align-items: center; gap: 5px;
+      color: var(--text-2); text-decoration: none;
+      transition: color 0.15s;
+    }
+    .byline-source:hover { color: var(--accent); }
+    .byline-source svg { width: 14px; height: 14px; fill: currentColor; }
+
+    .share-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 0 0 24px; align-items: center; }
+    .share-btn--linkedin {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 13px; font-weight: 600; padding: 9px 16px;
+      border-radius: 999px; cursor: pointer;
+      background: var(--linkedin); color: #ffffff;
+      border: 1px solid var(--linkedin);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+      box-shadow: 0 2px 8px rgba(10, 102, 194, 0.25);
+    }
+    .share-btn--linkedin:hover {
+      background: var(--linkedin-hover); border-color: var(--linkedin-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(10, 102, 194, 0.35);
+    }
+    .share-btn--linkedin svg { width: 16px; height: 16px; flex-shrink: 0; fill: #ffffff; }
+    .share-btn--copy {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 12px; font-weight: 500; padding: 8px 14px;
+      border-radius: 999px; cursor: pointer;
+      border: 1px solid var(--border-strong);
+      background: var(--surface); color: var(--text-2);
+      text-decoration: none; transition: all 0.15s;
+      font-family: inherit;
+    }
+    .share-btn--copy:hover { color: var(--text); border-color: var(--accent-line); background: rgba(94, 234, 212, 0.06); }
+    .share-btn--copy svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .share-hint { font-size: 11px; color: var(--text-3); font-style: italic; }
+    .share-toast {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+      background: var(--accent); color: #0a0a0f; padding: 8px 16px;
+      border-radius: 999px; font-size: 13px; font-weight: 600;
+      opacity: 0; transition: opacity 0.2s; pointer-events: none; z-index: 9999;
+    }
+    .share-toast.show { opacity: 1; }
+    .overview-section {
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0; padding: 16px 20px;
+      margin: 0 0 28px;
+    }
+    .overview-label {
+      font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--accent); font-weight: 700; margin-bottom: 8px;
+    }
+    .overview-text {
+      font-size: 15px; line-height: 1.65; color: var(--text); margin: 0;
+    }
+    .back-link { color: var(--text-3); font-size: 13px; text-decoration: none; }
+    .back-link:hover { color: var(--accent); }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .pill {
+      background: var(--surface); border: 1px solid var(--border); color: var(--text-2);
+      padding: 7px 14px; border-radius: 999px; font-size: 13px; font-weight: 500;
+      cursor: pointer; transition: all 0.15s;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .pill:hover { border-color: var(--border-strong); color: var(--text); }
+    .pill.active { background: var(--accent-soft); border-color: var(--accent-line); color: var(--accent); }
+    .pill .count {
+      background: rgba(255, 255, 255, 0.06); padding: 1px 7px; border-radius: 999px;
+      font-size: 11px; font-weight: 600;
+    }
+    .pill.active .count { background: rgba(94, 234, 212, 0.18); }
+
+    .articles { display: flex; flex-direction: column; gap: 14px; }
+    .article {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+      padding: 22px 24px; position: relative; overflow: hidden;
+      transition: border-color 0.15s, transform 0.15s;
+    }
+    .article:hover { border-color: var(--border-strong); transform: translateY(-1px); }
+    .article__score-bar {
+      position: absolute; top: 0; left: 0; height: 2px;
+      background: var(--accent); opacity: 0.6;
+    }
+    .article__top {
+      display: flex; justify-content: space-between; align-items: center;
+      margin-bottom: 12px; gap: 12px;
+    }
+    .category {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 6px; background: rgba(255, 255, 255, 0.04);
+    }
+    .category::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+    .cat-blog { color: var(--cat-blog); }
+    .cat-research { color: var(--cat-research); }
+    .cat-tutorial { color: var(--cat-tutorial); }
+    .cat-opinion { color: var(--cat-opinion); }
+    .cat-news { color: var(--cat-news); }
+    .cat-other { color: var(--cat-other); }
+    .score { font-size: 12px; color: var(--text-3); font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+    .article__title { margin: 0 0 8px; font-size: 18px; font-weight: 600; letter-spacing: -0.01em; line-height: 1.35; }
+    .article__title a { color: var(--text); text-decoration: none; }
+    .article__title a:hover { color: var(--accent); }
+    .article__meta {
+      font-size: 13px; color: var(--text-2); margin-bottom: 12px;
+      display: flex; flex-wrap: wrap; align-items: center; gap: 4px;
+    }
+    .article__meta .dot { color: var(--text-3); padding: 0 4px; }
+    .article__meta .host {
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+      font-size: 12px; color: var(--text-2);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 8px 2px 6px; border-radius: 4px; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .article__meta .host:hover { color: var(--accent); background: var(--accent-soft); }
+    .article__meta .favicon {
+      width: 14px; height: 14px; border-radius: 2px; flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.06);
+    }
+    .article__meta .date-fallback {
+      font-size: 11px; color: var(--text-3); font-style: italic; margin-left: 4px;
+    }
+    .article__summary { color: var(--text-2); margin: 0 0 14px; }
+
+    .takeaways {
+      background: rgba(255, 255, 255, 0.02);
+      border-left: 2px solid var(--accent-line);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 16px 12px 14px;
+      margin: 0 0 14px;
+    }
+    .takeaways__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--accent); font-weight: 600; margin-bottom: 6px;
+    }
+    .takeaways ul { list-style: none; padding: 0; margin: 0; }
+    .takeaways li {
+      position: relative; padding-left: 16px; margin: 4px 0;
+      font-size: 13.5px; line-height: 1.5; color: var(--text);
+    }
+    .takeaways li::before {
+      content: "→"; position: absolute; left: 0;
+      color: var(--accent); font-weight: 600;
+    }
+    .article__footer { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; }
+    .tags { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tag {
+      font-size: 11px; color: var(--text-3); background: rgba(255, 255, 255, 0.04);
+      padding: 3px 8px; border-radius: 4px; font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    .read-link { color: var(--accent); text-decoration: none; font-size: 13px; font-weight: 500; }
+    .read-link:hover { text-decoration: underline; }
+    .hidden { display: none !important; }
+    .empty {
+      text-align: center; padding: 60px 20px; color: var(--text-3);
+      background: var(--surface); border: 1px dashed var(--border); border-radius: 14px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="index.html">&larr; All episodes</a>
+    <div class="header-content">
+      
+      <img class="author-avatar" src="assets/avatar.jpg" alt="Marcilio Mendonca, PhD, Staff AI FDE at Google" />
+      
+      <div class="header-text">
+        <div class="eyebrow">Daily Agentic</div>
+        <h1>2026-07-22</h1>
+        
+        <p class="byline">
+          Brought to you by
+          <a href="https://www.linkedin.com/in/marcilio/" target="_blank" rel="noopener">Marcilio Mendonca, PhD, Staff AI FDE at Google</a>
+          <span class="byline-sep">·</span>
+          <a class="byline-source" href="https://github.com/marcilio/the-ai-promptly" target="_blank" rel="noopener" title="View source on GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg> view source</a>
+        </p>
+        
+      </div>
+    </div>
+    <p class="meta">
+      Generated 2026-07-22T16:26:19.998815Z UTC &nbsp;·&nbsp; 9 articles
+    </p>
+
+    
+
+    
+    <div class="share-row">
+      <a class="share-btn--linkedin"
+         href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A//the-daily-agentic.vercel.app/newsletter-2026-07-22.html"
+         target="_blank" rel="noopener"
+         title="Share this day's newsletter on LinkedIn. Tip: tag @marcilio when posting.">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.76 1.75-1.76 1.75.79 1.75 1.76-.78 1.76-1.75 1.76zM20 19h-3v-5.6c0-1.34-.48-2.25-1.68-2.25-.92 0-1.46.62-1.7 1.22-.09.21-.11.51-.11.81V19h-3V8h3v1.27c.4-.62 1.12-1.5 2.72-1.5 1.98 0 3.47 1.3 3.47 4.08V19z"/></svg>
+        Share on LinkedIn
+      </a>
+      <button type="button" class="share-btn--copy" data-url="https://the-daily-agentic.vercel.app/newsletter-2026-07-22.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        Copy link
+      </button>
+      <span class="share-hint">tag the author when you post</span>
+    </div>
+    <div id="shareToast" class="share-toast">Copied!</div>
+    
+
+    <nav id="filters" class="filters"></nav>
+    <main id="articles" class="articles">
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2603.15639" target="_blank" rel="noopener">The Comprehension-Gated Agent Economy: A Robustness-First Architecture for AI Economic Agency</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2603.15639" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Baxi, Rahul
+          <span class="dot">·</span>
+          2026-07-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper introduces the Comprehension-Gated Agent Economy (CGAE), a formal architecture for controlling AI agent economic agency through verified robustness rather than capability benchmarks. The core thesis is that granting agents financial authority (trading, budgeting, contract negotiation) should be gated by demonstrated robustness across three dimensions: constraint compliance, epistemic integrity, and behavioral alignment. The architecture proves three key properties: bounded economic exposure linking financial liability to verified robustness, incentive-compatible robustness investment making safety economically rational, and monotonic safety scaling ensuring system safety doesn&#39;t degrade as the economy grows. This work bridges AI safety evaluation with practical governance, making robustness a competitive advantage rather than regulatory friction.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Robustness audits, not capability benchmarks, should gate AI agent economic permissions to reduce financial risk exposure</li><li>Three robustness dimensions (compliance, epistemic integrity, alignment) with hallucination rates as diagnostics form the gating mechanism</li><li>Agents rationally maximize profit by improving robustness rather than scaling capabilities alone under CGAE incentives</li><li>Temporal decay and stochastic re-auditing prevent post-certification robustness drift in agent economies</li><li>Verified robustness-based governance creates economically-aligned safety without regulatory overhead</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI safety</span><span class="tag">#agent governance</span><span class="tag">#economic agency</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2603.15639" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 88%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.88</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/pdf/2603.17787" target="_blank" rel="noopener">Governed Memory: A Production Architecture for Multi-Agent Workflows</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/pdf/2603.17787" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Taheri, Hamed
+          <span class="dot">·</span>
+          2026-07-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper addresses the memory governance gap in enterprise multi-agent AI systems, where dozens of autonomous agents operate on shared entities without coordinated memory or governance. The authors introduce Governed Memory, a shared memory layer that combines a dual-model approach (atomic facts plus schema-enforced typed properties), tiered governance routing, reflection-bounded retrieval, and automated schema lifecycle management. Experimental validation (N=250) demonstrates 99.6% fact recall, 92% governance routing precision, 50% token reduction, and zero cross-entity information leakage. The system achieves 74.8% accuracy on LoCoMo benchmarks while maintaining governance compliance, confirming that schema enforcement and governance impose no retrieval quality penalty.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Dual memory model separates open-set atomic facts from schema-enforced properties, improving coverage and consistency</li><li>Tiered governance routing with progressive context delivery reduces token consumption by 50% while maintaining recall</li><li>Reflection-bounded retrieval with entity-scoped isolation prevents cross-entity information leakage across adversarial queries</li><li>Schema lifecycle automation with AI-assisted authoring reduces manual governance burden and ensures per-property refinement</li><li>Production system validates that governance constraints achieve zero quality penalty versus ungoverned baselines</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#multi-agent systems</span><span class="tag">#memory management</span><span class="tag">#AI governance</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/pdf/2603.17787" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="blog">
+        <div class="article__score-bar" style="width: 85%"></div>
+        <div class="article__top">
+          <span class="category cat-blog">blog</span>
+          <span class="score">relevance 0.85</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://blog.langchain.com/how-moda-builds-production-grade-ai-design-agents-with-deep-agents" target="_blank" rel="noopener">How Moda Builds Production-Grade AI Design Agents with Deep Agents</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://blog.langchain.com/how-moda-builds-production-grade-ai-design-agents-with-deep-agents" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=blog.langchain.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">blog.langchain.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-03-24T17:07:54.000Z
+          
+        </div>
+        <p class="article__summary">Moda is an AI-native design platform that uses a multi-agent system built on Deep Agents to help non-designers create professional graphics, presentations, and marketing materials. The core challenge was making LLMs effective at visual design—traditional formats like PowerPoint XML rely on absolute coordinates that models struggle with. Moda solved this through careful context engineering: developing a custom domain-specific language for layout representation, implementing a triage-and-skills architecture with prompt caching, dynamic tool loading to keep context lean, and intelligent context scaling for larger projects. The system achieves production-grade output by combining three specialized agents (Design, Research, Brand Kit) with LangSmith observability, enabling rapid iteration and cost-effective inference through strategic use of prompt caching breakpoints.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Models struggle with raw pixel coordinates; Moda built a proprietary DSL abstraction layer for layout reasoning similar to web dev Flexbox patterns.</li><li>Triage + skills injection with prompt caching breakpoints reduces token cost while allowing dynamic context per request.</li><li>Dynamic tool loading keeps 12–15 core tools in context; ~30 optional tools activated on-demand via RequestToolActivation, balancing UX against token overhead.</li><li>Context scaling for multi-page projects uses summaries + on-demand detail retrieval rather than full canvas state, keeping tokens bounded.</li><li>LangSmith tracing was critical for evaluating context representations and optimizing caching strategy for cost and latency.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#prompt engineering</span><span class="tag">#LLM design patterns</span>
+          </div>
+          <a class="read-link" href="https://blog.langchain.com/how-moda-builds-production-grade-ai-design-agents-with-deep-agents" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 82%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.82</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/blog/darielnoel/workflow-driven-agent" target="_blank" rel="noopener">WorkflowDrivenAgent: A Novel Paradigm for Deterministic Multi-Agent AI Systems</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/blog/darielnoel/workflow-driven-agent" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2025-11-27T15:55:56.811Z
+          
+        </div>
+        <p class="article__summary">WorkflowDrivenAgent proposes a hybrid architecture for multi-agent AI systems that combines deterministic workflow execution with selective LLM integration. Rather than relying solely on language models for task orchestration, the system uses proven workflow-orchestration patterns for critical business logic while deploying LLMs only where they provide measurable value. Implemented in KaibanJS, the approach addresses production deployment challenges: non-deterministic execution paths, cost scaling, and auditability. Technical readers should care because this bridges classical BPM systems with modern AI, offering concrete patterns for reliable, observable, and cost-efficient multi-agent systems without sacrificing adaptive capabilities.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Deterministic core with adaptive edges: use workflows for critical logic, LLMs for specific decision points requiring creativity.</li><li>Type-safe workflow steps with Zod schema validation enable runtime safety and reduce debugging complexity in multi-agent systems.</li><li>Hybrid architecture achieves linear cost scaling independent of LLM rate limits, addressing exponential overhead of pure LLM-driven orchestration.</li><li>Suspend/resume and streaming capabilities support long-running processes with full execution tracing and state observability.</li><li>KaibanJS provides task scheduling, dependency resolution, and inter-agent communication primitives for scalable agent coordination.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#multi-agent systems</span><span class="tag">#workflow orchestration</span><span class="tag">#hybrid AI architecture</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/blog/darielnoel/workflow-driven-agent" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 82%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.82</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://huggingface.co/blog/darielnoel/kaibanjs-ai-agent-opentelemetry" target="_blank" rel="noopener">Bringing Production-Grade Observability to AI Agent Workflows with OpenTelemetry</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://huggingface.co/blog/darielnoel/kaibanjs-ai-agent-opentelemetry" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=huggingface.co&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">huggingface.co</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2025-10-31T12:03:52.458Z
+          
+        </div>
+        <p class="article__summary">This article examines how to integrate OpenTelemetry—the industry-standard observability framework—into AI agent workflows, addressing unique challenges such as long-running processes, non-deterministic LLM outputs, and complex multi-agent interactions. The piece introduces @kaibanjs/opentelemetry, a package that automatically instruments KaibanJS multi-agent workflows with production-grade tracing and metrics. Technical readers should care because proper observability is essential for debugging, optimizing costs, and ensuring reliability in production AI systems where traditional request-response monitoring tools fall short.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>OpenTelemetry provides vendor-neutral tracing with LLM-specific semantic conventions (e.g., llm.request.model) compatible with Langfuse, SigNoz, and other AI observability platforms.</li><li>@kaibanjs/opentelemetry automatically instruments workflows via event subscription without modifying agent/task code, enabling non-invasive observability addition.</li><li>AI workflows require specialized observability for long-running tasks, cost tracking per LLM call, nested agent execution, and non-deterministic behavior reproducibility.</li><li>Production considerations include sampling strategies, multi-service export configuration, and environment-based settings to manage overhead and cost.</li><li>KaibanJS&#39;s structured task dependencies and event-driven architecture map naturally to OpenTelemetry&#39;s trace hierarchies, simplifying observability integration.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#observability</span><span class="tag">#AI agents</span><span class="tag">#OpenTelemetry</span>
+          </div>
+          <a class="read-link" href="https://huggingface.co/blog/darielnoel/kaibanjs-ai-agent-opentelemetry" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="tutorial">
+        <div class="article__score-bar" style="width: 75%"></div>
+        <div class="article__top">
+          <span class="category cat-tutorial">tutorial</span>
+          <span class="score">relevance 0.75</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://academy.openai.com/en/public/clubs/builders-etkn1/videos/ai-techniques-production-designing-reliable-agent-architectures-2025-12-11" target="_blank" rel="noopener">AI Techniques (Production): Designing Reliable Agent Architectures - Video | OpenAI Academy</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://academy.openai.com/en/public/clubs/builders-etkn1/videos/ai-techniques-production-designing-reliable-agent-architectures-2025-12-11" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=academy.openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">academy.openai.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2025-12-11T22:34:19.443Z
+          
+        </div>
+        <p class="article__summary">This OpenAI Academy video session teaches developers how to design, evaluate, and operate agent-based systems in production environments. Part of the Builder Bootcamp series, it covers real-world agent architecture patterns, tool orchestration strategies, failure modes, and guardrails practices used by enterprise teams. The content targets experienced builders moving beyond prototypes to ship reliable agentic systems at scale, providing practical guidance on production-grade agent design rather than theoretical foundations.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Real-world agent architectures include specific patterns and tool orchestration strategies proven in enterprise deployments</li><li>Production agents require explicit failure mode identification and guardrail implementation beyond prototype-stage systems</li><li>Evaluation and operational frameworks are critical for reliably deploying agentic systems at scale</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#agent architecture</span><span class="tag">#production systems</span><span class="tag">#agentic AI</span>
+          </div>
+          <a class="read-link" href="https://academy.openai.com/en/public/clubs/builders-etkn1/videos/ai-techniques-production-designing-reliable-agent-architectures-2025-12-11" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="news">
+        <div class="article__score-bar" style="width: 72%"></div>
+        <div class="article__top">
+          <span class="category cat-news">news</span>
+          <span class="score">relevance 0.72</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://blog.langchain.com/introducing-interrupt-langchain-conference" target="_blank" rel="noopener">Introducing Interrupt: The AI Agent Conference by LangChain</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://blog.langchain.com/introducing-interrupt-langchain-conference" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=blog.langchain.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">blog.langchain.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2025-02-03T16:29:57.000Z
+          
+        </div>
+        <p class="article__summary">LangChain announces Interrupt, its inaugural AI agent conference scheduled for May 13-14, 2025 in San Francisco. The two-day event brings together software engineers, AI/ML practitioners, researchers, and engineering leaders to explore production-ready AI agents, share best practices, and discuss challenges. Day 1 features hands-on workshops by the LangChain team; Day 2 includes keynotes, fireside chats, and product announcements from industry leaders like Andrew Ng and Cognition Labs. With limited capacity of 750 attendees, the conference aims to serve as a hub for the AI agent community to collaborate and exchange ideas as enterprises accelerate deployment from prototype to production.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>LangChain&#39;s Interrupt conference (May 13-14, SF) gathers 750 AI agent builders for production-focused workshops and expert talks.</li><li>Pre-conference workshops on May 13 provide hands-on training in real-world agent use cases; May 14 features keynotes and live product announcements.</li><li>Keynote speakers include Andrew Ng, Cognition Labs, Replit, and 11x, sharing latest AI agent innovations and production deployment strategies.</li><li>Conference targets practical knowledge: best practices, breakthrough use cases, debugging agent decisions, and scaling LLM applications across industries.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#LangChain</span><span class="tag">#conference</span>
+          </div>
+          <a class="read-link" href="https://blog.langchain.com/introducing-interrupt-langchain-conference" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="other">
+        <div class="article__score-bar" style="width: 10%"></div>
+        <div class="article__top">
+          <span class="category cat-other">other</span>
+          <span class="score">relevance 0.10</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://community.openai.com/t/ai-should-not-execute-actions-atomic-automation-policy-gate-architecture/1377541" target="_blank" rel="noopener">https://community.openai.com/t/ai-should-not-execute-actions-atomic-automation-policy-gate-architecture/1377541</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://community.openai.com/t/ai-should-not-execute-actions-atomic-automation-policy-gate-architecture/1377541" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=community.openai.com&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">community.openai.com</a><span class="dot">·</span>
+          Unknown author
+          <span class="dot">·</span>
+          2026-07-22
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">The provided content appears to be corrupted or encoded binary data rather than readable article text. The title references an AI agent architecture discussion about whether AI should execute actions autonomously, mentioning atomic automation and policy-gate architecture. However, the actual content is unreadable and cannot be analyzed. Without accessible article content, it is impossible to extract meaningful summaries, takeaways, or relevance assessments.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Cannot extract meaningful takeaways from corrupted content</li><li>Title suggests debate on autonomous AI action execution policies</li><li>Mentions atomic automation and policy-gate architecture concepts</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#AI agents</span><span class="tag">#automation policy</span><span class="tag">#architecture</span>
+          </div>
+          <a class="read-link" href="https://community.openai.com/t/ai-should-not-execute-actions-atomic-automation-policy-gate-architecture/1377541" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+      
+      
+      <article class="article" data-category="research">
+        <div class="article__score-bar" style="width: 78%"></div>
+        <div class="article__top">
+          <span class="category cat-research">research</span>
+          <span class="score">relevance 0.78</span>
+        </div>
+        <h2 class="article__title">
+          <a href="https://arxiv.org/html/2507.00096v1" target="_blank" rel="noopener">AI-Governed Agent Architecture for Web-Trustworthy Tokenization of Alternative Assets</a>
+        </h2>
+        
+        <div class="article__meta">
+          <a class="host" href="https://arxiv.org/html/2507.00096v1" target="_blank" rel="noopener"><img class="favicon" src="https://www.google.com/s2/favicons?domain=arxiv.org&sz=32" alt="" loading="lazy" onerror="this.style.display='none'">arxiv.org</a><span class="dot">·</span>
+          Borjigin, Ailiya, Zhou, Wei, He, Cong
+          <span class="dot">·</span>
+          2026-07-20
+          <span class="date-fallback">(discovered)</span>
+        </div>
+        <p class="article__summary">This paper proposes an AI-governed agent architecture for trustworthy tokenization of alternative assets on the web. The system combines autonomous agents with blockchain to orchestrate tokenization workflows including asset verification, valuation, compliance checking, and lifecycle management. An AI-driven governance layer monitors agent behavior and enforces trust through adaptive policies and cryptoeconomic incentives. The authors demonstrate the approach on real estate asset tokenization, showing how real-time AI anomaly detection and on-chain enforcement mitigate fraud and compliance risks. The work addresses critical challenges in web-based tokenized ecosystems by integrating multi-agent coordination with cryptographic enforcement to ensure data authenticity and regulatory compliance.</p>
+        
+        <div class="takeaways">
+          <div class="takeaways__label">Key takeaways</div>
+          <ul><li>Autonomous agents orchestrate tokenization workflow stages with AI governance layer ensuring trustworthy behavior through adaptive policies and cryptoeconomic incentives.</li><li>Real-time AI anomaly detection combined with blockchain enforcement mitigates fraudulent listings, money laundering, and off-chain data verification challenges.</li><li>Multi-agent systems with blockchain governance significantly enhance transparency, security, and regulatory compliance in alternative asset tokenization platforms.</li><li>Architecture demonstrated on real estate tokenization case study showing practical risk mitigation and compliance enforcement mechanisms.</li></ul>
+        </div>
+        
+        <div class="article__footer">
+          <div class="tags">
+            <span class="tag">#blockchain</span><span class="tag">#AI agents</span><span class="tag">#asset tokenization</span>
+          </div>
+          <a class="read-link" href="https://arxiv.org/html/2507.00096v1" target="_blank" rel="noopener">Read article &rarr;</a>
+        </div>
+      </article>
+    
+    </main>
+    <div id="empty" class="empty hidden">No articles in this category.</div>
+  </div>
+
+  <script>
+    const articles = Array.from(document.querySelectorAll(".article"));
+    const filtersEl = document.getElementById("filters");
+    const emptyEl = document.getElementById("empty");
+    const CATEGORIES = ["all", "blog", "research", "tutorial", "opinion", "news", "other"];
+    let current = "all";
+
+    function counts() {
+      const c = { all: articles.length };
+      for (const a of articles) {
+        const k = a.dataset.category || "other";
+        c[k] = (c[k] || 0) + 1;
+      }
+      return c;
+    }
+
+    function render() {
+      const c = counts();
+      filtersEl.innerHTML = CATEGORIES
+        .filter(cat => cat === "all" || c[cat])
+        .map(cat => `
+          <button class="pill ${current === cat ? "active" : ""}" data-cat="${cat}">
+            ${cat === "all" ? "All" : cat.charAt(0).toUpperCase() + cat.slice(1)}
+            <span class="count">${c[cat] || 0}</span>
+          </button>
+        `).join("");
+      filtersEl.querySelectorAll(".pill").forEach(btn => {
+        btn.addEventListener("click", () => { current = btn.dataset.cat; render(); });
+      });
+      let visible = 0;
+      for (const a of articles) {
+        const show = current === "all" || a.dataset.category === current;
+        a.classList.toggle("hidden", !show);
+        if (show) visible++;
+      }
+      emptyEl.classList.toggle("hidden", visible > 0);
+    }
+
+    render();
+
+    // Copy-link button (no-op if button not present)
+    const copyBtn = document.querySelector(".share-btn--copy");
+    const toast = document.getElementById("shareToast");
+    if (copyBtn && toast) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(copyBtn.dataset.url);
+          toast.classList.add("show");
+          setTimeout(() => toast.classList.remove("show"), 1500);
+        } catch (_) {
+          // Older browsers: fall back to a prompt
+          window.prompt("Copy this URL:", copyBtn.dataset.url);
+        }
+      });
+    }
+  </script>
+</body>
+</html>
